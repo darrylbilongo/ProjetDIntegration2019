@@ -1,8 +1,10 @@
-package com.example.projeintegration2019;
+package com.funndeh.projetintegration2019;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.funndeh.projetintegration2019.R;
 
 public class MainActivity extends AppCompatActivity {
 
