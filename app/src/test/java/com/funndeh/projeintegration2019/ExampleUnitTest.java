@@ -1,4 +1,4 @@
-package com.example.projeintegration2019;
+package com.funndeh.projeintegration2019;
 
 import org.junit.Test;
 

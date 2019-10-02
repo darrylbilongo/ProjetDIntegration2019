@@ -1,4 +1,4 @@
-package com.example.projeintegration2019;
+package com.funndeh.projeintegration2019;
 
 import android.content.Context;
 import androidx.test.platform.app.InstrumentationRegistry;
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
 
-        assertEquals("com.example.projeintegration2019", appContext.getPackageName());
+        assertEquals("com.funndeh.projeintegration2019", appContext.getPackageName());
     }
 }
