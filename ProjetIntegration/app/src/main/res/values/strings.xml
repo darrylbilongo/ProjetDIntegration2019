@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">ProjetIntegration</string>
+    <string name="desc">Image</string>
+    <string name="pwd">Password</string>
+    <string name="usr">Username</string>
+    <string name="register">Register now!</string>
+    <string name="log">Login</string>
 </resources>
