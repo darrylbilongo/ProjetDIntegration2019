@@ -5,15 +5,22 @@ import NavBar from './components/NavBar';
 import About from './components/About';
 import Login from './components/Login';
 
+import {BrowserRouter as Router, Switch, Route } from 'react-router-dom'; 
 
 class App extends React.Component {
   render(){
     return (
-      <div>
-          <NavBar></NavBar>
+      <Router>
+        <div>
+          <NavBar ></NavBar>
           <Login></Login>
-          <About></About>
+          <Switch>
+            {/*<Route exact path="/" Component={Home}></Route>
+            <Route path="/login" Component={Login}></Route>
+            <Route path="/about" Component={About}></Route>*/}
+          </Switch>
       </div>
+      </Router>
     );
   }
 }
