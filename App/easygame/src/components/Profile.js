@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import { StyleSheet, Text, View, Dimensions, Image, ScrollView} from 'react-native';
 import styles from './styles';
 import {TouchableOpacity} from 'react-native-gesture-handler';
+import NavigationService from './NavigationService';
 
 const { width, height } = Dimensions.get('window');
 
@@ -9,9 +10,8 @@ export default class Profile extends Component {
 
   render() {
     return (
-          <ScrollView  style={{flex:1,
-            backgroundColor: '#e0e0e0',}}>
-            <View style={styles.mainBody} >
+          <ScrollView  style={{flex:1,}}>
+            <View style={styles.container} >
               <Image style={styles.imgprofile} source={require("../images/inconnu.png")}/>
               <Text style={styles.name}>
                 Manou Stévia
@@ -60,6 +60,9 @@ export default class Profile extends Component {
                 </Text>
               </View>
               <TouchableOpacity style={{...styles.deconnexion, backgroundColor: '#003d00', color:'white'}}
+                onPress={()=>{
+                  NavigationService.navigate('Home');
+                }}
               >
                 <Text style={{fontSize:20, fontWeight:'bold', color: 'white'}} >
                   Deconnexion
