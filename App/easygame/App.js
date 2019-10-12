@@ -1,54 +1,18 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, {Component} from 'react';
+import Accueil from './src/components/Accueil'
+import { SafeAreaView, ScrollView, Platform, KeyboardAvoidingView } from 'react-native';
 
-import { Asset } from 'expo-asset';
-import { AppLoading } from 'expo';
-import Accueil  from './src/components/index';
-
-
-function cacheImages(images) {
-  return images.map(image => {
-    if (typeof image === 'string') {
-      return Image.prefetch(image);
-    } else {
-      return Asset.fromModule(image).downloadAsync();
-    }
-  });
-}
-
-
-export default class App extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      isReady: false
-    };
-  }
-
-  async _loadAssetsAsync() {
-    const imageAssets = cacheImages([require('./src/images/feuille.jpg')]);
-
-    await Promise.all([...imageAssets]);
-  }
-
+export default class App extends Component {
+  
   render() {
-    if (!this.state.isReady) {
-      return (
-        <AppLoading
-          startAsync={this._loadAssetsAsync}
-          onFinish={() => this.setState({ isReady: true })}
-          onError={console.warn}
-        />
-      );
-    }
-    return <Accueil />;
+    return (
+      <SafeAreaView style={{flex:1,}}>
+        <KeyboardAvoidingView style={{flex:1,}} behavior={Platform.Os == "ios" ? "padding" : "height" } enabled>
+          <ScrollView style={{flex:1,}}>
+            <Accueil/>
+          </ScrollView>
+        </KeyboardAvoidingView>
+      </SafeAreaView>
+    )
   }
-}
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center'
-  }
-});
+};

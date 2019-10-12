@@ -8,8 +8,8 @@ export default class Bienvenue extends Component {
         return (
             <View style={{...styles.container, marginTop: -2 *height/3 }}>
                 <Image 
-                    source={require("../images/logo.png")}
-                    style={{height: 100, width:100,}}
+                    source={require("../images/Logo/logo.png")}
+                    style={{height: 100, width:100, borderRadius: 50}}
                 />
                 <Text 
                 style={{fontSize: 30, 

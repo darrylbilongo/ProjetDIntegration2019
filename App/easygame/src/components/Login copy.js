@@ -1,19 +1,25 @@
 import React, {Component} from 'react';
-import { StyleSheet, Text, View, Dimensions, TextInput, } from 'react-native';
+import { StyleSheet, Text, View, Dimensions, TextInput, Alert,} from 'react-native';
 import Bienvenue from './Bienvenue';
 import Animated, {Easing} from "react-native-reanimated";
-import {TapGestureHandler, State} from 'react-native-gesture-handler';
+import {TapGestureHandler, State, TouchableOpacity} from 'react-native-gesture-handler';
 import Svg, {Image, Circle, ClipPath} from 'react-native-svg';
+import styles from './styles';
 
 
 const { width, height } = Dimensions.get('window');
 
 const {Value ,concat, event, clockRunning, timing, debug, stopClock, startClock, Clock, block, cond, eq, Extrapolate, interpolate, set} = Animated;
 
-export default class Accueil extends Component {
+export default class Login extends Component {
 
-  constructor(){
-    super();
+  constructor(props){
+    super(props);
+
+    this.state = {
+      email: "",
+      password: "",
+    }
 
     this.buttonOpacity = new Value(1);
 
@@ -70,9 +76,41 @@ export default class Accueil extends Component {
     });
   }
 
+  myValidate = () =>{
+    const {email, password} = this.state;
+    this.preventDefault = false;
+    if(email == "" && password == ""){
+      Alert.alert("Vueillez remplir votre mail et votre mot de passe");
+    }
+    else if(email == "manou" && password == "manou"){
+      
+    }
+    else if(email != "" && password == ""){
+      Alert.alert("Pas de mot de passe!")
+    }
+    else if(email == "" && password != ""){
+      Alert.alert("Pas d'email!")
+    }
+    else{
+      Alert.alert("Email ou mot de passe érroné!")
+    }
+  }
+
+  inputFocused (refName) {
+    setTimeout(() => {
+      let scrollResponder = this.refs.scrollView.getScrollResponder();
+      scrollResponder.scrollResponderScrollNativeHandleToKeyboard(
+        React.findNodeHandle(this.refs[refName]),
+        110,
+        true
+      );
+    }, 50);
+  }
+
   render() {
+    
     return (
-    <View style={styles.container}>
+    <View style={myContainer.container}>
         <Animated.View style={{...StyleSheet.absoluteFill, transform: [{translateY: this.bgY}]}}>
             <Svg height={height+50} width={width}>
               <ClipPath id='clip'>
@@ -95,12 +133,12 @@ export default class Accueil extends Component {
                                   backgroundColor: 'white',
                                   opacity: this.buttonOpacity,
                                   transform: [{translateY: this.buttonY}]}}>
-              <Text style={{ fontSize: 20, fontWeight: 'bold' }}>Connexion</Text>
+              <Text style={{ fontSize: 20, fontWeight: 'bold' }}>Se connecter</Text>
             </Animated.View>
           </TapGestureHandler>
           <TapGestureHandler>
             <Animated.View style={{ ...styles.button, 
-                                    backgroundColor: '#3700B3',
+                                    backgroundColor: '#003d00',
                                     opacity: this.buttonOpacity,
                                     transform: [{translateY: this.buttonY}]
                                   }}>
@@ -110,40 +148,51 @@ export default class Accueil extends Component {
             </Animated.View>
           </TapGestureHandler>
 
-          <Animated.View style={{height:height/2, 
-                                ...StyleSheet.absoluteFill, 
-                                top:null, 
-                                justifyContent:'center',
-                                zIndex: this.textInputZindex,
-                                opacity: this.textInputOpacity,
-                                transform:[{translateY: this.textInputY}],
-                              }}>
-              <TapGestureHandler onHandlerStateChange={this.onCloseState}>
-                <Animated.View style={styles.closeButton}>
-                  <Animated.Text style={{fontSize: 15,
-                                          color: 'black',
-                                          fontWeight: 'bold',
-                                          transform: [{rotate: concat(this.rotateCross, 'deg')}]}}>
-                    X
-                  </Animated.Text>
-                </Animated.View>
-              </TapGestureHandler>
-
-              <TextInput 
-                placeholder="nom d'utilisateur"
-                style={styles.textInput}
-                placeholderTextColor="black"
-              />
-              <TextInput 
-                placeholder="mot de passe"
-                style={styles.textInput}
-                placeholderTextColor="black"
-              />
-              <Animated.View style={{...styles.button, backgroundColor: '#3700B3', color:'white'}}>
-                <Text style={{fontSize:20, fontWeight:'bold', color: 'white'}}>
-                  Connexion
-                </Text>
-              </Animated.View>
+            <Animated.View style={{height:height/2, 
+                                  ...StyleSheet.absoluteFill, 
+                                  top:null, 
+                                  justifyContent:'center',
+                                  zIndex: this.textInputZindex,
+                                  opacity: this.textInputOpacity,
+                                  transform:[{translateY: this.textInputY}],
+                                  
+                                }}>
+          <TapGestureHandler onHandlerStateChange={this.onCloseState}>
+            <Animated.View style={styles.closeButton}>
+              <Animated.Text style={{fontSize: 15,
+                                      color: 'black',
+                                      fontWeight: 'bold',
+                                      transform: [{rotate: concat(this.rotateCross, 'deg')}]}}>
+                X
+              </Animated.Text>
+            </Animated.View>
+          </TapGestureHandler>
+          <TextInput 
+              placeholder="email"
+              style={styles.textInput}
+              placeholderTextColor="black"
+              keyboardType={'email-address'}
+              onChangeText={email => this.setState({email})}
+              autoCapitalize='none'
+              returnKeyType='next'
+            />
+            <TextInput 
+              placeholder="mot de passe"
+              style={styles.textInput}
+              secureTextEntry={true}
+              placeholderTextColor="black"
+              autoCapitalize='none'
+              onChangeText={password => this.setState({password})}
+              keyboardType={'default'}
+            />
+            <TouchableOpacity style={{...styles.button, backgroundColor: '#003d00', color:'white'}}
+              onPress={this.myValidate}
+              //onPress={this.myValidate}
+            >
+              <Text style={{fontSize:20, fontWeight:'bold', color: 'white'}} >
+                Connexion
+              </Text>
+            </TouchableOpacity>
           </Animated.View>
         </View>
     </View>
@@ -180,44 +229,12 @@ function runTiming(clock, value, dest) {
   ]);
 }
 
-const styles = StyleSheet.create({
+const myContainer = StyleSheet.create({
     container: {
         flex: 1,
         alignItems: 'center',
-        justifyContent: 'flex-end'
-      },
-      button: {
-        height: 50,
-        marginHorizontal: 20,
-        borderRadius: 20,
-        alignItems: 'center',
-        justifyContent: 'center',
-        marginVertical: 10,
-        padding: 10,
-        shadowColor: 'black',
-        shadowOpacity: 0.2,
-        shadowOffset: {width: 2, height: 2},
-
-      },
-      textInput: {
-        height:50,
-        borderRadius: 20,
-        borderWidth: 0.5,
-        marginHorizontal: 20,
-        paddingLeft: 10,
-        marginVertical: 5,
-        borderColor:'rgba(0,0,0, 0.5)',
-        fontStyle: 'italic'
-      },
-      closeButton:{
-        height: 40,
-        width: 40,
-        backgroundColor: 'white',
-        borderRadius: 20,
-        alignItems: 'center',
-        justifyContent: 'center',
-        position: 'absolute',
-        top: 5,
-        left: width / 2 -20,
+        justifyContent: 'flex-end',
+        height:height,
+        width: width,
       }
 });
