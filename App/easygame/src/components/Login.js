@@ -16,8 +16,8 @@ export default class Login extends Component {
     super();
 
     this.state = {
-      email: "",
-      password: "",
+      userEmail: "",
+      userPassword: "",
     }
 
     this.viewOpacity = new Value(1);
@@ -93,17 +93,38 @@ export default class Login extends Component {
   }
 
   myValidate = () =>{
-    const {email, password} = this.state;
-    if(email == "" && password == ""){
+    const {userEmail, userPassword} = this.state;
+    /*
+    fetch('https://www.easygame.funndeh.com/nichtszusehen/login.php', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        email: userEmail,
+        password: userPassword
+      })
+    })
+    .then((response) => response.json())
+    .then((responseJson) => {
+      alert(responseJson);
+    })
+    .catch((error) => {
+      console.error(error);
+    });*/
+
+    
+    if(userEmail == "" && userPassword == ""){
       Alert.alert("Veuillez remplir votre mail et votre mot de passe");
     }
-    else if(email == "manou" && password == "manou"){
+    else if(userEmail == "manou" && userPassword == "manou"){
       NavigationService.navigate('Profile');
     }
-    else if(email != "" && password == ""){
+    else if(userEmail != "" && userPassword == ""){
       Alert.alert("Pas de mot de passe!")
     }
-    else if(email == "" && password != ""){
+    else if(userEmail == "" && userPassword != ""){
       Alert.alert("Pas d'email!")
     }
     else{
@@ -198,7 +219,7 @@ export default class Login extends Component {
                   style={styles.textInput}
                   placeholderTextColor="black"
                   keyboardType={'email-address'}
-                  onChangeText={email => this.setState({email})}
+                  onChangeText={userEmail => this.setState({userEmail})}
                   autoCapitalize='none'
                   returnKeyType='next'
                 />
@@ -208,7 +229,7 @@ export default class Login extends Component {
                   secureTextEntry={true}
                   placeholderTextColor="black"
                   autoCapitalize='none'
-                  onChangeText={password => this.setState({password})}
+                  onChangeText={userPassword => this.setState({userPassword})}
                   keyboardType={'default'}
                 />
                 <TouchableOpacity style={{...styles.button, backgroundColor: '#003d00', color:'white'}}
