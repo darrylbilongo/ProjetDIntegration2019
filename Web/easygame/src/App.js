@@ -1,26 +1,30 @@
 import React from 'react';
 import './App.css';
-import Menus from './components/Menus';
-import NavBar from './components/NavBar';
+
+// Components
 import About from './components/About';
 import Login from './components/Login';
+import Home from './components/Home';
+import Error from './components/Error';
 
-import {BrowserRouter as Router, Switch, Route } from 'react-router-dom'; 
+import {BrowserRouter as Router, Route, Switch } from 'react-router-dom'; 
+import NavBar from './components/NavBar';
+import Footer from './components/Footer';
+import Admin from './components/Admin';
 
 class App extends React.Component {
   render(){
     return (
-      <Router>
-        <div>
-          <NavBar ></NavBar>
-          <Login></Login>
+        <Router>
+          <NavBar/>
           <Switch>
-            {/*<Route exact path="/" Component={Home}></Route>
-            <Route path="/login" Component={Login}></Route>
-            <Route path="/about" Component={About}></Route>*/}
-          </Switch>
-      </div>
-      </Router>
+            <Route path="/" component={Home} exact/>
+            <Route path="/login" component={Login} />
+            <Route path="/about" component={About} />
+            <Route path="/admin" component={Admin} />
+            <Route component={Error}/>
+          </Switch>  
+        </Router>
     );
   }
 }
