@@ -2,7 +2,6 @@ import React from 'react';
 import NavBar from './NavBar';
 import styled from 'styled-components';
 import logo from '../Logo/logo_transparent.png'
-import thumbnail from '../Logo/instagram_profile_image.png'
 import fondvert from '../Logo/green-material-background.jpg'
 
 class Home extends React.Component {
@@ -20,9 +19,9 @@ class Home extends React.Component {
           <div class="carousel-inner">
             <div class="carousel-item active">   
               <img src={fondvert} id="fond" alt="fond vert"></img>
+              <img src={logo} class="centered" id="logo" alt="logo EasyGame"></img>
               <h1 class="welcome">Welcome</h1>
               <a href="/login" class="btn btn-info centered" role="button">Sign in</a>
-
             </div>
             <div class="map-responsive carousel-item container-fluid">
               <iframe src="https://www.google.com/maps/embed/v1/place?key=AIzaSyA0s1a7phLN0iaD6-UE7m4qP-z21pH0eSc&q=Ephec+lln" 
@@ -76,10 +75,10 @@ const HomeComponent = styled.div`
       } 
       #logo {
         position: absolute;
-        top: 10%;
-        left: 10%;
-        width: 15%;
-        height: 15%;
+        top: 20%;
+        left: 50%;
+        width: 60%;
+        height: 60%;
         transform: translate(-50%, -50%);
         font-size: 500%;
       }
