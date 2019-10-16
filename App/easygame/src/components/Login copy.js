@@ -6,15 +6,15 @@ import {TapGestureHandler, State, TouchableOpacity} from 'react-native-gesture-h
 import Svg, {Image, Circle, ClipPath} from 'react-native-svg';
 import styles from './styles';
 
+
 const { width, height } = Dimensions.get('window');
 
 const {Value ,concat, event, clockRunning, timing, debug, stopClock, startClock, Clock, block, cond, eq, Extrapolate, interpolate, set} = Animated;
 
 export default class Login extends Component {
+
   constructor(props){
     super(props);
-
-    const myValue = new Value(-1);
 
     this.state = {
       email: "",
@@ -80,10 +80,10 @@ export default class Login extends Component {
     const {email, password} = this.state;
     this.preventDefault = false;
     if(email == "" && password == ""){
-      Alert.alert("Veuillez remplir votre mail et votre mot de passe");
+      Alert.alert("Vueillez remplir votre mail et votre mot de passe");
     }
     else if(email == "manou" && password == "manou"){
-      this.onStateChange;
+      
     }
     else if(email != "" && password == ""){
       Alert.alert("Pas de mot de passe!")
@@ -148,7 +148,7 @@ export default class Login extends Component {
             </Animated.View>
           </TapGestureHandler>
 
-          <Animated.View style={{height:height/2, 
+            <Animated.View style={{height:height/2, 
                                   ...StyleSheet.absoluteFill, 
                                   top:null, 
                                   justifyContent:'center',
@@ -157,43 +157,42 @@ export default class Login extends Component {
                                   transform:[{translateY: this.textInputY}],
                                   
                                 }}>
-            <TapGestureHandler onHandlerStateChange={this.onCloseState}>
-              <Animated.View style={styles.closeButton}>
-                <Animated.Text style={{fontSize: 15,
-                                        color: 'black',
-                                        fontWeight: 'bold',
-                                        transform: [{rotate: concat(this.rotateCross, 'deg')}]}}>
-                  X
-                </Animated.Text>
-              </Animated.View>
-            </TapGestureHandler>
+          <TapGestureHandler onHandlerStateChange={this.onCloseState}>
+            <Animated.View style={styles.closeButton}>
+              <Animated.Text style={{fontSize: 15,
+                                      color: 'black',
+                                      fontWeight: 'bold',
+                                      transform: [{rotate: concat(this.rotateCross, 'deg')}]}}>
+                X
+              </Animated.Text>
+            </Animated.View>
+          </TapGestureHandler>
+          <TextInput 
+              placeholder="email"
+              style={styles.textInput}
+              placeholderTextColor="black"
+              keyboardType={'email-address'}
+              onChangeText={email => this.setState({email})}
+              autoCapitalize='none'
+              returnKeyType='next'
+            />
             <TextInput 
-                placeholder="email"
-                style={styles.textInput}
-                placeholderTextColor="black"
-                keyboardType={'email-address'}
-                onChangeText={email => this.setState({email})}
-                autoCapitalize='none'
-                returnKeyType='next'
-              />
-              <TextInput 
-                placeholder="mot de passe"
-                style={styles.textInput}
-                secureTextEntry={true}
-                placeholderTextColor="black"
-                autoCapitalize='none'
-                onChangeText={password => this.setState({password})}
-                keyboardType={'default'}
-              />
-              <TapGestureHandler>
-                <TouchableOpacity style={{...styles.button, backgroundColor: '#003d00', color:'white'}}
-                  onPress={this.myValidate}
-                >
-                  <Text style={{fontSize:20, fontWeight:'bold', color: 'white'}} >
-                    Connexion
-                  </Text>
-                </TouchableOpacity>
-              </TapGestureHandler>
+              placeholder="mot de passe"
+              style={styles.textInput}
+              secureTextEntry={true}
+              placeholderTextColor="black"
+              autoCapitalize='none'
+              onChangeText={password => this.setState({password})}
+              keyboardType={'default'}
+            />
+            <TouchableOpacity style={{...styles.button, backgroundColor: '#003d00', color:'white'}}
+              onPress={this.myValidate}
+              //onPress={this.myValidate}
+            >
+              <Text style={{fontSize:20, fontWeight:'bold', color: 'white'}} >
+                Connexion
+              </Text>
+            </TouchableOpacity>
           </Animated.View>
         </View>
     </View>
