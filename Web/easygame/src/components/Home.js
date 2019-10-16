@@ -6,7 +6,7 @@ class Home extends React.Component {
       return (
         <div className="App">
             <div>
-                HOME PAGE
+              BOOTSRATP TO DO!
             </div>
         </div>
       );
