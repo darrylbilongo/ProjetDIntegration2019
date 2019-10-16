@@ -1,6 +1,6 @@
 import React from 'react';
-import NavigationRoot from './src/components/NavigationRoot';
-import NavigationService from './src/components/NavigationService';
+import NavigationRoot from './src/components/Navigation/NavigationRoot';
+import NavigationService from './src/components/Navigation/NavigationService';
 
 export default class App extends React.Component {
   render() {

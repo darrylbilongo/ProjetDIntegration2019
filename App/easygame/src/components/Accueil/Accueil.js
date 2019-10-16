@@ -25,7 +25,7 @@ export default class Accueil extends React.Component {
   }
 
   async _loadAssetsAsync() {
-    const imageAssets = cacheImages([require('../images/feuille.jpg')]);
+    const imageAssets = cacheImages([require('../../images/feuille.jpg')]);
 
     await Promise.all([...imageAssets]);
   }

@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import { StyleSheet, Text, View, Dimensions, Image, ScrollView} from 'react-native';
 import styles from './styles';
 import {TouchableOpacity} from 'react-native-gesture-handler';
-import NavigationService from './NavigationService';
+import NavigationService from '../Navigation/NavigationService';
 
 const { width, height } = Dimensions.get('window');
 
@@ -12,7 +12,7 @@ export default class Profile extends Component {
     return (
           <ScrollView  style={{flex:1,}}>
             <View style={styles.container} >
-              <Image style={styles.imgprofile} source={require("../images/inconnu.png")}/>
+              <Image style={styles.imgprofile} source={require("../../images/inconnu.png")}/>
               <Text style={styles.name}>
                 Manou Stévia
               </Text>
@@ -21,7 +21,7 @@ export default class Profile extends Component {
               </Text>
 
               <View style={styles.itemProfile}>
-                <Image style={styles.imgItem} source={require("../images/etoile.png")}/>
+                <Image style={styles.imgItem} source={require("../../images/etoile.png")}/>
                 <Text style={styles.labelItem}>
                   Animateur
                 </Text>
@@ -31,7 +31,7 @@ export default class Profile extends Component {
               </View>
 
               <View style={styles.itemProfile}>
-                <Image style={styles.imgItem} source={require("../images/profile.png")}/>
+                <Image style={styles.imgItem} source={require("../../images/profile.png")}/>
                 <Text style={styles.labelItem}>
                   Modifier le Profil
                 </Text>
@@ -41,7 +41,7 @@ export default class Profile extends Component {
               </View>
 
               <View style={styles.itemProfile}>
-                <Image style={styles.imgItem} source={require("../images/totem.png")}/>
+                <Image style={styles.imgItem} source={require("../../images/totem.png")}/>
                 <Text style={styles.labelItem}>
                   Totem
                 </Text>
@@ -51,7 +51,7 @@ export default class Profile extends Component {
               </View>
 
               <View style={styles.itemProfile}>
-                <Image style={styles.imgItem} source={require("../images/notif.png")}/>
+                <Image style={styles.imgItem} source={require("../../images/notif.png")}/>
                 <Text style={styles.labelItem}>
                   Notifications
                 </Text>
@@ -59,6 +59,17 @@ export default class Profile extends Component {
                   0 messages
                 </Text>
               </View>
+
+              <TouchableOpacity style={{...styles.deconnexion, backgroundColor: '#003d00', color:'white'}}
+                onPress={()=>{
+                  NavigationService.navigate('Agenda');
+                }}
+              >
+                <Text style={{fontSize:20, fontWeight:'bold', color: 'white'}} >
+                  Projet
+                </Text>
+              </TouchableOpacity>
+              
               <TouchableOpacity style={{...styles.deconnexion, backgroundColor: '#003d00', color:'white'}}
                 onPress={()=>{
                   NavigationService.navigate('Home');

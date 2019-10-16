@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {Text,Alert, View, Dimensions, Image, ScrollView, TextInput, Platform, KeyboardAvoidingView, SafeAreaView,} from 'react-native';
 import styles from './styles';
 import {TouchableOpacity} from 'react-native-gesture-handler';
-import NavigationService from './NavigationService';
+import NavigationService from '../Navigation/NavigationService';
 import Animated from "react-native-reanimated";
 
 const { width, height } = Dimensions.get('window');
@@ -64,7 +64,7 @@ export default class Enregistrer extends Component {
                     marginBottom: height/20,
                     marginLeft: width/3,
                     borderColor: '#003d00', borderRadius:50, borderWidth:1
-                }} source={require("../images/Logo/logo_transparent.png")}/>
+                }} source={require("../../images/Logo/logo_transparent.png")}/>
                 <Animated.View >
                     <TextInput
                         placeholder="Entrez votre Nom"

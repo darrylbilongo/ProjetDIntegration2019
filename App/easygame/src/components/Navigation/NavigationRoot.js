@@ -1,10 +1,11 @@
 import React from 'react';
 import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
-import HomeScreen from './Homescreen';
-import Profile from './Profile';
-import NavigationService from './NavigationService';
-import Enregistrer from './Enregistrer';
+import HomeScreen from '../Accueil/Homescreen';
+import Profile from '../Accueil/Profile';
+import Project from '../Admin/Project';
+import Planning from '../Admin/Agenda';
+import Enregistrer from '../Accueil/Enregistrer';
 import {Dimensions} from 'react-native';
 
 const { width, height } = Dimensions.get('window');
@@ -28,10 +29,23 @@ const AppNavigator = createStackNavigator(
         navigationOptions: {
             header: null
         }
-    }
+    },
+    Agenda: {
+      screen: Planning,
+      navigationOptions: {
+        header: null,
+      }
+    },
+    Project: {
+      screen: Project,
+      navigationOptions: {
+        header: null,
+      }
+    },
+
   },
   {
-    initialRouteName: 'Home',
+    initialRouteName: 'Agenda',
   }
 );
 

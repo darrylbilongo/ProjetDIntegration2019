@@ -1,11 +1,12 @@
 import React, {Component} from 'react';
 import { StyleSheet, Text, View, Dimensions, TextInput, Alert,} from 'react-native';
-import Bienvenue from './Bienvenue';
+import Welcome from '../Accueil/Welcome';
 import Animated, {Easing} from "react-native-reanimated";
 import {TapGestureHandler, State, TouchableOpacity} from 'react-native-gesture-handler';
 import Svg, {Image, Circle, ClipPath} from 'react-native-svg';
 import styles from './styles';
-import NavigationService from './NavigationService';
+import NavigationService from '../Navigation/NavigationService';
+
 
 const { width, height } = Dimensions.get('window');
 
@@ -161,7 +162,7 @@ export default class Login extends Component {
                   <Circle r={height+50} cx={width / 2} />
                 </ClipPath>
               <Image
-                  href={require("../images/feuille.jpg")}
+                  href={require("../../images/feuille.jpg")}
                   width={width}
                   height={height+50}
                   preserveAspectRatio="xMidYMid slice"
@@ -171,7 +172,7 @@ export default class Login extends Component {
           </Animated.View>
 
           <View style={{ height: height / 2, justifyContent: 'center' , marginVertical:30 }}>
-          <Bienvenue />
+          <Welcome />
             <TapGestureHandler onHandlerStateChange={this.onStateChange}>
               <Animated.View style={{
                                       ...styles.button, 
@@ -232,7 +233,7 @@ export default class Login extends Component {
                   onChangeText={userPassword => this.setState({userPassword})}
                   keyboardType={'default'}
                 />
-                <TouchableOpacity style={{...styles.button, backgroundColor: '#003d00', color:'white'}}
+                <TouchableOpacity style={{...styles.button, backgroundColor: '#003d00'}}
                   onPress={this.myValidate}
                 >
                   <Text style={{fontSize:20, fontWeight:'bold', color: 'white'}} >
