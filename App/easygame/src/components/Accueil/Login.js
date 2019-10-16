@@ -1,11 +1,12 @@
 import React, {Component} from 'react';
 import { StyleSheet, Text, View, Dimensions, TextInput, Alert,} from 'react-native';
-import Bienvenue from './Bienvenue';
+import Welcome from '../Accueil/Welcome';
 import Animated, {Easing} from "react-native-reanimated";
 import {TapGestureHandler, State, TouchableOpacity} from 'react-native-gesture-handler';
 import Svg, {Image, Circle, ClipPath} from 'react-native-svg';
 import styles from './styles';
-import NavigationService from './NavigationService';
+import NavigationService from '../Navigation/NavigationService';
+
 
 const { width, height } = Dimensions.get('window');
 
@@ -16,8 +17,8 @@ export default class Login extends Component {
     super();
 
     this.state = {
-      email: "",
-      password: "",
+      userEmail: "",
+      userPassword: "",
     }
 
     this.viewOpacity = new Value(1);
@@ -93,17 +94,38 @@ export default class Login extends Component {
   }
 
   myValidate = () =>{
-    const {email, password} = this.state;
-    if(email == "" && password == ""){
+    const {userEmail, userPassword} = this.state;
+    /*
+    fetch('https://www.easygame.funndeh.com/nichtszusehen/login.php', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        email: userEmail,
+        password: userPassword
+      })
+    })
+    .then((response) => response.json())
+    .then((responseJson) => {
+      alert(responseJson);
+    })
+    .catch((error) => {
+      console.error(error);
+    });*/
+
+    
+    if(userEmail == "" && userPassword == ""){
       Alert.alert("Veuillez remplir votre mail et votre mot de passe");
     }
-    else if(email == "manou" && password == "manou"){
+    else if(userEmail == "manou" && userPassword == "manou"){
       NavigationService.navigate('Profile');
     }
-    else if(email != "" && password == ""){
+    else if(userEmail != "" && userPassword == ""){
       Alert.alert("Pas de mot de passe!")
     }
-    else if(email == "" && password != ""){
+    else if(userEmail == "" && userPassword != ""){
       Alert.alert("Pas d'email!")
     }
     else{
@@ -140,7 +162,7 @@ export default class Login extends Component {
                   <Circle r={height+50} cx={width / 2} />
                 </ClipPath>
               <Image
-                  href={require("../images/feuille.jpg")}
+                  href={require("../../images/feuille.jpg")}
                   width={width}
                   height={height+50}
                   preserveAspectRatio="xMidYMid slice"
@@ -150,7 +172,7 @@ export default class Login extends Component {
           </Animated.View>
 
           <View style={{ height: height / 2, justifyContent: 'center' , marginVertical:30 }}>
-          <Bienvenue />
+          <Welcome />
             <TapGestureHandler onHandlerStateChange={this.onStateChange}>
               <Animated.View style={{
                                       ...styles.button, 
@@ -198,7 +220,7 @@ export default class Login extends Component {
                   style={styles.textInput}
                   placeholderTextColor="black"
                   keyboardType={'email-address'}
-                  onChangeText={email => this.setState({email})}
+                  onChangeText={userEmail => this.setState({userEmail})}
                   autoCapitalize='none'
                   returnKeyType='next'
                 />
@@ -208,10 +230,10 @@ export default class Login extends Component {
                   secureTextEntry={true}
                   placeholderTextColor="black"
                   autoCapitalize='none'
-                  onChangeText={password => this.setState({password})}
+                  onChangeText={userPassword => this.setState({userPassword})}
                   keyboardType={'default'}
                 />
-                <TouchableOpacity style={{...styles.button, backgroundColor: '#003d00', color:'white'}}
+                <TouchableOpacity style={{...styles.button, backgroundColor: '#003d00'}}
                   onPress={this.myValidate}
                 >
                   <Text style={{fontSize:20, fontWeight:'bold', color: 'white'}} >

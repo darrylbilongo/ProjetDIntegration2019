@@ -3,8 +3,9 @@ import {KeyboardAvoidingView, ScrollView, Platform} from 'react-native';
 import Accueil from './Accueil';
 import { SafeAreaView } from 'react-navigation';
 
+
 export default class HomeScreen extends React.Component {
-  
+
   render() {
     return (
             <SafeAreaView style={{flex: 1}}>
@@ -15,3 +16,5 @@ export default class HomeScreen extends React.Component {
           );
   }
 };
+
+// export default HomeScreen

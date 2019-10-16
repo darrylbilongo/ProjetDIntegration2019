@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
 import { StyleSheet, Text, View, Dimensions, TextInput, Alert,} from 'react-native';
-import Bienvenue from './Bienvenue';
+import Welcome from '../Welcome';
 import Animated, {Easing} from "react-native-reanimated";
 import {TapGestureHandler, State, TouchableOpacity} from 'react-native-gesture-handler';
 import Svg, {Image, Circle, ClipPath} from 'react-native-svg';
-import styles from './styles';
+import styles from '../styles';
 
 
 const { width, height } = Dimensions.get('window');
@@ -117,7 +117,7 @@ export default class Login extends Component {
                 <Circle r={height+50} cx={width / 2} />
               </ClipPath>
             <Image
-                href={require("../images/feuille.jpg")}
+                href={require("../../../images/feuille.jpg")}
                 width={width}
                 height={height+50}
                 preserveAspectRatio="xMidYMid slice"
@@ -127,7 +127,7 @@ export default class Login extends Component {
         </Animated.View>
 
         <View style={{ height: height / 2, justifyContent: 'center' , marginVertical:30 }}>
-        <Bienvenue />
+        <Welcome />
           <TapGestureHandler onHandlerStateChange={this.onStateChange}>
             <Animated.View style={{...styles.button, 
                                   backgroundColor: 'white',
