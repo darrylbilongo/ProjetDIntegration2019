@@ -45,7 +45,7 @@ const AppNavigator = createStackNavigator(
 
   },
   {
-    initialRouteName: 'Agenda',
+    initialRouteName: 'Home',
   }
 );
 
