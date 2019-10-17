@@ -28,5 +28,5 @@ ou encore (pour les fans du yarn)
 ```bash
 sudo yarn start
 ```
-L'application va ouvrir une fenêtre depuis votre navigateur en local au port 1900. Veuillez vous assurer que votre mobile se trouve dans le même réseau que votre ordinateur. Télécharger l'application expo sur votre mbile pour un test à temps réel.
+L'application va ouvrir une fenêtre depuis votre navigateur en local au port 1900. Veuillez vous assurer que votre mobile se trouve dans le même réseau que votre ordinateur. Télécharger l'application ***expo*** sur votre mobile pour un test à temps réel.
 Vous verrez un QR Code depuis votre terminal et votre nagigateur. Scannez le depuis l'application ***expo*** se trouvant sur votre mobile.
