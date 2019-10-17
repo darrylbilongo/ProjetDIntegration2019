@@ -21,4 +21,4 @@ class Scheduler extends React.Component {
     }
 }
 
-export default Calendar;
+export default Scheduler;
