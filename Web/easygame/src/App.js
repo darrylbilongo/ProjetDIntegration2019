@@ -11,6 +11,7 @@ import {BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import NavBar from './components/NavBar';
 import Footer from './components/Footer';
 import Admin from './components/Admin';
+import Team from './components/Team';
 
 class App extends React.Component {
   render(){
@@ -22,6 +23,7 @@ class App extends React.Component {
             <Route path="/login" component={Login} />
             <Route path="/about" component={About} />
             <Route path="/admin" component={Admin} />
+            <Route path="/team" component={Team} />
             <Route component={Error}/>
           </Switch>  
         </Router>
