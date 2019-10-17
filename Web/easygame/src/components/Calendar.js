@@ -1,13 +1,24 @@
-import React from "react";
+import React from 'react';
 
-class Calendar extends React.Component {
-  render() {
-    return (
-      <div>
-        <h2>Calendar</h2>
-      </div>
-    );
-  }
+import Calendar from 'react-calendar';
+
+class Scheduler extends React.Component {
+    state = {
+        date: new Date(),
+    }
+     
+    onChange = date => this.setState({ date })
+     
+    render() {
+        return (
+          <div>
+            <Calendar
+              onChange={this.onChange}
+              value={this.state.date}
+            />
+          </div>
+        );
+    }
 }
 
 export default Calendar;
