@@ -1,10 +1,10 @@
 import React from "react";
-import Calendar from "./Calendar";
+import Scheduler from "./Scheduler";
 
 class Admin extends React.Component {
   render() {
     return (
-      <Calendar />
+      <Scheduler />
     );
   }
 }

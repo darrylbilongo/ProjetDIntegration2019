@@ -21,11 +21,11 @@ class Home extends React.Component {
               <img src={fondvert} id="fond" alt="fond vert"></img>
               <img src={logo} class="centered" id="logo" alt="logo EasyGame"></img>
               <h1 class="welcome">Welcome</h1>
-              <a href="/login" class="btn btn-info centered" role="button">Sign in</a>
+              <a href="/login" class="btn btn-info centered btn" role="button">Sign in</a>
             </div>
             <div class="map-responsive carousel-item container-fluid">
               <iframe src="https://www.google.com/maps/embed/v1/place?key=AIzaSyA0s1a7phLN0iaD6-UE7m4qP-z21pH0eSc&q=Ephec+lln" 
-              width="1600" height="900" frameborder="0" allowfullscreen></iframe>
+              class="map" width="1600" height="900" allowfullscreen></iframe>
             </div>
           </div>
           <a class="carousel-control-prev" href="#demo" data-slide="prev">
@@ -44,6 +44,10 @@ const HomeComponent = styled.div`
       background-color:grey;
       .imgmenus{
         width:100%;
+      }
+      .map{
+        margin: 0;
+        padding: 0;
       }
       div {
         color: black;
@@ -85,6 +89,8 @@ const HomeComponent = styled.div`
       #fond {
         filter: blur(4px);
         -webkit-filter: blur(4px);
+
+      }
       .row {
           margin: 8px -16px;
         }     
@@ -115,6 +121,11 @@ const HomeComponent = styled.div`
             width: 100%;
           }
         }
+      .btn{
+        position: absolute;
+        top: 70%;
+        left: 50%;
+      }
 `;
 
 export default Home;

@@ -17,7 +17,7 @@ class Team extends React.Component {
         <div class="card border-0 shadow">
           <div class="card-body text-center">
             <h5 class="card-title mb-0">Jean Cornil</h5>
-            <div class="card-text text-black-50">App Developer</div>
+            <div class="card-text text-black-50">Web Developer</div>
           </div>
         </div>
       </div>
@@ -25,7 +25,7 @@ class Team extends React.Component {
         <div class="card border-0 shadow">
           <div class="card-body text-center">
             <h5 class="card-title mb-0">Celia Hassain</h5>
-            <div class="card-text text-black-50">App Developer</div>
+            <div class="card-text text-black-50">Web Developer</div>
           </div>
         </div>
       </div>
