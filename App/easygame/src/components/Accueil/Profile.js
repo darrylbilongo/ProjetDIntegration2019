@@ -69,6 +69,16 @@ export default class Profile extends Component {
                   Projet
                 </Text>
               </TouchableOpacity>
+
+              <TouchableOpacity style={{...styles.deconnexion, backgroundColor: '#003d00', color:'white'}}
+                onPress={()=>{
+                  NavigationService.navigate('Geolocalization');
+                }}
+              >
+                <Text style={{fontSize:20, fontWeight:'bold', color: 'white'}} >
+                  Geolocalisation
+                </Text>
+              </TouchableOpacity>
               
               <TouchableOpacity style={{...styles.deconnexion, backgroundColor: '#003d00', color:'white'}}
                 onPress={()=>{
