@@ -24,27 +24,24 @@ export const NavigationBar = () => (
         <Nav className="ml-auto">
           <Nav.Item>
             <Nav.Link>
-              <Link to="/">Home</Link>
-            </Nav.Link>
-          </Nav.Item>
-          <Nav.Item>
-            <Nav.Link>
               <Link to="/admin">Administration</Link>
             </Nav.Link>
-          </Nav.Item>
+          </Nav.Item>    
           <Nav.Item>
             <Nav.Link>
-              <Link to="/about">About</Link>
+              <Link to="/login">Connexion</Link>
             </Nav.Link>
           </Nav.Item>
-          <Nav.Item>
-            <Nav.Link>
-              <Link to="/team">Team</Link>
-            </Nav.Link>
-          </Nav.Item>
+  
           <Nav.Item>
             <Nav.Link>
               <Link to="/jeux">Jeux</Link>
+            </Nav.Link>
+          </Nav.Item>
+
+          <Nav.Item>
+            <Nav.Link>
+              <Link to="/team">Team</Link>
             </Nav.Link>
           </Nav.Item>
         </Nav>

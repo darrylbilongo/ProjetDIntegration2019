@@ -8,8 +8,6 @@ import Home from './components/Home';
 import Error from './components/Error';
 
 import {BrowserRouter as Router, Route, Switch } from 'react-router-dom'; 
-import NavBar from './components/NavBar';
-import Footer from './components/Footer';
 import Team from './components/Team';
 import Admin from './components/Admin';
 import Layout from './components/Layout';
