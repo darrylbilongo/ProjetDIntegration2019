@@ -119,7 +119,7 @@ export default class Login extends Component {
     if(userEmail == "" && userPassword == ""){
       Alert.alert("Veuillez remplir votre mail et votre mot de passe");
     }
-    else if(userEmail == "manou" && userPassword == "manou"){
+    else if(userEmail == "manou@gmail.com" && userPassword == "manou"){
       NavigationService.navigate('Profile');
     }
     else if(userEmail != "" && userPassword == ""){
