@@ -14,19 +14,29 @@ export default class Profile extends Component {
             <View style={styles.container} >
               <Image style={styles.imgprofile} source={require("../../images/inconnu.png")}/>
               <Text style={styles.name}>
-                Manou Stévia
+                {global.utilisateur.nom} {global.utilisateur.prenom}
               </Text>
               <Text style={styles.username}>
-                @manoustevia
+                @{global.utilisateur.nomUtilisateur}
               </Text>
 
               <View style={styles.itemProfile}>
                 <Image style={styles.imgItem} source={require("../../images/etoile.png")}/>
                 <Text style={styles.labelItem}>
-                  Animateur
+                  Fonction
                 </Text>
                 <Text style={styles.subLabelItem}>
-                  couleurFoulard
+                  {global.utilisateur.fonction}
+                </Text>
+              </View>
+
+              <View style={styles.itemProfile}>
+                <Image style={styles.imgItem} source={require("../../images/etoile.png")}/>
+                <Text style={styles.labelItem}>
+                  Date de naissance
+                </Text>
+                <Text style={styles.subLabelItem}>
+                  {global.utilisateur.dateNaissance}
                 </Text>
               </View>
 
@@ -46,7 +56,7 @@ export default class Profile extends Component {
                   Totem
                 </Text>
                 <Text style={styles.subLabelItem}>
-                  Loup
+                  {global.utilisateur.totem}
                 </Text>
               </View>
 

@@ -78,7 +78,22 @@ router.route('/login').post((req, res) => {
                     let token = jwt.sign(verif, process.env.SECRET_KEY, {
                         expiresIn: 1440
                     });
-                    res.send(token)
+                    //res.send(token)
+                    res.json({
+                        token: token,
+                        message: 'Utilisateur existant: Connexion reussie!!!',
+                        utilisateur: {
+                            nomUtilisateur : user.nomUtilisateur,
+                            nom : user.nom,
+                            prenom : user.prenom,
+                            email : user.email,
+                            motDePasse : user.motDePasse,
+                            dateNaissance : user.dateNaissance,
+                            estSupprime : user.estSupprime,
+                            totem : user.totem,
+                            fonction : user.fonction
+                        }
+                    })
                 }
                 else{
                     //Mots de Passe pas identiques
