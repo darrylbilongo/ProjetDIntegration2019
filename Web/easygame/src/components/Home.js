@@ -1,5 +1,4 @@
 import React from 'react';
-import NavBar from './NavBar';
 import styled from 'styled-components';
 import logo from '../Logo/logo_transparent.png'
 import fondvert from '../Logo/green-material-background.jpg'

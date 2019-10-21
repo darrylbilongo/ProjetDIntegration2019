@@ -13,7 +13,7 @@ app.use(express.json());
 
 
 
-const uri = process.env.ATLAS_URI;
+const uri = process.env.SRV_URI;
 mongoose.connect(uri, {useNewUrlParser: true,
                         useCreateIndex: true,
                         useUnifiedTopology: true});
@@ -27,6 +27,7 @@ connection.once('open', () => {
 // Routes
 const usersRouter = require('./routes/users');
 
+app.use('/users', usersRouter);
 // app
 
 app.listen(port, () => {

@@ -1,40 +1,61 @@
-import React from 'react';
-import '../App.css';
-import NavBar from './NavBar';
+import React, { Component } from "react";
 
-class Login extends React.Component {
-    constructor (props) {
+class Login extends Component {
+    constructor(props) {
         super(props);
+
+        this.onChangeUserEmail = this.onChangeUserEmail.bind(this);
+        this.onSubmit = this.onSubmit.bind(this);
+
         this.state = {
-            email: '',
-            password: ''
-          }
+            userEmail: "",
+            userPassword: "",
+            responseAPI: ""
+        }
     }
 
+    onChangeUserEmail(e) {
+        this.setState({
+            userEmail: e.target.value
+        });
+    }
+
+    onSubmit(e) {
+        e.preventDefault();
+
+        const user = {
+            userEmail: this.state.userEmail,
+        }
+
+        console.log(user);
+
+        this.setState({
+            userEmail: ''
+        })
+    }
+
+    
     render() {
         return (
-          <div>
             <div>
-              <form className='demoForm'>
-                <h2>Connectez Vous !</h2>
-                <div className="form-group">
-                  <label htmlFor="email">Email</label>
-                  <input type="email" className="form-control"
-                    name="email" />
-                </div>
-                <div className="form-group">
-                  <label htmlFor="password">Mot de passe</label>
-                  <input type="password" className="form-control"
-                    name="password" />
-                </div>
-                <button type="submit" className="btn btn-primary">
-                    Se connecter
-                </button>
-              </form>
+                <h3>Enregistrez vous !</h3>
+                <form onSubmit={this.onSubmit}>
+
+                    <div className="form-group">
+                        <label>email: </label>
+                        <input type="text"
+                            required
+                            className="form-control"
+                            value={this.state.userEmail}
+                            onChange={this.onChangeUserEmail}
+                            />
+                    </div>
+                    <div className="form-group">
+                        <input type="submit" value="Soumettre" className="btn btn-primary" />
+                    </div>
+                </form>
             </div>
-          </div>
-          
-    );
+        );
     }
 }
 
