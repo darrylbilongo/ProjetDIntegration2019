@@ -1,18 +1,12 @@
-import React, {Component} from 'react';
-import Accueil from './src/components/Accueil'
-import { SafeAreaView, ScrollView, Platform, KeyboardAvoidingView } from 'react-native';
-
-export default class App extends Component {
-  
+import React from 'react';
+import NavigationRoot from './src/components/Navigation/NavigationRoot';
+import NavigationService from './src/components/Navigation/NavigationService';
+export default class App extends React.Component {
   render() {
-    return (
-      <SafeAreaView style={{flex:1,}}>
-        <KeyboardAvoidingView style={{flex:1,}} behavior={Platform.Os == "ios" ? "padding" : "height" } enabled>
-          <ScrollView style={{flex:1,}}>
-            <Accueil/>
-          </ScrollView>
-        </KeyboardAvoidingView>
-      </SafeAreaView>
-    )
-  }
-};
+    return <NavigationRoot
+            ref={navigatorRef => {
+              NavigationService.setTopLevelNavigator(navigatorRef);
+            }}
+        />;
+    }
+ }
