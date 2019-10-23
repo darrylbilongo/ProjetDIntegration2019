@@ -1,5 +1,11 @@
 const router = require('express').Router();
-let User = require('../models/users.model');
+const User = require('../models/users.model');
+const cors = require('cors');
+const jwt = require('jsonwebtoken');
+const bcrypt = require('bcryptjs');
+
+router.use(cors());
+
 
 router.route('/').get((req, res) => {
     User.find()
@@ -7,32 +13,102 @@ router.route('/').get((req, res) => {
         .catch(err => res.status(400).json('Error: ' + err));
 });
 
-router.route('/add').post((req, res) => {
-    const nomUtilisateur = req.body.nomUtilisateur;
-    const nom = req.body.nom;
-    const prenom = req.body.prenom;
-    const email = req.body.email;
-    const motDePasse = req.body.motDePasse;
-    const dateNaissance = req.body.dateNaissance;
-    const estSupprime = req.body.estSupprime;
-    const totem = req.body.totem;
-    const fonction = req.body.fonction;
+router.route('/register').post((req, res) => {
 
-    const nouveau = new User({
-        nomUtilisateur,
-        nom,
-        prenom,
-        email,
-        motDePasse,
-        dateNaissance,
-        estSupprime,
-        totem,
-        fonction
-    });
+    const userData = {
+        nomUtilisateur : req.body.nomUtilisateur,
+        nom : req.body.nom,
+        prenom : req.body.prenom,
+        email : req.body.email,
+        motDePasse : req.body.motDePasse,
+        dateNaissance : req.body.dateNaissance,
+        estSupprime : req.body.estSupprime,
+        totem : req.body.totem,
+        fonction : req.body.fonction,
+    }
 
-    nouveau.save()
-            .then(() => res.json('User added!'))
-            .catch(err => res.status(400).json('Error: ' + err));
+    User.findOne({
+        email: req.body.email
+    })
+        .then(user => {
+            if(!user) {
+                bcrypt.hash(req.body.motDePasse, 10, (err, hash) =>{
+                    userData.motDePasse = hash;
+                    User.create(userData)
+                    .then(user => {
+                        res.json({status: user.email + ' est enregistré'})
+                    })
+                    .catch(err => {
+                        res.status(400).json('Error: ' + err)
+                    })
+                })
+            }
+            else{
+                res.json({ error: 'Utilisateur déja existant'})
+            }
+        })
+        .catch(err => {
+            res.status(400).json('Error: ' + err)
+        });
+
+    
+});
+
+router.route('/login').post((req, res) => {
+
+    User.findOne({
+        email: req.body.email
+    })
+        .then(user => {
+            if(user) {
+                if(bcrypt.compareSync(req.body.motDePasse, user.motDePasse)){
+                    // Mots de Passe compatibles
+                    const verif = {
+                        _id: user._id,
+                        nomUtilisateur : user.nomUtilisateur,
+                        nom : user.nom,
+                        prenom : user.prenom,
+                        email : user.email,
+                        motDePasse : user.motDePasse,
+                        dateNaissance : user.dateNaissance,
+                        estSupprime : user.estSupprime,
+                        totem : user.totem,
+                        fonction : user.fonction,
+                    };
+                    let token = jwt.sign(verif, process.env.SECRET_KEY, {
+                        expiresIn: 1440
+                    });
+                    //res.send(token)
+                    res.json({
+                        token: token,
+                        message: 'Utilisateur existant: Connexion reussie!!!',
+                        utilisateur: {
+                            nomUtilisateur : user.nomUtilisateur,
+                            nom : user.nom,
+                            prenom : user.prenom,
+                            email : user.email,
+                            motDePasse : user.motDePasse,
+                            dateNaissance : user.dateNaissance,
+                            estSupprime : user.estSupprime,
+                            totem : user.totem,
+                            fonction : user.fonction
+                        }
+                    })
+                }
+                else{
+                    //Mots de Passe pas identiques
+                    res.json({error: 'Utilisateur inexistant'})
+                }
+            }
+            else{
+                res.json({ error: 'Utilisateur inexistant'})
+            }
+        })
+        .catch(err => {
+            res.status(400).json('Error: ' + err)
+        });
+
+    
 });
 
 router.route('/:id').get((req, res) =>{
@@ -67,5 +143,32 @@ router.route('/update/:id').post((req, res) =>{
         .catch(err => res.status(400).json('Error: ' + err));
 });
 
+router.route('/add').post((req, res) => {
+    const nomUtilisateur = req.body.nomUtilisateur;
+    const nom = req.body.nom;
+    const prenom = req.body.prenom;
+    const email = req.body.email;
+    const motDePasse = req.body.motDePasse;
+    const dateNaissance = req.body.dateNaissance;
+    const estSupprime = req.body.estSupprime;
+    const totem = req.body.totem;
+    const fonction = req.body.fonction;
+
+    const nouveau = new User({
+        nomUtilisateur,
+        nom,
+        prenom,
+        email,
+        motDePasse,
+        dateNaissance,
+        estSupprime,
+        totem,
+        fonction
+    });
+
+    nouveau.save()
+            .then(() => res.json('User added!'))
+            .catch(err => res.status(400).json('Error: ' + err));
+});
 
 module.exports = router;
