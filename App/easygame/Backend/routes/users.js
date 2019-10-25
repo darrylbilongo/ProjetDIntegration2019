@@ -36,7 +36,7 @@ router.route('/register').post((req, res) => {
                     userData.motDePasse = hash;
                     User.create(userData)
                     .then(user => {
-                        res.json({status: user.email + ' est enregistré'})
+                        res.json({message : user.email + ' est enregistré'})
                     })
                     .catch(err => {
                         res.status(400).json('Error: ' + err)
@@ -97,11 +97,11 @@ router.route('/login').post((req, res) => {
                 }
                 else{
                     //Mots de Passe pas identiques
-                    res.json({error: 'Utilisateur inexistant'})
+                    res.json({message: 'Utilisateur inexistant'})
                 }
             }
             else{
-                res.json({ error: 'Utilisateur inexistant'})
+                res.json({ message: 'Utilisateur inexistant'})
             }
         })
         .catch(err => {

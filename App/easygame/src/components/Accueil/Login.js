@@ -20,7 +20,8 @@ export default class Login extends Component {
     this.state = {
       userEmail: "",
       userPassword: "",
-      responseAPI: ""
+      responseAPI: "",
+      isLoading: true
     }
 
     this.viewOpacity = new Value(1);
@@ -97,7 +98,8 @@ export default class Login extends Component {
 
 
   login = async () => {
-    const response = await fetch('http://192.168.1.96:5000/users/login', {
+    try{
+      const response = await fetch('http://192.168.1.96:5000/users/login', {
                               method: 'POST',
                               headers: {
                                 'Accept': 'application/json',
@@ -108,28 +110,43 @@ export default class Login extends Component {
                                 motDePasse: this.state.userPassword
                               })
                             });                
-    this.state.responseAPI = await response.json();  
+      this.state.responseAPI = await response.json(); 
+      this.state.isLoading = false;
+    }
+    catch (error){
+      console.log(error);
+    }
+    
   }
 
-  myValidate = () =>{
-    const {userEmail, userPassword} = this.state;
+  verifierDonnees = (userEmail, userPassword) => {
     if(userEmail == "" && userPassword == ""){
-      Alert.alert("Veuillez remplir votre mail et votre mot de passe");
+      return false;
+    }
+    else if((userEmail == "" || userEmail.indexOf('@') == -1)){
+      return false;
     }
     else if(userEmail != "" && userPassword == ""){
-      Alert.alert("Pas de mot de passe!")
+      return false;
     }
-    else if(userEmail == "" && userPassword != ""){
-      Alert.alert("Pas d'email!")
-    }
-    else{
+    return true;
+  }
+
+  myValidate = () => {
+    const {userEmail, userPassword} = this.state;
+    if(this.verifierDonnees(userEmail, userPassword)){
       this.login();
-      Alert.alert(this.state.responseAPI.message);
-      global.utilisateur = this.state.responseAPI.utilisateur;
-      if(this.state.responseAPI.message){
+      if(this.state.responseAPI.message == 'Utilisateur existant: Connexion reussie!!!'){
+        this.state.userPassword = '';
+        this.state.userEmail = '';
+        global.utilisateur = this.state.responseAPI.utilisateur;
         NavigationService.navigate('Profile');
       }
+      else if(this.state.responseAPI.message != '')
+        Alert.alert(this.state.responseAPI.message);
     }
+    else
+      Alert.alert("Veuillez remplir votre mail et votre mot de passe");
   }
 
   stopAction = (e) =>{
@@ -148,6 +165,7 @@ export default class Login extends Component {
   }
 
   render() {
+    if(this.state.isLoading){}
     
     return (
     <View style={myContainer.container}>
