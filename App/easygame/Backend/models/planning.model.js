@@ -18,6 +18,7 @@ const plannigSchema = new Schema({
     },
     date: {
         type: Date,
+        default: Date.now
     },
 
 },{

@@ -7,7 +7,6 @@ import Svg, {Image, Circle, ClipPath} from 'react-native-svg';
 import styles from './styles';
 import NavigationService from '../Navigation/NavigationService';
 
-
 const { width, height } = Dimensions.get('window');
 
 const {Value ,concat, event, clockRunning, timing, debug, stopClock, startClock, Clock, block, cond, eq, Extrapolate, interpolate, set} = Animated;
@@ -16,9 +15,13 @@ export default class Login extends Component {
   constructor(){
     super();
 
+    global.utilisateur = {};
+
     this.state = {
       userEmail: "",
       userPassword: "",
+      responseAPI: "",
+      isLoading: true
     }
 
     this.viewOpacity = new Value(1);
@@ -93,44 +96,57 @@ export default class Login extends Component {
     });
   }
 
-  myValidate = () =>{
-    const {userEmail, userPassword} = this.state;
-    /*
-    fetch('https://www.easygame.funndeh.com/nichtszusehen/login.php', {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        email: userEmail,
-        password: userPassword
-      })
-    })
-    .then((response) => response.json())
-    .then((responseJson) => {
-      alert(responseJson);
-    })
-    .catch((error) => {
-      console.error(error);
-    });*/
 
-    
-    if(userEmail == "" && userPassword == ""){
-      Alert.alert("Veuillez remplir votre mail et votre mot de passe");
+  login = async () => {
+    try{
+      const response = await fetch('http://192.168.1.96:5000/users/login', {
+                              method: 'POST',
+                              headers: {
+                                'Accept': 'application/json',
+                                'Content-Type': 'application/json'
+                              },
+                              body: JSON.stringify({
+                                email: this.state.userEmail,
+                                motDePasse: this.state.userPassword
+                              })
+                            });                
+      this.state.responseAPI = await response.json(); 
+      this.state.isLoading = false;
     }
-    else if(userEmail == "manou@gmail.com" && userPassword == "manou"){
-      NavigationService.navigate('Profile');
+    catch (error){
+      console.log(error);
+    }
+    
+  }
+
+  verifierDonnees = (userEmail, userPassword) => {
+    if(userEmail == "" && userPassword == ""){
+      return false;
+    }
+    else if((userEmail == "" || userEmail.indexOf('@') == -1)){
+      return false;
     }
     else if(userEmail != "" && userPassword == ""){
-      Alert.alert("Pas de mot de passe!")
+      return false;
     }
-    else if(userEmail == "" && userPassword != ""){
-      Alert.alert("Pas d'email!")
+    return true;
+  }
+
+  myValidate = () => {
+    const {userEmail, userPassword} = this.state;
+    if(this.verifierDonnees(userEmail, userPassword)){
+      this.login();
+      if(this.state.responseAPI.message == 'Utilisateur existant: Connexion reussie!!!'){
+        this.state.userPassword = '';
+        this.state.userEmail = '';
+        global.utilisateur = this.state.responseAPI.utilisateur;
+        NavigationService.navigate('Profile');
+      }
+      else if(this.state.responseAPI.message != '')
+        Alert.alert(this.state.responseAPI.message);
     }
-    else{
-      Alert.alert("Email ou mot de passe érroné!")
-    }
+    else
+      Alert.alert("Veuillez remplir votre mail et votre mot de passe");
   }
 
   stopAction = (e) =>{
@@ -149,6 +165,7 @@ export default class Login extends Component {
   }
 
   render() {
+    if(this.state.isLoading){}
     
     return (
     <View style={myContainer.container}>

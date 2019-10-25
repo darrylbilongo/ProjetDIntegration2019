@@ -8,6 +8,7 @@ import Planning from '../Admin/Agenda';
 import Enregistrer from '../Accueil/Enregistrer';
 import {Dimensions} from 'react-native';
 import Geo from '../Geolocalisation/index';
+import container from '../Navigation/NavConnection';
 
 const { width, height } = Dimensions.get('window');
 
@@ -20,7 +21,7 @@ const AppNavigator = createStackNavigator(
       }
     },
     Profile: {
-      screen: Profile,
+      screen: container,
       navigationOptions:{
         header: null
       }

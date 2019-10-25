@@ -32,8 +32,7 @@ const userSchema = new Schema({
     },
     dateNaissance: {
         type: Date,
-        required: false,
-        default: ''
+        required: true,
     },
     estSupprime: {
         type: Boolean,
@@ -46,7 +45,6 @@ const userSchema = new Schema({
     },
     fonction:{
         type: String,
-        required: true,
         default: 'scout'
     }
 
