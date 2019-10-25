@@ -34,7 +34,7 @@ export default class CustomSidebarMenu extends Component {
     return (
       <View style={styles.sideMenuContainer}>
         <Image
-          source={{ uri: this.logo }}
+          source={require('../../images/Logo/logo.png')}
           style={styles.sideMenuProfileIcon}
         />
         <View
