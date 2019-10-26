@@ -7,7 +7,7 @@ import Project from '../Admin/Project';
 import Planning from '../Admin/Agenda';
 import Enregistrer from '../Accueil/Enregistrer';
 import {Dimensions} from 'react-native';
-import Geo from '../Geolocalisation/index';
+import Geo from '../Geolocation/index';
 import container from '../Navigation/NavConnection';
 
 const { width, height } = Dimensions.get('window');
@@ -44,7 +44,7 @@ const AppNavigator = createStackNavigator(
         header: null,
       }
     },
-    Geolocalization: {
+    Geolocation: {
       screen: Geo,
       navigationOptions: {
         header: null,

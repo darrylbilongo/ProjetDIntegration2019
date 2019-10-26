@@ -99,7 +99,7 @@ export default class Login extends Component {
 
   login = async () => {
     try{
-      const response = await fetch('http://192.168.1.96:5000/users/login', {
+      const response = await fetch('http://192.168.1.122:5000/users/login', {
                               method: 'POST',
                               headers: {
                                 'Accept': 'application/json',

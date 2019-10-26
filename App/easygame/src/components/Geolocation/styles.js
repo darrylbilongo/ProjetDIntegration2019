@@ -101,7 +101,11 @@ const styles = StyleSheet.create({
         shadowColor: 'black',
         shadowOpacity: 0.2,
         shadowOffset: {width: 2, height: 2},
-      }
+      },
+      mapStyle: {
+        width: Dimensions.get('window').width,
+        height: Dimensions.get('window').height,
+      },
     });   
     
     export default styles;
