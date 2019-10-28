@@ -32,6 +32,11 @@ export const NavigationBar = () => (
               <Link to="/login">Connexion</Link>
             </Nav.Link>
           </Nav.Item>
+          <Nav.Item>
+            <Nav.Link>
+              <Link to="/users">Creer Compte</Link>
+            </Nav.Link>
+          </Nav.Item>
   
           <Nav.Item>
             <Nav.Link>
