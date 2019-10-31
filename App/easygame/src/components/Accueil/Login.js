@@ -6,10 +6,12 @@ import {TapGestureHandler, State, TouchableOpacity} from 'react-native-gesture-h
 import Svg, {Image, Circle, ClipPath} from 'react-native-svg';
 import styles from './styles';
 import NavigationService from '../Navigation/NavigationService';
+import verifierDonnees from './verifierDonnees';
 
 const { width, height } = Dimensions.get('window');
 
 const {Value ,concat, event, clockRunning, timing, debug, stopClock, startClock, Clock, block, cond, eq, Extrapolate, interpolate, set} = Animated;
+
 
 export default class Login extends Component {
   constructor(){
@@ -99,7 +101,7 @@ export default class Login extends Component {
 
   login = async () => {
     try{
-      const response = await fetch('http://192.168.1.96:5000/users/login', {
+      const response = await fetch('http://192.168.1.122:5000/users/login', {
                               method: 'POST',
                               headers: {
                                 'Accept': 'application/json',
@@ -119,22 +121,9 @@ export default class Login extends Component {
     
   }
 
-  verifierDonnees = (userEmail, userPassword) => {
-    if(userEmail == "" && userPassword == ""){
-      return false;
-    }
-    else if((userEmail == "" || userEmail.indexOf('@') == -1)){
-      return false;
-    }
-    else if(userEmail != "" && userPassword == ""){
-      return false;
-    }
-    return true;
-  }
-
   myValidate = () => {
     const {userEmail, userPassword} = this.state;
-    if(this.verifierDonnees(userEmail, userPassword)){
+    if(verifierDonnees(userEmail, userPassword)){
       this.login();
       if(this.state.responseAPI.message == 'Utilisateur existant: Connexion reussie!!!'){
         this.state.userPassword = '';
