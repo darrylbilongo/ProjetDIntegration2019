@@ -20,7 +20,7 @@ export default class CustomSidebarMenu extends Component {
       },
       {
         navOptionThumb: 'location-on',
-        navOptionName: 'Geolocalisation',
+        navOptionName: 'Geolocation',
         screenToNavigate: 'Geo',
       },
       {
