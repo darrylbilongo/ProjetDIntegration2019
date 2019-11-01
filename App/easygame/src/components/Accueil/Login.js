@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { StyleSheet, Text, View, Dimensions, TextInput, Alert,} from 'react-native';
+import { ActivityIndicator, StyleSheet, Text, View, Dimensions, TextInput, Alert,} from 'react-native';
 import Welcome from '../Accueil/Welcome';
 import Animated, {Easing} from "react-native-reanimated";
 import {TapGestureHandler, State, TouchableOpacity} from 'react-native-gesture-handler';
@@ -23,7 +23,8 @@ export default class Login extends Component {
       userEmail: "",
       userPassword: "",
       responseAPI: "",
-      isLoading: true
+      isLoading: true,
+      text: <Text></Text>
     }
 
     this.viewOpacity = new Value(1);
@@ -130,8 +131,11 @@ export default class Login extends Component {
         this.state.userEmail = '';
         global.utilisateur = this.state.responseAPI.utilisateur;
         NavigationService.navigate('Profile');
+        this.state.text = <Text></Text>;
       }
-      else if(this.state.responseAPI.message != '')
+      else if(this.state.responseAPI.message == undefined)
+        this.state.text = <ActivityIndicator size="small" color="#00ff00" />;
+      else
         Alert.alert(this.state.responseAPI.message);
     }
     else
@@ -246,6 +250,9 @@ export default class Login extends Component {
                     Connexion
                   </Text>
                 </TouchableOpacity>
+                <View>
+                  {this.state.text}
+                </View>
             </Animated.View>
           </View>
         </Animated.View>
