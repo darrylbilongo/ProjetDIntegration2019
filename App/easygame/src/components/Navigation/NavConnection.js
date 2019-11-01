@@ -17,7 +17,7 @@ import {createStackNavigator} from 'react-navigation-stack';
 
 import Profile from '../Accueil/Profile';
 import Planning from '../Admin/Agenda';
-import Geo from '../Geolocalisation/index';
+import Geo from '../Geolocation/index';
 import Settings from '../Settings/Settings';
 
 import CustomSidebarMenu from './CustomSidebarMenu';
@@ -90,7 +90,7 @@ const Settings_Fenetre = createStackNavigator({
     Third: {
       screen: Settings,
       navigationOptions: ({ navigation }) => ({
-        title: 'Geolocalisation',
+        title: 'Configuration',
         headerLeft: <NavigationDrawerStructure navigationProps={navigation} />,
         headerStyle: {
           backgroundColor: '#62bd0d',
@@ -117,7 +117,7 @@ const drawerNavigator = createDrawerNavigator(
     Geo: {
         screen: Geo_Fenetre,
         navigationOptions: {
-            drawerLabel: 'Geolocalisation',
+            drawerLabel: 'Geolocation',
         },
     },
     Settings: {
