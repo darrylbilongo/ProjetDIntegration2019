@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { AppRegistry, StyleSheet, Dimensions, Image, View, StatusBar, TouchableOpacity, ActivityIndicator,  } from "react-native";
+import { AppRegistry, StyleSheet, Dimensions, Image, View, ActivityIndicator,  } from "react-native";
 import { Container, Text } from "native-base";
 
 import MapView from 'react-native-maps';

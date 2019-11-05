@@ -1,1 +1,0 @@
-{"dependencies":[],"output":[{"data":{"code":"__d(function(global, require, _aUnused, _bUnused, module, exports, _cUnused) {\n  module.exports = {\n\t\"universal\": 50,\n\t\"tag\": 30,\n\t\"attribute\": 1,\n\t\"pseudo\": 0,\n\t\"descendant\": -1,\n\t\"child\": -1,\n\t\"parent\": -1,\n\t\"sibling\": -1,\n\t\"adjacent\": -1\n}\n;\n});","map":[]},"type":"js/module"}]}

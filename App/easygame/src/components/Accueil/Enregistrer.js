@@ -25,9 +25,12 @@ export default class Enregistrer extends Component {
             email : '',
             motDePasse : '',
             dateNaissance : '',
+            estSupprime : '',
             totem : '',
-            fonction : '',
+            fonction : 'maître-scout',
         };
+
+        this.motDePasse='';
 
         this.responseAPI = {message: 'Erreur de connexion'};
     }
@@ -55,9 +58,13 @@ export default class Enregistrer extends Component {
 
     verifierAge = (date) => {
         const current_date = new Date();
+        const userDate = new Date(date);
+        const age = new Number(((current_date.getTime() - userDate.getTime())/ 31536000000)).toFixed(0);
 
-        if((current_date - date) >= 25) 
+        if(age <= 25 /*&& age >= 15*/) 
+        {
             return true;
+        }
         else{
             this.responseAPI.message = 'Vous êtes trop agé pour être animateur!';
             return false;   
@@ -65,7 +72,7 @@ export default class Enregistrer extends Component {
     }
 
     register = async () => {
-        const response = await fetch('http://192.168.1.96:5000/users/login', {
+        const response = await fetch('http://192.168.43.163:5000/users/register', {
                                   method: 'POST',
                                   headers: {
                                     'Accept': 'application/json',
@@ -82,14 +89,17 @@ export default class Enregistrer extends Component {
                                     totem : this.state.totem,
                                     fonction : 'animateur',
                                   })
-                                });       
+                                });                             
 
         this.responseAPI = await response.json();  
     }
 
     userRegister = () =>{
 
-        if(!this.state.filter(x => x != '')){
+        if(this.state.motDePasse !== this.motDePasse){
+            this.responseAPI.message =  "Mots de passe incohérents!!!";
+        }
+        else if(!Object.keys(this.state).filter(x => this.state[x] != '')){
             this.responseAPI.message = 'Vous avez oublié de completer une donnée!';
         }
         else{
@@ -97,13 +107,11 @@ export default class Enregistrer extends Component {
                 this.register();
                 if(this.responseAPI.message.includes(' est enregistré')){
                     global.utilisateur = this.responseAPI.utilisateur;
+                    NavigationService.navigate('Profile');
                 }
             }
         }
         Alert.alert(this.responseAPI.message);
-        
-        if(utilisateur != {})
-            NavigationService.navigate('Profile');
     }
 
   render() {
@@ -194,7 +202,7 @@ export default class Enregistrer extends Component {
                     <TextInput
                         placeholder="Entrez votre mot de passe"
                         style={{...styles.textInput}}
-                        onChangeText={motPasse=> this.setState({motPasse})}
+                        onChangeText={motPasse=> this.motDePasse = motPasse}
                         autoCapitalize='none'
                         returnKeyType='next'
                         keyboardType={'default'}
@@ -204,7 +212,9 @@ export default class Enregistrer extends Component {
                     <TextInput
                         placeholder="Recrivez votre mot de Passe"
                         style={{...styles.textInput}}
-                        onChangeText={motPasse=> this.setState({motPasse})}
+                        onChangeText={motPasse=> {
+                            this.state.motDePasse = motPasse    
+                        }}
                         autoCapitalize='none'
                         returnKeyType='next'
                         keyboardType={'default'}
