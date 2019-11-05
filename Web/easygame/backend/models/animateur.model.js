@@ -2,28 +2,23 @@ const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;
 
-const plannigSchema = new Schema({
-    nomUtilisateur: {
-        type: String,
-        required: true,
-        trim: true,
-    },
-    description: {
+const animateurSchema = new Schema({
+    nom: {
         type: String,
         required: true,
     },
-    duree: {
+    prenom: {
+        type: String,
+        required: true,
+    },
+    fonction: {
         type: Number,
         required: true,
     },
-    date: {
-        type: Date,
-    },
-
 },{
     timestamps: true   
 });
 
-const plannings = mongoose.model('plannings', plannigSchema);
+const Animateur = mongoose.model('Animateur', animateurSchema);
 
-module.exports = plannings;
+module.exports = Animateur;

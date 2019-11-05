@@ -1,12 +1,28 @@
 import React from "react";
-import Scheduler from "./Scheduler";
+import { Admin, Resource, ListGuesser } from "react-admin";
+import simpleRestProvider from 'ra-data-simple-rest';
+import jsonServerProvider from "ra-data-json-server";
 
-class Admin extends React.Component {
+import { UserList } from './userslist';
+
+const dataProvider = jsonServerProvider("https://jsonplaceholder.typicode.com");
+
+class Administration extends React.Component {
+
+
   render() {
     return (
-      <Scheduler />
+      <div>
+        <Admin dataProvider={dataProvider}>
+          <Resource name="users" list={ListGuesser} />
+          <Resource name="parents" list={ListGuesser} />
+          <Resource name="animateurs" list={ListGuesser} />
+        </Admin>
+      </div>
+      
+      //<Scheduler />
     );
   }
 }
 
-export default Admin;
+export default Administration;

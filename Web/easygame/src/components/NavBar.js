@@ -28,18 +28,23 @@ class NavBar extends React.Component {
     render() { 
 
         const loginRegLink = (
-            <ul>
-                <li className="nav-item active">
-                    <Link to="/login" className="nav-link">
-                        Login
-                    </Link>
-                </li>
-                <li className="nav-item active">
-                    <Link to="/register" className="nav-link">
-                       Register
-                    </Link>
-                </li>
-            </ul>
+            <nav className="navbar navbar-expand-lg navbar-light bg-light" id="navbar">
+                <div className="collapse navbar-collapse justify-content"  id="navbarNav">
+                    <ul>
+                        <li className="nav-item active">
+                            <Link to="/login" className="nav-link">
+                                Login
+                            </Link>
+                        </li>
+                        <li className="nav-item active">
+                            <Link to="/register" className="nav-link">
+                            Register
+                            </Link>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+            
         )
 
         const userLink = (
@@ -77,13 +82,13 @@ class NavBar extends React.Component {
                         </Link>
                     </li>
                     <li className="nav-item">
-                        <a className="nav-link" href="/">Tracking</a>
+                        <a className="nav-link" href="/admin">Administration</a>
+                    </li>
+                    <li className="nav-item">
+                        <a className="nav-link" href="/error">Tracking</a>
                     </li>
                     <li className="nav-item">
                         <a className="nav-link" href="#">Jeux</a>
-                    </li>
-                    <li className="nav-item">
-                        <a className="nav-link" href="/about">About</a>
                     </li>
                     <li className="nav-item">
                         <a className="nav-link" href="/team">Team</a>
