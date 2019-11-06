@@ -90,6 +90,6 @@ const styles = StyleSheet.create({
     width: 150,
     height: 150,
     marginTop: 20,
-    borderRadius: 150 / 2,
+    borderRadius: 50,
   },
 });

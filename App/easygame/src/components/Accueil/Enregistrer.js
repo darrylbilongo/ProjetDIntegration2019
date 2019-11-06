@@ -18,7 +18,7 @@ export default class Enregistrer extends Component {
 
         super();
 
-        this.state={
+        this.state = {
             nomUtilisateur : '',
             nom : '',
             prenom : '',
@@ -27,7 +27,6 @@ export default class Enregistrer extends Component {
             dateNaissance : '',
             estSupprime : '',
             totem : '',
-            fonction : 'maître-scout',
         };
 
         this.motDePasse='';
@@ -61,8 +60,7 @@ export default class Enregistrer extends Component {
         const userDate = new Date(date);
         const age = new Number(((current_date.getTime() - userDate.getTime())/ 31536000000)).toFixed(0);
 
-        if(age <= 25 /*&& age >= 15*/) 
-        {
+        if(age <= 25 && age >= 15){
             return true;
         }
         else{
@@ -101,6 +99,9 @@ export default class Enregistrer extends Component {
         }
         else if(!Object.keys(this.state).filter(x => this.state[x] != '')){
             this.responseAPI.message = 'Vous avez oublié de completer une donnée!';
+        }
+        else if(this.state.motDePasse.length < 8){
+            this.responseAPI.message = "Mot de passe trop court";
         }
         else{
             if(this.verifierAge(this.state.dateNaissance)){
