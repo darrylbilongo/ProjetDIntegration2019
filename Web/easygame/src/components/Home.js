@@ -7,12 +7,12 @@ class Home extends React.Component {
     render(){
       return (
         <HomeComponent>
-          <div id="demo" class="carousel slide" data-ride="carousel">
+          <div id="carrousel" class="carousel slide" data-ride="carousel">
 
           <ul class="carousel-indicators">
-            <li data-target="#demo" data-slide-to="0" class="active"></li>
-            <li data-target="#demo" data-slide-to="1"></li>
-            <li data-target="#demo" data-slide-to="2"></li>
+            <li data-target="#carrousel" data-slide-to="0" class="active"></li>
+            <li data-target="#carrousel" data-slide-to="1"></li>
+            <li data-target="#carrousel" data-slide-to="2"></li>
           </ul>
 
           <div class="carousel-inner">
@@ -20,17 +20,20 @@ class Home extends React.Component {
               <img src={fondvert} id="fond" alt="fond vert"></img>
               <img src={logo} class="centered" id="logo" alt="logo EasyGame"></img>
               <h1 class="welcome">Welcome</h1>
-              <a href="/login" class="btn btn-info centered btn" role="button">Sign in</a>
+              <div class="centered active dropdown-menu-lg-right" aria-labelledby="Dropdown">
+                <a class="dropdown-item" href="/Register">Register</a>
+                <a class="dropdown-item" href="/Login">Login</a>
+              </div>
             </div>
             <div class="map-responsive carousel-item container-fluid">
               <iframe src="https://www.google.com/maps/embed/v1/place?key=AIzaSyA0s1a7phLN0iaD6-UE7m4qP-z21pH0eSc&q=Ephec+lln" 
-              class="map" width="1600" height="900" allowfullscreen></iframe>
+              class="map" width="100%" height="600" allowfullscreen></iframe>
             </div>
           </div>
-          <a class="carousel-control-prev" href="#demo" data-slide="prev">
+          <a class="carousel-control-prev" href="#carrousel" data-slide="prev">
             <span class="carousel-control-prev-icon"></span>
           </a>
-          <a class="carousel-control-next" href="#demo" data-slide="next">
+          <a class="carousel-control-next" href="#carrousel" data-slide="next">
             <span class="carousel-control-next-icon"></span>
           </a>
         </div>
