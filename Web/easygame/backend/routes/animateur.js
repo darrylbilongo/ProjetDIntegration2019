@@ -3,7 +3,7 @@ let Animateur = require('../models/fonction.model');
 
 router.route('/').get((req, res) => {
     Fonction.find()
-        .then(fonctions => res.json(fonctions))
+        .then(fonctions => res.json(animateur))
         .catch(err => res.status(400).json('Error: ' + err));
 });
 

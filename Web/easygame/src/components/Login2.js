@@ -3,7 +3,8 @@ import { login } from './UserFunctions'
 
 class Login extends Component {
   constructor() {
-    super()
+    super();
+    
     this.state = {
       email: '',
       password: '',

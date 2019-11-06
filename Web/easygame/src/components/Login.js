@@ -3,15 +3,15 @@ import React, { Component } from "react";
 import {login} from './UserFonctions';
 
 class Login extends Component {
-    constructor(props) {
-        super(props);
-
+    constructor() {
+        super();
         this.onChange = this.onChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
 
         this.state = {
             email: "",
             motDePasse: "",
+            errors: {}
         }
     }
 
