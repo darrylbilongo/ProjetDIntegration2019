@@ -10,8 +10,8 @@ class Calendar extends Component {
                 <FullCalendar 
                 defaultView="dayGridMonth" plugins={[ dayGridPlugin ]}
                 events={[
-                    { title: 'event 1', date: '2019-11-01' },
-                    { title: 'event 2', date: '2019-11-05' }
+                    { title: 'Repas', date: '2019-11-01' },
+                    { title: 'Activité 1', date: '2019-11-05' }
                 ]} 
                 />   
             );

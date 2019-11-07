@@ -32,12 +32,12 @@ class NavBar extends React.Component {
                 <ul>
                     <li className="nav-item">
                         <Link to="/login" className="nav-link">
-                            Login
+                            Se connecter
                         </Link>
                     </li>
                     <li className="nav-item">
                         <Link to="/register" className="nav-link">
-                        Register
+                        S'enregistrer
                         </Link>
                     </li>
                 </ul>
@@ -85,12 +85,12 @@ class NavBar extends React.Component {
                         </li>
                         <li className="nav-item">
                         <Link to="/login" className="nav-link">
-                            Login
+                            Se connecter
                         </Link>
                         </li>
                         <li className="nav-item">
                             <Link to="/register" className="nav-link">
-                            Register
+                            S'enregistrer
                             </Link>
                         </li>
                     </ul>

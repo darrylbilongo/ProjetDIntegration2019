@@ -1,4 +1,3 @@
-/*
 import React from "react";
 import { Admin, Resource, ListGuesser } from "react-admin";
 import simpleRestProvider from 'ra-data-simple-rest';
@@ -30,9 +29,7 @@ class Administration extends React.Component {
 
 export default Administration; 
 
-*/
-
-
+/*
 import React from 'react';
 import { Provider } from 'react-redux';
 import { createHashHistory } from 'history';
@@ -47,7 +44,7 @@ import createAdminStore from './createAdminStore';
 /*import Dashboard from './Dashboard';
 import { PostList, PostCreate, PostEdit, PostShow } from './Post';
 import { CommentList, CommentEdit, CommentCreate } from './Comment';
-import { UserList, UserEdit, UserCreate } from './User';*/
+import { UserList, UserEdit, UserCreate } from './User';
 
 import { UserList } from './userslist';
 import jsonServerProvider from "ra-data-json-server";
@@ -62,7 +59,8 @@ const dataProvider = jsonServerProvider("https://jsonplaceholder.typicode.com");
     }
     return defaultMessages;
 };*/
-const history = createHashHistory();
+
+{/*const history = createHashHistory();
 
 class Administration extends React.Component {
   render () {
@@ -81,7 +79,7 @@ class Administration extends React.Component {
         >
                 {/*<Resource name="posts" list={PostList} create={PostCreate} edit={PostEdit} show={PostShow} />
                 <Resource name="comments" list={CommentList} edit={CommentEdit} create={CommentCreate} />
-              <Resource name="users" list={UserList} />*/}
+              <Resource name="users" list={UserList} />
         </Admin>
       </Provider>
     );
@@ -89,4 +87,4 @@ class Administration extends React.Component {
 }
 
 
-export default Administration;
+export default Administration; */}

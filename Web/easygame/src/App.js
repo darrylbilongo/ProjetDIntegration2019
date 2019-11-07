@@ -15,6 +15,7 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import Menu from './components/Menu';
 import Calendar from './components/Calendar';
+import Administration from './components/Admin';
 
 class App extends React.Component {
   render(){
@@ -31,6 +32,7 @@ class App extends React.Component {
             <Route path="/profile" component={Profile} />
             <Route path="/register" component={Register} />
             <Route path="/calendar" component={Calendar}/>
+            <Route path="/admin" component={Administration}/>
             <Route component={Error}/>
           </Switch>
           <Footer/>
