@@ -44,20 +44,20 @@ class NavBar extends React.Component {
             )
         
         const userLink = (
-            <ul>
-                <li className="nav-item">
+            <li className="nav-item">
                     <Link to="/profile" className="nav-link">
                         User
                     </Link>
-                </li>
-                <li className="nav-item">
-                    <a href="" onClick={this.logOut.bind(this)} className="nav-link">
-                       Log Out
-                    </a>
-                </li>
-            </ul>
+            </li>
         )
-
+        const logoutLink = (
+            <li className="nav-item">
+                <a href="" onClick={this.logOut.bind(this)} className="nav-link">
+                   Log Out
+                </a>
+            </li>
+        )
+       
         return ( 
 
             <nav className="navbar navbar-expand-lg navbar-light bg-light" id="navbar">
@@ -79,13 +79,13 @@ class NavBar extends React.Component {
                         <a className="nav-link" href="#">Jeux</a>
                     </li>
                     <li className="nav-item">
-                        <a className="nav-link" href="/about">About</a>
-                    </li>
-                    <li className="nav-item">
                         <a className="nav-link" href="/team">Team</a>
                     </li>
                     {localStorage.usertoken ? userLink : loginLink}
-                    {localStorage.usertoken ? userLink : regLink}
+                    {localStorage.usertoken ? logoutLink : regLink}
+                    <li className="nav-item">
+                        <a className="nav-link" href="/about">About</a>
+                    </li>
                     </ul>
                 </div>
             </nav>

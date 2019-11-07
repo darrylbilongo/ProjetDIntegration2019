@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import axios from 'axios';
+import styled from 'styled-components';
 
 import {login} from './UserFonctions';
 
@@ -50,12 +51,12 @@ class Login extends Component {
     
     render() {
         return (
-            <div className="container">
+            <LoginComponent className="container-fluid">
                 <div className="row">
                     <form noValidate onSubmit={this.onSubmit}>
                         <h1 className="h3 mn-3">Connectez vous s'il vous plait!</h1>
                         <div className="form-group">
-                            <label htmlFor="email">email: </label>
+                            <label htmlFor="email">Email: </label>
                             <input type="email"
                                 required
                                 className="form-control"
@@ -79,9 +80,10 @@ class Login extends Component {
                         </button>
                     </form>
                 </div>    
-            </div>
+            </LoginComponent>
         );
     }
 }
+const LoginComponent = styled.div``
 
 export default Login;

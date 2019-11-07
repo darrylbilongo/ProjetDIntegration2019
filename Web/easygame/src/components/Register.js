@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import axios from 'axios';
-
+import styled from 'styled-components';
 import { register } from './UserFonctions';
 
 
@@ -61,7 +61,7 @@ class Login extends Component {
     
     render() {
         return (
-            <div className="container">
+            <RegisterComponent className="container-fluid">
                 <div className="row">
                     <form noValidate onSubmit={this.onSubmit}>
                         <h1 className="h3 mn-3">Veuillez vous enregistrer..</h1>
@@ -109,9 +109,9 @@ class Login extends Component {
                         </button>
                     </form>
                 </div>    
-            </div>
+            </RegisterComponent>
         );
     }
 }
-
+const RegisterComponent = styled.div``
 export default Login;
