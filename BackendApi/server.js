@@ -12,7 +12,7 @@ app.use(cors());
 app.use(express.json());
 
 
-const port = process.env.PORT || 80;
+const port = process.env.PORT || 5000;
 
 const uri = process.env.SRV_URI;
 mongoose.connect(uri, {useNewUrlParser: true,
