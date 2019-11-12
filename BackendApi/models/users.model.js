@@ -6,7 +6,6 @@ const userSchema = new Schema({
     nomUtilisateur: {
         type: String,
         required: true,
-        unique: true,
         trim: true,
         minlength:5
     },
