@@ -36,21 +36,19 @@ router.route('/register').post((req, res) => {
                     userData.motDePasse = hash;
                     User.create(userData)
                     .then(user => {
-                        res.json({
-                                    message : user.email + ' est enregistré'
-                                })
+                        res.json({message : user.email + ' est enregistré'})
                     })
                     .catch(err => {
-                        res.status(400).json({message: 'Error: ' + err})
+                        res.status(400).json('Error: ' + err)
                     })
                 })
             }
             else{
-                res.json({ message: 'Utilisateur déja existant'})
+                res.json({ error: 'Utilisateur déja existant'})
             }
         })
         .catch(err => {
-            res.status(400).json({message: 'Error: ' + err})
+            res.status(400).json('Error: ' + err)
         });
 
     
@@ -99,7 +97,7 @@ router.route('/login').post((req, res) => {
                 }
                 else{
                     //Mots de Passe pas identiques
-                    res.json({message: 'Utilisateur avec mot de passe incorrect'})
+                    res.json({message: 'Utilisateur inexistant'})
                 }
             }
             else{
@@ -107,7 +105,7 @@ router.route('/login').post((req, res) => {
             }
         })
         .catch(err => {
-            res.status(400).json({message: 'Error: ' + err})
+            res.status(400).json('Error: ' + err)
         });
 
     
@@ -116,13 +114,13 @@ router.route('/login').post((req, res) => {
 router.route('/:id').get((req, res) =>{
     User.findById(req.params.id)
         .then(user => res.json(user))
-        .catch(err => res.status(400).json({message: 'Error: ' + err}));
+        .catch(err => res.status(400).json('Error: ' + err));
 });
 
 router.route('/:id').delete((req, res) =>{
     User.findByIdAndDelete(req.params.id)
-        .then(user => res.json({message: "User deleted"}))
-        .catch(err => res.status(400).json({message: 'Error: ' + err}));
+        .then(user => res.json("User deleted"))
+        .catch(err => res.status(400).json('Error: ' + err));
 });
 
 router.route('/update/:id').post((req, res) =>{
@@ -139,10 +137,10 @@ router.route('/update/:id').post((req, res) =>{
             user.fonction = req.body.fonction;
 
             user.save()
-                .then(() => res.json({message:'User Updated!'}))
-                .catch(err => res.status(400).json({message: 'Error: ' + err}));
+                .then(() => res.json('User Updated!'))
+                .catch(err => res.status(400).json('Error: ' + err));
         })
-        .catch(err => res.status(400).json({message: 'Error: ' + err}));
+        .catch(err => res.status(400).json('Error: ' + err));
 });
 
 router.route('/add').post((req, res) => {
@@ -169,8 +167,8 @@ router.route('/add').post((req, res) => {
     });
 
     nouveau.save()
-            .then(() => res.json({ message: 'User added!'}))
-            .catch(err => res.status(400).json({message: 'Error: ' + err}));
+            .then(() => res.json('User added!'))
+            .catch(err => res.status(400).json('Error: ' + err));
 });
 
 module.exports = router;
