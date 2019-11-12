@@ -37,8 +37,7 @@ router.route('/register').post((req, res) => {
                     User.create(userData)
                     .then(user => {
                         res.json({
-                                    message : user.email + ' est enregistré',
-                                    utilisateur: userData
+                                    message : user.email + ' est enregistré'
                                 })
                     })
                     .catch(err => {
