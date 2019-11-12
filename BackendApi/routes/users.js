@@ -99,7 +99,7 @@ router.route('/login').post((req, res) => {
                 }
                 else{
                     //Mots de Passe pas identiques
-                    res.json({message: 'Utilisateur inexistant'})
+                    res.json({message: 'Utilisateur avec mot passe incorect'})
                 }
             }
             else{
