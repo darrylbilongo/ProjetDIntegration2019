@@ -61,6 +61,7 @@ router.route('/login').post((req, res) => {
     })
         .then(user => {
             if(user) {
+                res.json({message: req.body.motDePasse})
                 if(bcrypt.compareSync(req.body.motDePasse, user.motDePasse)){
                     // Mots de Passe compatibles
                     const verif = {
