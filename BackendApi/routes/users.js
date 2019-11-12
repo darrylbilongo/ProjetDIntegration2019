@@ -36,7 +36,10 @@ router.route('/register').post((req, res) => {
                     userData.motDePasse = hash;
                     User.create(userData)
                     .then(user => {
-                        res.json({message : user.email + ' est enregistré'})
+                        res.json({
+                                    message : user.email + ' est enregistré',
+                                    utilisateur: userData
+                                })
                     })
                     .catch(err => {
                         res.status(400).json('Error: ' + err)
