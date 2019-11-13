@@ -1,6 +1,6 @@
 import React from "react";
-import { Admin, Resource, ListGuesser } from "react-admin";
-import simpleRestProvider from 'ra-data-simple-rest';
+import { Admin, Resource} from "react-admin";
+//import simpleRestProvider from 'ra-data-simple-rest';
 import jsonServerProvider from "ra-data-json-server";
 
 import { UserList } from './userslist';

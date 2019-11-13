@@ -1,9 +1,8 @@
 import React, { Component } from "react";
-
 import { register } from './UserFonctions';
 
 
-class Login extends Component {
+class Register extends Component {
     constructor(props) {
         super(props);
 
@@ -23,8 +22,14 @@ class Login extends Component {
     }
 
     onChange(e) {
+        let nam = e.target.name;
+        let val = e.target.value;
+        this.setState({[nam]: val});
+    }
+
+    onChangeMail(e) {
         this.setState({
-            [e.target.name]: e.target.value
+            email: e.target.value
         });
     }
 
@@ -53,7 +58,6 @@ class Login extends Component {
     
     render() {
         return (
-            <div className="container">
                 <div className="row">
                     <div className="col-md-6 mt-5 mx-auto">
                         <form noValidate onSubmit={this.onSubmit}>
@@ -83,8 +87,7 @@ class Login extends Component {
                                 <input type="email"
                                     className="form-control"
                                     placeholder="Entrez votre email"
-                                    value={this.state.email}
-                                    onChange={this.onChange}
+                                    onChange={this.onChangeMail}
                                 />
                             </div>
                             <div className="form-group">
@@ -92,9 +95,16 @@ class Login extends Component {
                                 <input type="password"
                                     className="form-control"
                                     placeholder="Entrez votre mot de passe"
-                                    value={this.state.userPassword}
                                     onChange={this.onChange}
                                 />
+                            </div>
+                            <div className="form-group">
+                                <label >Date de Naissance</label>
+                                <input type="date" name="bday" min="1000-01-01"
+                                    max="3000-12-31" 
+                                    className="form-control"
+                                >
+                                </input>
                             </div>
                             <button type="submit"
                             className="btn btn-block btn-lg btn-primary">
@@ -103,9 +113,8 @@ class Login extends Component {
                         </form>
                     </div>
                 </div>    
-            </div>
         );
     }
 }
 
-export default Login;
+export default Register;

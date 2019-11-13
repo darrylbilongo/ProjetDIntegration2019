@@ -1,32 +1,46 @@
 import React, {Component} from 'react';
 import { StyleSheet, Text, View, Dimensions, TextInput, Alert,} from 'react-native';
-import Welcome from '../Welcome';
+import Welcome from '../Accueil/Welcome';
 import Animated, {Easing} from "react-native-reanimated";
 import {TapGestureHandler, State, TouchableOpacity} from 'react-native-gesture-handler';
 import Svg, {Image, Circle, ClipPath} from 'react-native-svg';
-import styles from '../styles';
-
+import styles from './styles';
+import NavigationService from '../Navigation/NavigationService';
 
 const { width, height } = Dimensions.get('window');
 
 const {Value ,concat, event, clockRunning, timing, debug, stopClock, startClock, Clock, block, cond, eq, Extrapolate, interpolate, set} = Animated;
 
 export default class Login extends Component {
+  constructor(){
+    super();
 
-  constructor(props){
-    super(props);
+    global.utilisateur = {};
 
     this.state = {
-      email: "",
-      password: "",
+      userEmail: "",
+      userPassword: "",
+      responseAPI: "",
+      isLoading: true
     }
 
+    this.viewOpacity = new Value(1);
+
     this.buttonOpacity = new Value(1);
+    
 
     this.onStateChange = event([
       {
         nativeEvent: ({state})=>block([
           cond(eq(state, State.END), set(this.buttonOpacity, runTiming(new Clock(), 1, 0)))
+        ])
+      }
+    ]);
+
+    this.onStateChangeView = event([
+      {
+        nativeEvent: ({state})=>block([
+          cond(eq(state, State.END), set(this.viewOpacity, runTiming(new Clock(), 1, 0)))
         ])
       }
     ]);
@@ -69,6 +83,12 @@ export default class Login extends Component {
       extrapolate: Extrapolate.CLAMP
     });
 
+    this.viewX = interpolate(this.viewOpacity, {
+      inputRange: [0, 1],
+      outputRange: [width, 0],
+      extrapolate: Extrapolate.CLAMP
+    });
+
     this.rotateCross = interpolate(this.buttonOpacity, {
       inputRange: [0, 1],
       outputRange: [180, 360],
@@ -76,24 +96,61 @@ export default class Login extends Component {
     });
   }
 
-  myValidate = () =>{
-    const {email, password} = this.state;
-    this.preventDefault = false;
-    if(email == "" && password == ""){
-      Alert.alert("Vueillez remplir votre mail et votre mot de passe");
+
+  login = async () => {
+    try{
+      const response = await fetch('http://192.168.1.122:5000/users/login', {
+                              method: 'POST',
+                              headers: {
+                                'Accept': 'application/json',
+                                'Content-Type': 'application/json'
+                              },
+                              body: JSON.stringify({
+                                email: this.state.userEmail,
+                                motDePasse: this.state.userPassword
+                              })
+                            });                
+      this.state.responseAPI = await response.json(); 
+      this.state.isLoading = false;
     }
-    else if(email == "manou" && password == "manou"){
-      
+    catch (error){
+      console.log(error);
     }
-    else if(email != "" && password == ""){
-      Alert.alert("Pas de mot de passe!")
+    
+  }
+
+  verifierDonnees = (userEmail, userPassword) => {
+    if(userEmail == "" && userPassword == ""){
+      return false;
     }
-    else if(email == "" && password != ""){
-      Alert.alert("Pas d'email!")
+    else if((userEmail == "" || userEmail.indexOf('@') == -1)){
+      return false;
     }
-    else{
-      Alert.alert("Email ou mot de passe érroné!")
+    else if(userEmail != "" && userPassword == ""){
+      return false;
     }
+    return true;
+  }
+
+  myValidate = () => {
+    const {userEmail, userPassword} = this.state;
+    if(this.verifierDonnees(userEmail, userPassword)){
+      this.login();
+      if(this.state.responseAPI.message == 'Utilisateur existant: Connexion reussie!!!'){
+        this.state.userPassword = '';
+        this.state.userEmail = '';
+        global.utilisateur = this.state.responseAPI.utilisateur;
+        NavigationService.navigate('Profile');
+      }
+      else if(this.state.responseAPI.message != '')
+        Alert.alert(this.state.responseAPI.message);
+    }
+    else
+      Alert.alert("Veuillez remplir votre mail et votre mot de passe");
+  }
+
+  stopAction = (e) =>{
+    e.stopPropagation();
   }
 
   inputFocused (refName) {
@@ -108,93 +165,101 @@ export default class Login extends Component {
   }
 
   render() {
+    if(this.state.isLoading){}
     
     return (
     <View style={myContainer.container}>
-        <Animated.View style={{...StyleSheet.absoluteFill, transform: [{translateY: this.bgY}]}}>
-            <Svg height={height+50} width={width}>
-              <ClipPath id='clip'>
-                <Circle r={height+50} cx={width / 2} />
-              </ClipPath>
-            <Image
-                href={require("../../../images/feuille.jpg")}
-                width={width}
-                height={height+50}
-                preserveAspectRatio="xMidYMid slice"
-                clipPath="url(#clip)"
-            />
-            </Svg>
-        </Animated.View>
+        <Animated.View style={{...myContainer.container,
+                                opacity: this.viewOpacity,
+                                transform: [{translateX: this.viewX}]
+                              }}>
+          <Animated.View style={{...StyleSheet.absoluteFill, transform: [{translateY: this.bgY}]}}>
+              <Svg height={height+50} width={width}>
+                <ClipPath id='clip'>
+                  <Circle r={height+50} cx={width / 2} />
+                </ClipPath>
+              <Image
+                  href={require("../../images/feuille.jpg")}
+                  width={width}
+                  height={height+50}
+                  preserveAspectRatio="xMidYMid slice"
+                  clipPath="url(#clip)"
+              />
+              </Svg>
+          </Animated.View>
 
-        <View style={{ height: height / 2, justifyContent: 'center' , marginVertical:30 }}>
-        <Welcome />
-          <TapGestureHandler onHandlerStateChange={this.onStateChange}>
-            <Animated.View style={{...styles.button, 
-                                  backgroundColor: 'white',
-                                  opacity: this.buttonOpacity,
-                                  transform: [{translateY: this.buttonY}]}}>
-              <Text style={{ fontSize: 20, fontWeight: 'bold' }}>Se connecter</Text>
-            </Animated.View>
-          </TapGestureHandler>
-          <TapGestureHandler>
-            <Animated.View style={{ ...styles.button, 
-                                    backgroundColor: '#003d00',
-                                    opacity: this.buttonOpacity,
-                                    transform: [{translateY: this.buttonY}]
-                                  }}>
-              <Text style={{ fontSize: 20, fontWeight: 'bold', color: 'white' }}>
-                  Créer un compte
-              </Text>
-            </Animated.View>
-          </TapGestureHandler>
+          <View style={{ height: height / 2, justifyContent: 'center' , marginVertical:30 }}>
+          <Welcome />
+            <TapGestureHandler onHandlerStateChange={this.onStateChange}>
+              <Animated.View style={{
+                                      ...styles.button, 
+                                      backgroundColor: 'white',
+                                      opacity: this.buttonOpacity,
+                                      transform: [{translateY: this.buttonY}]
+                                    }}>
+                <Text style={{ fontSize: 20, fontWeight: 'bold' }}>Se connecter</Text>
+              </Animated.View>
+            </TapGestureHandler>
+            <TapGestureHandler onHandlerStateChange={()=>{NavigationService.navigate('Register');}}>
+              <Animated.View style={{ 
+                                      ...styles.button, 
+                                      backgroundColor: '#003d00',
+                                      opacity: this.buttonOpacity,
+                                      transform: [{translateY: this.buttonY}]
+                                    }}>
+                <Text style={{ fontSize: 20, fontWeight: 'bold', color: 'white' }}>
+                    Créer un compte
+                </Text>
+              </Animated.View>
+            </TapGestureHandler>
 
             <Animated.View style={{height:height/2, 
-                                  ...StyleSheet.absoluteFill, 
-                                  top:null, 
-                                  justifyContent:'center',
-                                  zIndex: this.textInputZindex,
-                                  opacity: this.textInputOpacity,
-                                  transform:[{translateY: this.textInputY}],
-                                  
-                                }}>
-          <TapGestureHandler onHandlerStateChange={this.onCloseState}>
-            <Animated.View style={styles.closeButton}>
-              <Animated.Text style={{fontSize: 15,
-                                      color: 'black',
-                                      fontWeight: 'bold',
-                                      transform: [{rotate: concat(this.rotateCross, 'deg')}]}}>
-                X
-              </Animated.Text>
+                                    ...StyleSheet.absoluteFill, 
+                                    top:null, 
+                                    justifyContent:'center',
+                                    zIndex: this.textInputZindex,
+                                    opacity: this.textInputOpacity,
+                                    transform:[{translateY: this.textInputY}],
+                                    
+                                  }}>
+              <TapGestureHandler onHandlerStateChange={this.onCloseState}>
+                <Animated.View style={styles.closeButton}>
+                  <Animated.Text style={{fontSize: 15,
+                                          color: 'black',
+                                          fontWeight: 'bold',
+                                          transform: [{rotate: concat(this.rotateCross, 'deg')}]}}>
+                    X
+                  </Animated.Text>
+                </Animated.View>
+              </TapGestureHandler>
+              <TextInput 
+                  placeholder="email"
+                  style={styles.textInput}
+                  placeholderTextColor="black"
+                  keyboardType={'email-address'}
+                  onChangeText={userEmail => this.setState({userEmail})}
+                  autoCapitalize='none'
+                  returnKeyType='next'
+                />
+                <TextInput 
+                  placeholder="mot de passe"
+                  style={styles.textInput}
+                  secureTextEntry={true}
+                  placeholderTextColor="black"
+                  autoCapitalize='none'
+                  onChangeText={userPassword => this.setState({userPassword})}
+                  keyboardType={'default'}
+                />
+                <TouchableOpacity style={{...styles.button, backgroundColor: '#003d00'}}
+                  onPress={this.myValidate}
+                >
+                  <Text style={{fontSize:20, fontWeight:'bold', color: 'white'}} >
+                    Connexion
+                  </Text>
+                </TouchableOpacity>
             </Animated.View>
-          </TapGestureHandler>
-          <TextInput 
-              placeholder="email"
-              style={styles.textInput}
-              placeholderTextColor="black"
-              keyboardType={'email-address'}
-              onChangeText={email => this.setState({email})}
-              autoCapitalize='none'
-              returnKeyType='next'
-            />
-            <TextInput 
-              placeholder="mot de passe"
-              style={styles.textInput}
-              secureTextEntry={true}
-              placeholderTextColor="black"
-              autoCapitalize='none'
-              onChangeText={password => this.setState({password})}
-              keyboardType={'default'}
-            />
-            <TouchableOpacity style={{...styles.button, backgroundColor: '#003d00', color:'white'}}
-              onPress={this.myValidate}
-              //onPress={this.myValidate}
-            >
-              <Text style={{fontSize:20, fontWeight:'bold', color: 'white'}} >
-                Connexion
-              </Text>
-            </TouchableOpacity>
-          </Animated.View>
-        </View>
+          </View>
+        </Animated.View>
     </View>
     );
   }

@@ -24,9 +24,9 @@ class App extends React.Component {
         <Router>
           <div className="App">
           <NavBar/>
-          <Switch>
-            <Route exact path="/" component={Home}/>
-            <Route exact path="/home" component={Home}/>
+          <Route exact path="/" component={Home}/>
+          <Route exact path="/home" component={Home}/>
+          <div className="container">
             <Route path="/login" component={Login} />
             <Route path="/team" component={Team} />
             <Route path="/profile" component={Profile} />
@@ -34,7 +34,7 @@ class App extends React.Component {
             <Route path="/calendar" component={Calendar}/>
             <Route path="/admin" component={Administration}/>
             <Route component={Error}/>
-          </Switch>
+          </div>
           <Footer/>
           </div>  
 

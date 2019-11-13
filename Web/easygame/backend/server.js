@@ -28,8 +28,8 @@ connection.once('open', () => {
 const usersRouter = require('./routes/users');
 const animateurRouter = require('./routes/animateur');
 
-app.use('/users', usersRouter);
-app.use('/users', animateurRouter);
+app.use('/api/users', usersRouter);
+app.use('/api/animateur', animateurRouter);
 // app
 
 app.listen(port, () => {

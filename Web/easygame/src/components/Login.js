@@ -3,25 +3,32 @@ import React, { Component } from "react";
 import {login} from './UserFonctions';
 
 class Login extends Component {
-    constructor() {
-        super();
-        this.onChange = this.onChange.bind(this);
-        this.onSubmit = this.onSubmit.bind(this);
-
+    constructor(props) {
+        super(props);
         this.state = {
-            email: "",
-            motDePasse: "",
+            email: '',
+            motDePasse: '',
             errors: {}
         }
+
+        this.handleChangeEmail = this.handleChangeEmail.bind(this);
+        this.handleChangeMDP = this.handleChangeMDP.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    onChange(e) {
+    handleChangeEmail(e) {
         this.setState({
-            [e.target.name]: e.target.value
+            email: e.target.value
         });
     }
 
-    onSubmit(e) {
+    handleChangeMDP(e) {
+        this.setState({
+           motDePasse: e.target.value
+        });
+    }
+
+    handleSubmit(e) {
         e.preventDefault();
 
         const user = {
@@ -41,18 +48,16 @@ class Login extends Component {
     
     render() {
         return (
-            <div className="container">
                 <div className="row">
                     <div className="col-md-6 mt-5 mx-auto">
-                        <form noValidate onSubmit={this.onSubmit}>
+                        <form noValidate onSubmit={this.handleSubmit}>
                             <h1 className="h3 mn-3">Connectez vous s'il vous plait!</h1>
                             <div className="form-group">
                                 <label htmlFor="email">Email: </label>
                                 <input type="email"
                                     className="form-control"
                                     placeholder="Entrez votre email"
-                                    value={this.state.email}
-                                    onChange={this.onChange}
+                                    onChange={this.handleChangeEmail}
                                 />
                             </div>
                             <div className="form-group">
@@ -60,8 +65,7 @@ class Login extends Component {
                                 <input type="password"
                                     className="form-control"
                                     placeholder="Entrez votre mot de passe"
-                                    value={this.state.motDePasse}
-                                    onChange={this.onChange}
+                                    onChange={this.handleChangeMDP}
                                 />
                             </div>
                             <button type="submit"
@@ -71,7 +75,6 @@ class Login extends Component {
                         </form>
                     </div>
                 </div>    
-            </div>
         );
     }
 }
