@@ -92,7 +92,7 @@ export default class Enregistrer extends Component {
                                     nom : this.state.nom,
                                     prenom : this.state.prenom,
                                     email : this.state.email,
-                                    motDePasse : this.state.email,
+                                    motDePasse : this.state.motDePasse,
                                     dateNaissance : this.state.dateNaissance,
                                     estSupprime : false,
                                     totem : this.state.totem,

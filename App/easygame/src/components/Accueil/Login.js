@@ -132,6 +132,8 @@ export default class Login extends Component {
         global.utilisateur = this.state.responseAPI.utilisateur;
         NavigationService.navigate('Profile');
         this.state.text = <Text></Text>;
+        this._textInput1.setNativeProps({ text: '' });
+        this._textInput2.setNativeProps({ text: '' });
       }
       else if(this.state.responseAPI.message == undefined)
         this.state.text = <ActivityIndicator size="small" color="#00ff00" />;
@@ -139,7 +141,7 @@ export default class Login extends Component {
         Alert.alert(this.state.responseAPI.message);
     }
     else
-      Alert.alert("Veuillez remplir votre mail et votre mot de passe");
+      Alert.alert("Veuillez remplir votre mail et votre mot de passe"); 
   }
 
   stopAction = (e) =>{
@@ -231,6 +233,7 @@ export default class Login extends Component {
                   onChangeText={userEmail => this.setState({userEmail})}
                   autoCapitalize='none'
                   returnKeyType='next'
+                  ref={component => this._textInput1 = component}
                 />
                 <TextInput 
                   placeholder="mot de passe"
@@ -240,6 +243,7 @@ export default class Login extends Component {
                   autoCapitalize='none'
                   onChangeText={userPassword => this.setState({userPassword})}
                   keyboardType={'default'}
+                  ref={component => this._textInput2 = component}
                 />
                 <TouchableOpacity style={{...styles.button, backgroundColor: '#003d00'}}
                   onPress={this.myValidate}

@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { StyleSheet, Text, View, Dimensions, ScrollView, SafeAreaView, Image, ActivityIndicator} from 'react-native';
+import { StyleSheet, Text, View, Dimensions, ScrollView, SafeAreaView, Image, KeyboardAvoidingView, Platform} from 'react-native';
 import styles from './styles';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import {Ionicons, MaterialIcons} from "@expo/vector-icons";
@@ -13,16 +13,15 @@ const { width, height } = Dimensions.get('window');
 export default class Profile extends Component {
 
   deconnexion = () => {
-    console.log("rien");
     global.utilisateur = {};
-    NavigationService.navigate('Home');
+    NavigationService.navigate('HomePage');
   }
 
   render() {
     return (
-      <SafeAreaView style={styles.container}>
-
-        <ScrollView showsVerticalScrollIndicator={false}>
+      <SafeAreaView style={{flex: 1,}}>
+      <KeyboardAvoidingView style={{flex: 1}} behavior={Platform.Os == "ios" ? "padding" : "height" } enabled>
+        <ScrollView>
           <View style={{alignSelf: "center"}}>
             <View style={styles.profileImage}>
               <Image source={require('../../images/nouveau.jpg')} style={styles.image} resizeMode="center"></Image>
@@ -68,6 +67,7 @@ export default class Profile extends Component {
               </TouchableOpacity>
 
         </ScrollView>
+        </KeyboardAvoidingView>
       </SafeAreaView>
     );
   }
