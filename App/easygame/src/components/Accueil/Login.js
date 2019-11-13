@@ -102,7 +102,7 @@ export default class Login extends Component {
 
   login = async () => {
     try{
-      const response = await fetch('http://192.168.1.122:5000/users/login', {
+      const response = await fetch('http://easygame.funndeh.com:5000/api/users/login', {
                               method: 'POST',
                               headers: {
                                 'Accept': 'application/json',
@@ -158,8 +158,6 @@ export default class Login extends Component {
   }
 
   render() {
-    if(this.state.isLoading){}
-    
     return (
     <View style={myContainer.container}>
         <Animated.View style={{...myContainer.container,

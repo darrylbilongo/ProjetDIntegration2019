@@ -52,7 +52,7 @@ const AppNavigator = createStackNavigator(
     },    
   },
   {
-    initialRouteName: 'Profile',
+    initialRouteName: 'Home',
   }
 );
 

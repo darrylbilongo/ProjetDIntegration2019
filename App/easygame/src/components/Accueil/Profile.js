@@ -4,24 +4,20 @@ import styles from './styles';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import {Ionicons, MaterialIcons} from "@expo/vector-icons";
 import Font from 'expo-font';
+import NavigationService from '../Navigation/NavigationService';
 
 
 
 const { width, height } = Dimensions.get('window');
 
-global.utilisateur = {
-  nomUtilisateur : 'manou',
-  nom : 'manou',
-  prenom : 'manou',
-  email : 'manoustevia@gmail.com',
-  motDePasse : 'manou',
-  dateNaissance : '11-11-1963',
-  estSupprime : 'false',
-  totem : 'lapin',
-  fonction: 'animateur'
-};
-
 export default class Profile extends Component {
+
+  deconnexion = () => {
+    console.log("rien");
+    global.utilisateur = {};
+    NavigationService.navigate('Home');
+  }
+
   render() {
     return (
       <SafeAreaView style={styles.container}>
@@ -58,16 +54,13 @@ export default class Profile extends Component {
                 <Text style={[styles.text, styles.subText]}>Totem</Text>
             </View>
             <View style={styles.statsBox}>
-                <Text style={[styles.text, { fontSize: 24 }]}>{global.utilisateur.fonction}</Text>
+                <Text style={[styles.text, { fontSize: 14 }]}>{global.utilisateur.fonction}</Text>
                 <Text style={[styles.text, styles.subText]}>Fonction</Text>
             </View>
           </View>
 
           <TouchableOpacity style={{...styles.deconnexion, backgroundColor: '#003d00', color:'white'}}
-                onPress={()=>{
-                  global.utilisateur = {};
-                  NavigationService.navigate('Home');
-                }}
+                onPress={this.deconnexion}
               >
                 <Text style={{fontSize:20, fontWeight:'bold', color: 'white'}} >
                   Deconnexion
