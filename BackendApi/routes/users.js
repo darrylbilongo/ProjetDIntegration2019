@@ -36,7 +36,9 @@ router.route('/register').post((req, res) => {
                     userData.motDePasse = hash;
                     User.create(userData)
                     .then(user => {
-                        res.json({message : user.email + ' est enregistré'})
+                        res.json({message : user.email + ' est enregistré',
+                                utilisateur: user
+                    })
                     })
                     .catch(err => {
                         res.status(400).json({message: 'Error: ' + err})
@@ -105,7 +107,7 @@ router.route('/login').post((req, res) => {
             }
         })
         .catch(err => {
-            res.status(400).json('Error: ' + err)
+            res.status(400).json({message: 'Error: ' + err})
         });
 
     
@@ -126,15 +128,18 @@ router.route('/:id').delete((req, res) =>{
 router.route('/update/:id').post((req, res) =>{
     User.findById(req.params.id)
         .then(user => {
-            user.nomUtilisateur = req.body.nomUtilisateur;
-            user.nom = req.body.nom;
-            user.prenom = req.body.prenom;
-            user.email = req.body.email;
-            user.motDePasse = req.body.motDePasse;
-            user.dateNaissance = req.body.dateNaissance;
-            user.estSupprime = req.body.estSupprime;
-            user.totem = req.body.totem;
-            user.fonction = req.body.fonction;
+            if(bcrypt.compareSync(req.body.oldMotDePasse, user.motDePasse)){ 
+                bcrypt.hash(req.body.newMotDePasse, 10, (err, hash) =>{
+                    user.motDePasse = hash;
+
+                    user.nomUtilisateur = req.body.nomUtilisateur;
+                    user.nom = req.body.nom;
+                    user.prenom = req.body.prenom;
+                    user.email = req.body.email;
+                    user.dateNaissance = req.body.dateNaissance;
+                    user.totem = req.body.totem;
+                })
+            }
 
             user.save()
                 .then(() => res.json({message: 'User Updated!'}))
