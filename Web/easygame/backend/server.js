@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
+const bodyParser = require('body-parser');
 
 require('dotenv').config();
 
@@ -10,7 +11,6 @@ const port = process.env.PORT || 5000;
 // middleware
 app.use(cors());
 app.use(express.json());
-
 
 
 const uri = process.env.SRV_URI;
@@ -26,8 +26,10 @@ connection.once('open', () => {
 
 // Routes
 const usersRouter = require('./routes/users');
+const animateurRouter = require('./routes/animateur');
 
-app.use('/users', usersRouter);
+app.use('/api/users', usersRouter);
+app.use('/api/animateur', animateurRouter);
 // app
 
 app.listen(port, () => {

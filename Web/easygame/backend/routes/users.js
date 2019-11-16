@@ -1,5 +1,10 @@
 const router = require('express').Router();
 let User = require('../models/users.model');
+const cors = require('cors');
+const jwt = require('jsonwebtoken');
+const bcrypt = require('bcryptjs');
+
+router.use(cors());
 
 router.route('/').get((req, res) => {
     User.find()
