@@ -33,7 +33,7 @@ export const login = user => {
         })
         .then(res => {
             localStorage.setItem('usertoken', res.data.token);
-            console.log(res.data);
+            console.log(res.data.message);
             return res.data.token;
         })
         .catch(err => {

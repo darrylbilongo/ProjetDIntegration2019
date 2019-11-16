@@ -12,7 +12,7 @@ app.use(cors());
 app.use(express.json());
 
 
-const port = process.env.PORT || 80;
+const port = process.env.PORT || 5000;
 
 const uri = process.env.SRV_URI;
 mongoose.connect(uri, {useNewUrlParser: true,
@@ -29,10 +29,10 @@ const fonctionRouter = require('./routes/fonctions');
 const totemRouter = require('./routes/totems');
 const planningRouter = require('./routes/plannings');
 
-app.use('/users', userRouter);
-app.use('/fonctions', fonctionRouter);
-app.use('/totems', totemRouter);
-app.use('/plannings', planningRouter);
+app.use('/api/users', userRouter);
+app.use('/api/fonctions', fonctionRouter);
+app.use('/api/totems', totemRouter);
+app.use('/api/plannings', planningRouter);
 
 
 app.listen(port,function(){

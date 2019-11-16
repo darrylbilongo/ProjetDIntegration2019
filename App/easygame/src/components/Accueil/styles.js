@@ -101,6 +101,67 @@ const styles = StyleSheet.create({
         shadowColor: 'black',
         shadowOpacity: 0.2,
         shadowOffset: {width: 2, height: 2},
+      },
+      text: {
+        color: "#52575D"
+      },
+      image: {
+          flex: 1,
+          height: undefined,
+          width: undefined
+      },
+      titleBar: {
+          flexDirection: "row",
+          justifyContent: "space-between",
+          marginTop: 24,
+          marginHorizontal: 16
+      },
+      subText: {
+          fontSize: 12,
+          color: "#AEB5BC",
+          textTransform: "uppercase",
+          fontWeight: "500"
+      },
+      profileImage: {
+          width: 200,
+          height: 200,
+          borderRadius: 100,
+          overflow: "hidden"
+      },
+      dm: {
+          backgroundColor: "#41444B",
+          position: "absolute",
+          top: 20,
+          width: 40,
+          height: 40,
+          borderRadius: 20,
+          alignItems: "center",
+          justifyContent: "center"
+      },
+      add: {
+          backgroundColor: "#41444B",
+          position: "absolute",
+          bottom: 0,
+          right: 0,
+          width: 60,
+          height: 60,
+          borderRadius: 30,
+          alignItems: "center",
+          justifyContent: "center"
+      },
+      infoContainer: {
+          alignSelf: "center",
+          alignItems: "center",
+          marginTop: 16
+      },
+      statsContainer: {
+          flexDirection: "row",
+          alignSelf: "center",
+          marginTop: 32
+      },
+      statsBox: {
+          alignItems: "center",
+          flex: 1
       }
     });   
     

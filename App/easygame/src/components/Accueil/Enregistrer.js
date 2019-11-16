@@ -18,7 +18,8 @@ export default class Enregistrer extends Component {
 
         super();
 
-        this.state={
+        this.state = {
+            isLoading: false,
             nomUtilisateur : '',
             nom : '',
             prenom : '',
@@ -26,13 +27,12 @@ export default class Enregistrer extends Component {
             motDePasse : '',
             dateNaissance : '',
             estSupprime : '',
-            totem : '',
-            fonction : 'maître-scout',
+            totem : ''
         };
 
         this.motDePasse='';
 
-        this.responseAPI = {message: 'Erreur de connexion'};
+        this.responseAPI = {message: ''};
     }
 
 
@@ -56,62 +56,80 @@ export default class Enregistrer extends Component {
         })
     }
 
+    getStars = () => new Promise((resolve) => {
+        setTimeout(() => resolve, 2000)
+    })
+
+
     verifierAge = (date) => {
         const current_date = new Date();
         const userDate = new Date(date);
         const age = new Number(((current_date.getTime() - userDate.getTime())/ 31536000000)).toFixed(0);
 
-        if(age <= 25 /*&& age >= 15*/) 
-        {
-            return true;
-        }
-        else{
+        if(age >= 25){
             this.responseAPI.message = 'Vous êtes trop agé pour être animateur!';
-            return false;   
+            return false;
+        }
+        else if(age <= 15){
+            this.responseAPI.message = 'Vous êtes trop jeune pour être animateur!';
+            return false
+        }
+        else{            
+            return true;   
         } 
     }
 
     register = async () => {
-        const response = await fetch('http://192.168.43.163:5000/users/register', {
+        this.state.isLoading = true;
+        const response = await fetch('http://easygame.funndeh.com:5000/api/users/register', {
                                   method: 'POST',
                                   headers: {
                                     'Accept': 'application/json',
                                     'Content-Type': 'application/json'
                                   },
                                   body: JSON.stringify({
-                                    nomUtilisateur : this.state.dateNaissance,
+                                    nomUtilisateur : this.state.nomUtilisateur,
                                     nom : this.state.nom,
                                     prenom : this.state.prenom,
                                     email : this.state.email,
-                                    motDePasse : this.state.email,
+                                    motDePasse : this.state.motDePasse,
                                     dateNaissance : this.state.dateNaissance,
                                     estSupprime : false,
                                     totem : this.state.totem,
                                     fonction : 'animateur',
                                   })
                                 });                             
-
+        this.getStars();
         this.responseAPI = await response.json();  
     }
 
     userRegister = () =>{
-
-        if(this.state.motDePasse !== this.motDePasse){
+        if(!Object.keys(this.state).filter(x => this.state[x] != '')){
+            this.responseAPI.message = 'Vous avez oublié de completer une donnée!';
+        }
+        else if(this.state.nomUtilisateur.length < 5)
+            this.responseAPI.message = "Le nombre de lettre attendu pour le nom d'utlisateur est 5.";
+        else if(this.state.motDePasse !== this.motDePasse){
             this.responseAPI.message =  "Mots de passe incohérents!!!";
         }
-        else if(!Object.keys(this.state).filter(x => this.state[x] != '')){
-            this.responseAPI.message = 'Vous avez oublié de completer une donnée!';
+        else if(this.state.motDePasse.length < 8){
+            this.responseAPI.message = "Mot de passe trop court";
         }
         else{
             if(this.verifierAge(this.state.dateNaissance)){
                 this.register();
-                if(this.responseAPI.message.includes(' est enregistré')){
-                    global.utilisateur = this.responseAPI.utilisateur;
+                if(this.responseAPI.message && this.responseAPI.message.includes(' est enregistré')){
+                    global.utilisateur =this.responseAPI.utilisateur;
+                    console.log(global.utilisateur);
                     NavigationService.navigate('Profile');
                 }
             }
         }
-        Alert.alert(this.responseAPI.message);
+
+        if(this.responseAPI.message)
+            Alert.alert(this.responseAPI.message);
+        console.log(this.responseAPI.message);
+        this.responseAPI.message = ''; 
     }
 
   render() {

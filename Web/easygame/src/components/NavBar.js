@@ -31,6 +31,11 @@ class NavBar extends React.Component {
             <div className="collapse navbar-collapse justify-content"  id="navbarNav">
                 <ul>
                     <li className="nav-item">
+                            <Link to="/home" className="nav-link">
+                                Home
+                            </Link>
+                        </li>
+                    <li className="nav-item">
                         <Link to="/login" className="nav-link">
                             Se connecter
                         </Link>
@@ -57,12 +62,12 @@ class NavBar extends React.Component {
             <ul>
                 <li className="nav-item">
                     <Link to="/profile" className="nav-link">
-                        User
+                        Profil
                     </Link>
                 </li>
                 <li className="nav-item">
                     <a href="" onClick={this.logOut.bind(this)} className="nav-link">
-                       Log Out
+                       Deconnexion
                     </a>
                 </li>
             </ul>
@@ -89,12 +94,7 @@ class NavBar extends React.Component {
                         <span className="navbar-toggler-icon"></span>
                 </button>
                 <div className="collapse navbar-collapse justify-content"  id="navbarNav">
-                    <ul className="navbar-nav">
-                        <li className="nav-item">
-                            <Link to="/home" className="nav-link">
-                                Home
-                            </Link>
-                        </li>
+                    <ul className="navbar-nav"> 
                         {/*<li className="nav-item">
                             <a className="nav-link" href="/admin">Administration</a>
                         </li>

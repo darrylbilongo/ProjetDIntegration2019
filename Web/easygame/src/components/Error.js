@@ -4,7 +4,7 @@ class Error extends Component {
     render(){
         return (
             <div>
-                NOT FOUND
+                NOT FOUND :: Cette page n'existe pas
             </div>
         );
     }
