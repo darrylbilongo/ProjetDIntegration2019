@@ -100,7 +100,6 @@ export default class Enregistrer extends Component {
                                   })
                                 });                             
         this.getStars();
-        this.state.fonction = 'animateur';
         this.responseAPI = await response.json();  
     }
 
@@ -120,8 +119,8 @@ export default class Enregistrer extends Component {
             if(this.verifierAge(this.state.dateNaissance)){
                 this.register();
                 if(this.responseAPI.message && this.responseAPI.message.includes(' est enregistré')){
-                    global.utilisateur = this.state;
-                    console.log(this.state);
+                    global.utilisateur =this.responseAPI.utilisateur;
+                    console.log(global.utilisateur);
                     NavigationService.navigate('Profile');
                 }
             }

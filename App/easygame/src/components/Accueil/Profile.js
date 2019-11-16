@@ -1,14 +1,9 @@
 import React, {Component} from 'react';
-import { StyleSheet, Text, View, Dimensions, ScrollView, SafeAreaView, Image, KeyboardAvoidingView, Platform} from 'react-native';
+import { Text, View, ScrollView, SafeAreaView, Image, KeyboardAvoidingView, Platform} from 'react-native';
 import styles from './styles';
 import {TouchableOpacity} from 'react-native-gesture-handler';
-import {Ionicons, MaterialIcons} from "@expo/vector-icons";
-import Font from 'expo-font';
+import { MaterialIcons} from "@expo/vector-icons";
 import NavigationService from '../Navigation/NavigationService';
-
-
-
-const { width, height } = Dimensions.get('window');
 
 export default class Profile extends Component {
 
