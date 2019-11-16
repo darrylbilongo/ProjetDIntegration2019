@@ -45,13 +45,13 @@ class NavBar extends React.Component {
             
         )
          
-        const regLink = (
+        /*const regLink = (
             <li className="nav-item">
                 <Link to="/register" className="nav-link">
                     Register
                 </Link>
             </li>
-        )
+        )*/
         
         const userLink = (
             <ul>

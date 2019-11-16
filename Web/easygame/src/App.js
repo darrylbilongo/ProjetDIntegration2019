@@ -5,15 +5,13 @@ import './App.css';
 // Components
 import Login from './components/Login';
 import Home from './components/Home';
-import Error from './components/Error';
+//import Error from './components/Error';
 import Profile from "./components/Profile";
 import Register from "./components/Register";
 import Team from './components/Team';
 import Layout from './components/Layout';
 import NavBar from './components/NavBar';
-import Header from './components/Header';
 import Footer from './components/Footer';
-import Menu from './components/Menu';
 import Calendar from './components/Calendar';
 import Administration from './components/Admin';
 
@@ -33,7 +31,7 @@ class App extends React.Component {
             <Route path="/register" component={Register} />
             <Route path="/calendar" component={Calendar}/>
             <Route path="/admin" component={Administration}/>
-            <Route component={Error}/>
+            {/*<Route component={Error}/>*/}
           </div>
           <Footer/>
           </div>  

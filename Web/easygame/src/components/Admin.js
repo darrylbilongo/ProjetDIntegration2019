@@ -60,7 +60,7 @@ const dataProvider = jsonServerProvider("https://jsonplaceholder.typicode.com");
     return defaultMessages;
 };*/
 
-{/*const history = createHashHistory();
+/*const history = createHashHistory();
 
 class Administration extends React.Component {
   render () {
@@ -87,4 +87,4 @@ class Administration extends React.Component {
 }
 
 
-export default Administration; */}
+export default Administration; */

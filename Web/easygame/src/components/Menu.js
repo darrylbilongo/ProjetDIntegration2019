@@ -18,7 +18,7 @@ class Menu extends React.Component {
                 <img src="dist/img/avatar3.jpg" className="img-circle elevation-2" alt="User" />
               </div>
               <div className="info">
-                <a href="#" className="d-block">X</a>
+                <Link to="#" className="d-block"></Link>
               </div>
             </div>
             {/* Sidebar Menu */}

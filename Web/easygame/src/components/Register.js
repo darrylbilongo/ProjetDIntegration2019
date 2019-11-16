@@ -7,6 +7,8 @@ class Register extends Component {
         super(props);
 
         this.onChange = this.onChange.bind(this);
+        this.onChangeMail = this.onChangeMail.bind(this);
+        this.onChangeMdp = this.onChangeMdp.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
 
         this.state = {
@@ -30,6 +32,12 @@ class Register extends Component {
     onChangeMail(e) {
         this.setState({
             email: e.target.value
+        });
+    }
+
+    onChangeMdp(e) {
+        this.setState({
+            motDePasse: e.target.value
         });
     }
 
@@ -87,6 +95,7 @@ class Register extends Component {
                                 <input type="email"
                                     className="form-control"
                                     placeholder="Entrez votre email"
+
                                     onChange={this.onChangeMail}
                                 />
                             </div>
@@ -95,7 +104,7 @@ class Register extends Component {
                                 <input type="password"
                                     className="form-control"
                                     placeholder="Entrez votre mot de passe"
-                                    onChange={this.onChange}
+                                    onChange={this.onChangeMdp}
                                 />
                             </div>
                             <div className="form-group">

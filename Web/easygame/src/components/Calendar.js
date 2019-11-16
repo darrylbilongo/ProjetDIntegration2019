@@ -4,7 +4,6 @@ import dayGridPlugin from '@fullcalendar/daygrid'
 
 
 class Calendar extends Component {
-
     render () {
             return (   
                 <FullCalendar 

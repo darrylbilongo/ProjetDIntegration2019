@@ -9,7 +9,7 @@ class Home extends React.Component {
         <HomeComponent>
           <div id="carrousel" class="carousel slide" data-ride="carousel">
 
-          <ul class="carousel-indicators">
+          <ul className="carousel-indicators">
             <li data-target="#carrousel" data-slide-to="0" class="active"></li>
             <li data-target="#carrousel" data-slide-to="1"></li>
             <li data-target="#carrousel" data-slide-to="2"></li>
