@@ -1,88 +1,69 @@
 import React, {Component} from 'react';
-import { StyleSheet, Text, View, Dimensions, Image, ScrollView} from 'react-native';
+import { Text, View, ScrollView, SafeAreaView, Image, KeyboardAvoidingView, Platform} from 'react-native';
 import styles from './styles';
 import {TouchableOpacity} from 'react-native-gesture-handler';
+import { MaterialIcons} from "@expo/vector-icons";
 import NavigationService from '../Navigation/NavigationService';
-
-const { width, height } = Dimensions.get('window');
 
 export default class Profile extends Component {
 
+  deconnexion = () => {
+    global.utilisateur = {};
+    NavigationService.navigate('HomePage');
+  }
+
   render() {
     return (
-          <ScrollView  style={{flex:1,}}>
-            <View style={styles.container} >
-              <Image style={styles.imgprofile} source={require("../../images/inconnu.png")}/>
-              <Text style={styles.name}>
-                {global.utilisateur.nom} {global.utilisateur.prenom}
-              </Text>
-              <Text style={styles.username}>
-                @{global.utilisateur.nomUtilisateur}
-              </Text>
+      <SafeAreaView style={{flex: 1,}}>
+      <KeyboardAvoidingView style={{flex: 1}} behavior={Platform.Os == "ios" ? "padding" : "height" } enabled>
+        <ScrollView>
+          <View style={{alignSelf: "center"}}>
+            <View style={styles.profileImage}>
+              <Image source={require('../../images/nouveau.jpg')} style={styles.image} resizeMode="center"></Image>
+            </View>
+          </View>
+          <View style={styles.dm}>
+            <MaterialIcons name="chat" size={18} color="#DFD8C8"></MaterialIcons>
+          </View>
 
-              <View style={styles.itemProfile}>
-                <Image style={styles.imgItem} source={require("../../images/etoile.png")}/>
-                <Text style={styles.labelItem}>
-                  Fonction
-                </Text>
-                <Text style={styles.subLabelItem}>
-                  {global.utilisateur.fonction}
-                </Text>
-              </View>
+          <View style={styles.infoContainer}>
+            <Text style={{fontSize: 30}}>{global.utilisateur.email}</Text>
+            <Text>Email</Text>
+          </View>
 
-              <View style={styles.itemProfile}>
-                <Image style={styles.imgItem} source={require("../../images/etoile.png")}/>
-                <Text style={styles.labelItem}>
-                  Date de naissance
-                </Text>
-                <Text style={styles.subLabelItem}>
-                  {global.utilisateur.dateNaissance}
-                </Text>
-              </View>
+          <View style={styles.statsContainer}>
+            <View style={styles.statsBox}>
+              <Text style={{...styles.text, fontSize: 24, fontWeight: "200",}}>{global.utilisateur.prenom + ' ' + global.utilisateur.nom }</Text>
+              <Text style={{...styles.text, ...styles.subText, color: "#AEB5BC", fontSize: 14}}>Nom</Text>
+            </View>
+          </View>
 
-              <View style={styles.itemProfile}>
-                <Image style={styles.imgItem} source={require("../../images/profile.png")}/>
-                <Text style={styles.labelItem}>
-                  Modifier le Profil
-                </Text>
-                <Text style={styles.subLabelItem}>
-                  Eligible
-                </Text>
-              </View>
+          <View style={styles.statsContainer}>
+            <View style={styles.statsBox}>
+                <Text style={[styles.text, { fontSize: 24 }]}>{global.utilisateur.nomUtilisateur}</Text>
+                <Text style={[styles.text, styles.subText]}>Utilisateur</Text>
+            </View>
+            <View style={[styles.statsBox, { borderColor: "#DFD8C8", borderLeftWidth: 1, borderRightWidth: 1 }]}>
+                <Text style={[styles.text, { fontSize: 24 }]}>{global.utilisateur.totem}</Text>
+                <Text style={[styles.text, styles.subText]}>Totem</Text>
+            </View>
+            <View style={styles.statsBox}>
+                <Text style={[styles.text, { fontSize: 14 }]}>{global.utilisateur.fonction}</Text>
+                <Text style={[styles.text, styles.subText]}>Fonction</Text>
+            </View>
+          </View>
 
-              <View style={styles.itemProfile}>
-                <Image style={styles.imgItem} source={require("../../images/totem.png")}/>
-                <Text style={styles.labelItem}>
-                  Totem
-                </Text>
-                <Text style={styles.subLabelItem}>
-                  {global.utilisateur.totem}
-                </Text>
-              </View>
-
-              <View style={styles.itemProfile}>
-                <Image style={styles.imgItem} source={require("../../images/notif.png")}/>
-                <Text style={styles.labelItem}>
-                  Notifications
-                </Text>
-                <Text style={styles.subLabelItem}>
-                  0 messages
-                </Text>
-              </View>
-
-              <TouchableOpacity style={{...styles.deconnexion, backgroundColor: '#003d00', color:'white'}}
-                onPress={()=>{
-                  global.utilisateur = {};
-                  NavigationService.navigate('Home');
-                }}
+          <TouchableOpacity style={{...styles.deconnexion, backgroundColor: '#003d00', color:'white'}}
+                onPress={this.deconnexion}
               >
                 <Text style={{fontSize:20, fontWeight:'bold', color: 'white'}} >
                   Deconnexion
                 </Text>
               </TouchableOpacity>
 
-            </View>
-          </ScrollView>
+        </ScrollView>
+        </KeyboardAvoidingView>
+      </SafeAreaView>
     );
   }
 }

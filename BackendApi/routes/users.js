@@ -10,7 +10,7 @@ router.use(cors());
 router.route('/').get((req, res) => {
     User.find()
         .then(users => res.json(users))
-        .catch(err => res.status(400).json('Error: ' + err));
+        .catch(err => res.status(400).json({message: 'Error: ' + err}));
 });
 
 router.route('/register').post((req, res) => {
@@ -36,19 +36,22 @@ router.route('/register').post((req, res) => {
                     userData.motDePasse = hash;
                     User.create(userData)
                     .then(user => {
-                        res.json({message : user.email + ' est enregistré'})
+                        res.json({
+                                    message : user.email + ' est enregistré',
+                                    utilisateur: user
+                                })
                     })
                     .catch(err => {
-                        res.status(400).json('Error: ' + err)
+                        res.status(400).json({message: 'Error: ' + err})
                     })
                 })
             }
             else{
-                res.json({ error: 'Utilisateur déja existant'})
+                res.json({ message: 'Utilisateur déja existant'})
             }
         })
         .catch(err => {
-            res.status(400).json('Error: ' + err)
+            res.status(400).json({message: 'Error: ' + err})
         });
 
     
@@ -97,7 +100,7 @@ router.route('/login').post((req, res) => {
                 }
                 else{
                     //Mots de Passe pas identiques
-                    res.json({message: 'Utilisateur inexistant'})
+                    res.json({message: 'Utilisateur avec mot de passe erroné!'})
                 }
             }
             else{
@@ -105,7 +108,7 @@ router.route('/login').post((req, res) => {
             }
         })
         .catch(err => {
-            res.status(400).json('Error: ' + err)
+            res.status(400).json({message: 'Error: ' + err})
         });
 
     
@@ -114,33 +117,36 @@ router.route('/login').post((req, res) => {
 router.route('/:id').get((req, res) =>{
     User.findById(req.params.id)
         .then(user => res.json(user))
-        .catch(err => res.status(400).json('Error: ' + err));
+        .catch(err => res.status(400).json({message: 'Error: ' + err}));
 });
 
 router.route('/:id').delete((req, res) =>{
     User.findByIdAndDelete(req.params.id)
         .then(user => res.json("User deleted"))
-        .catch(err => res.status(400).json('Error: ' + err));
+        .catch(err => res.status(400).json({message: 'Error: ' + err}));
 });
 
 router.route('/update/:id').post((req, res) =>{
     User.findById(req.params.id)
         .then(user => {
-            user.nomUtilisateur = req.body.nomUtilisateur;
-            user.nom = req.body.nom;
-            user.prenom = req.body.prenom;
-            user.email = req.body.email;
-            user.motDePasse = req.body.motDePasse;
-            user.dateNaissance = req.body.dateNaissance;
-            user.estSupprime = req.body.estSupprime;
-            user.totem = req.body.totem;
-            user.fonction = req.body.fonction;
+            if(bcrypt.compareSync(req.body.oldMotDePasse, user.motDePasse)){ 
+                bcrypt.hash(req.body.newMotDePasse, 10, (err, hash) =>{
+                    user.motDePasse = hash;
+
+                    user.nomUtilisateur = req.body.nomUtilisateur;
+                    user.nom = req.body.nom;
+                    user.prenom = req.body.prenom;
+                    user.email = req.body.email;
+                    user.dateNaissance = req.body.dateNaissance;
+                    user.totem = req.body.totem;
+                })
+            }
 
             user.save()
-                .then(() => res.json('User Updated!'))
-                .catch(err => res.status(400).json('Error: ' + err));
+                .then(() => res.json({message: 'User Updated!'}))
+                .catch(err => res.status(400).json({message: 'Error: ' + err}));
         })
-        .catch(err => res.status(400).json('Error: ' + err));
+        .catch(err => res.status(400).json({message: 'Error: ' + err}));
 });
 
 router.route('/add').post((req, res) => {
@@ -167,8 +173,8 @@ router.route('/add').post((req, res) => {
     });
 
     nouveau.save()
-            .then(() => res.json('User added!'))
-            .catch(err => res.status(400).json('Error: ' + err));
+            .then(() => res.json({message: 'User added!'}))
+            .catch(err => res.status(400).json({message: 'Error: ' + err}));
 });
 
 module.exports = router;
