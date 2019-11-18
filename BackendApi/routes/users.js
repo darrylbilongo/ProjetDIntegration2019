@@ -85,18 +85,8 @@ router.route('/login').post((req, res) => {
                     res.json({
                         token: token,
                         message: 'Utilisateur existant: Connexion reussie!!!',
-                        utilisateur: {
-                            nomUtilisateur : user.nomUtilisateur,
-                            nom : user.nom,
-                            prenom : user.prenom,
-                            email : user.email,
-                            motDePasse : user.motDePasse,
-                            dateNaissance : user.dateNaissance,
-                            estSupprime : user.estSupprime,
-                            totem : user.totem,
-                            fonction : user.fonction
-                        }
-                    })
+                        utilisateur: user
+                    }
                 }
                 else{
                     //Mots de Passe pas identiques
@@ -122,12 +112,12 @@ router.route('/:id').get((req, res) =>{
 
 router.route('/:id').delete((req, res) =>{
     User.findByIdAndDelete(req.params.id)
-        .then(user => res.json("User deleted"))
+        .then(user => res.json("Utilisateur supprimé!"))
         .catch(err => res.status(400).json({message: 'Error: ' + err}));
 });
 
 router.route('/update/:id').post((req, res) =>{
-    User.findById(req.params.id)
+    /*User.findById(req.params.id)
         .then(user => {
             if(bcrypt.compareSync(req.body.oldMotDePasse, user.motDePasse)){ 
                 bcrypt.hash(req.body.newMotDePasse, 10, (err, hash) =>{
@@ -139,14 +129,25 @@ router.route('/update/:id').post((req, res) =>{
                     user.email = req.body.email;
                     user.dateNaissance = req.body.dateNaissance;
                     user.totem = req.body.totem;
+
+                    user.save()
+                        .then(() => res.json({message: 'Profil à jour!'}))
+                        .catch(err => res.status(400).json({message: 'Error: ' + err}));
                 })
             }
-
-            user.save()
-                .then(() => res.json({message: 'User Updated!'}))
-                .catch(err => res.status(400).json({message: 'Error: ' + err}));
         })
-        .catch(err => res.status(400).json({message: 'Error: ' + err}));
+        .catch(err => res.status(400).json({message: 'Error: ' + err}));*/
+        User.findOne({
+            email: req.body.email
+        })
+            .then(user => {
+                if(user) {
+                    if(bcrypt.compareSync(req.body.oldMotDePasse, user.motDePasse)){ 
+                        res.json("Manuelle")
+                    }
+                }
+            })
+            .catch(err => res.status(400).json({message: 'Error: ' + err}));        
 });
 
 router.route('/add').post((req, res) => {
