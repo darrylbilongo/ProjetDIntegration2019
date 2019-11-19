@@ -86,7 +86,7 @@ router.route('/login').post((req, res) => {
                         token: token,
                         message: 'Utilisateur existant: Connexion reussie!!!',
                         utilisateur: user
-                    }
+                    })
                 }
                 else{
                     //Mots de Passe pas identiques
