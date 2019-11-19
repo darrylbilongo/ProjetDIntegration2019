@@ -119,8 +119,8 @@ export default class Enregistrer extends Component {
             if(this.verifierAge(this.state.dateNaissance)){
                 this.register();
                 if(this.responseAPI.message && this.responseAPI.message.includes(' est enregistré')){
+                    console.log(this.responseAPI);
                     global.utilisateur =this.responseAPI.utilisateur;
-                    console.log(global.utilisateur);
                     NavigationService.navigate('Profile');
                 }
             }
