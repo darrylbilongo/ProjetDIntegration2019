@@ -9,6 +9,7 @@ class Register extends Component {
         this.onChange = this.onChange.bind(this);
         this.onChangeMail = this.onChangeMail.bind(this);
         this.onChangeMdp = this.onChangeMdp.bind(this);
+        this.onChangeDate = this.onChangeDate.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
 
         this.state = {
@@ -34,6 +35,13 @@ class Register extends Component {
             email: e.target.value
         });
     }
+
+    onChangeDate(e) {
+        this.setState({
+            dateNaissance: e.target.value
+        });
+    }
+
 
     onChangeMdp(e) {
         this.setState({
@@ -112,6 +120,7 @@ class Register extends Component {
                                 <input type="date" name="bday" min="1000-01-01"
                                     max="3000-12-31" 
                                     className="form-control"
+                                    onChange={this.onChangeDate}
                                 >
                                 </input>
                             </div>

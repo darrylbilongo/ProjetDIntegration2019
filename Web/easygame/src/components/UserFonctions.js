@@ -1,24 +1,24 @@
 import axios from 'axios';
 
 export const register = newUser => {
+
+    newUser.totem = "Lion";
+    newUser.fonction =  "animateur";
+
     return axios   
         .post('http://easygame.funndeh.com:5000/api/users/register', {
-            nomUtilisateur : "darryl",
+            nomUtilisateur : "test123",
             nom : newUser.nom,
             prenom : newUser.prenom,
             email : newUser.email,
             motDePasse : newUser.motDePasse,
             dateNaissance : newUser.dateNaissance,
             estSupprime : false,
-            totem : "Lion",
-            fonction : 'animateur'
-        }, {
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
-            }
+            totem : newUser.totem,
+            fonction : newUser.fonction
         })
         .then(res => {
-            console.log(res);
+            console.log(res.message);
         })
         .catch(err => {
             console.log(err)

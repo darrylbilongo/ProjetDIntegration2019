@@ -31,11 +31,6 @@ class NavBar extends React.Component {
             <div className="collapse navbar-collapse justify-content"  id="navbarNav">
                 <ul>
                     <li className="nav-item">
-                            <Link to="/home" className="nav-link">
-                                Home
-                            </Link>
-                        </li>
-                    <li className="nav-item">
                         <Link to="/login" className="nav-link">
                             Se connecter
                         </Link>
@@ -50,16 +45,26 @@ class NavBar extends React.Component {
             
         )
          
-        /*const regLink = (
+        const regLink = (
             <li className="nav-item">
                 <Link to="/register" className="nav-link">
                     Register
                 </Link>
             </li>
-        )*/
+        )
         
         const userLink = (
             <ul>
+                <li className="nav-item">
+                            <Link to="/home" className="nav-link">
+                                Home
+                            </Link>
+                </li>
+                <li className="nav-item">
+                    <Link to="/calendar" className="nav-link">
+                        Calendrier
+                    </Link>
+                </li>
                 <li className="nav-item">
                     <Link to="/profile" className="nav-link">
                         Profil
@@ -95,6 +100,8 @@ class NavBar extends React.Component {
                 </button>
                 <div className="collapse navbar-collapse justify-content"  id="navbarNav">
                     <ul className="navbar-nav"> 
+
+                        {localStorage.usertoken ? userLink : loginRegLink}
                         {/*<li className="nav-item">
                             <a className="nav-link" href="/admin">Administration</a>
                         </li>
@@ -103,15 +110,9 @@ class NavBar extends React.Component {
                         </li>
                         <li className="nav-item">
                             <a className="nav-link" href="/calendar">Calendrier</a>
-                        </li>
-                        <li className="nav-item">
-                            <a className="nav-link" href="/login">Se connecter</a>
-                        </li>
-                        <li className="nav-item">
-                            <a className="nav-link" href="/register">S'enregistrer</a>
                         </li>*/}
                     </ul>
-                    {localStorage.usertoken ? userLink : loginRegLink}
+                    
                 </div>
             </nav>
         );
