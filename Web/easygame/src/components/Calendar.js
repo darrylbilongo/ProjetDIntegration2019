@@ -15,7 +15,9 @@ class Calendar extends Component {
             email: "",
             dateNaissance:"",
             totem:"",
-            fonction:""
+            fonction:"",
+            events: [],
+            nouveau:""
         }
     }
 
@@ -30,9 +32,20 @@ class Calendar extends Component {
             dateNaissance : decoded.dateNaissance,
             totem : decoded.totem,
             fonction : decoded.fonction,
-            events: decoded.events
+            events: [],
         })
+    }
 
+    onChange(e) {
+        let nam = e.target.name;
+        let val = e.target.value;
+        this.setState({[nam]: val});
+    }
+
+    onChangeDate(e) {
+        this.setState({
+            dateNaissance: e.target.value
+        });
     }
 
     onTypeChange = (type) => {
@@ -41,21 +54,53 @@ class Calendar extends Component {
         });
     }
 
+    onSubmit(e) {
+        e.preventDefault();
+
+        let evenements = this.state.events;
+
+        evenements.push(e);
+
+        this.setState({
+            events: evenements
+        })
+    }
+
     render () {
             return (
                 <div>
                     <div className="container">
-                        <h2>Hello {this.state.prenom}</h2>
+                        <h1>Hello {this.state.prenom}, {this.state.event}</h1>
                     </div>
                     <FullCalendar 
                         defaultView="dayGridMonth" 
                         plugins={[ dayGridPlugin ]}
-                        events={[
-                            { title: 'Repas', date: '2019-11-01' },
-                            { title: 'Activité 1', date: '2019-11-05' }
-                        ]}
+                        events={this.state.events}
                         onTypeChange={this.onTypeChange} 
                         />   
+                    <form noValidate onSubmit={this.onSubmit}>
+                            <div className="form-group">
+                                <label htmlFor="password"> Entrez le nom: </label>
+                                <input type="password"
+                                    className="form-control"
+                                    placeholder=". . ."
+                                    onChange={this.onChange}
+                                />
+                            </div>
+                            <div className="form-group">
+                                <input type="date" name="bday" min="1000-01-01"
+                                    max="3000-12-31" 
+                                    name="newDate"
+                                    className="form-control"
+                                    onChange={this.onChangeDate}
+                                >
+                                </input>
+                            </div>
+                            <button type="submit"
+                            className="btn btn-block btn-lg btn-primary">
+                                Envoyer
+                            </button>
+                        </form>
                 </div>   
             );
     }

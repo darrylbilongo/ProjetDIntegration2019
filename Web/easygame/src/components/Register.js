@@ -101,26 +101,28 @@ class Register extends Component {
                             <div className="form-group">
                                 <label htmlFor="email">Email: </label>
                                 <input type="email"
+                                    name="email"
                                     className="form-control"
                                     placeholder="Entrez votre email"
-
-                                    onChange={this.onChangeMail}
+                                    onChange={this.onChange}
                                 />
                             </div>
                             <div className="form-group">
                                 <label htmlFor="password">Mot de passe: </label>
                                 <input type="password"
                                     className="form-control"
+                                    name="motDePasse"
                                     placeholder="Entrez votre mot de passe"
-                                    onChange={this.onChangeMdp}
+                                    onChange={this.onChange}
                                 />
                             </div>
                             <div className="form-group">
                                 <label >Date de Naissance</label>
                                 <input type="date" name="bday" min="1000-01-01"
                                     max="3000-12-31" 
+                                    name="dateNaissance"
                                     className="form-control"
-                                    onChange={this.onChangeDate}
+                                    onChange={this.onChange}
                                 >
                                 </input>
                             </div>

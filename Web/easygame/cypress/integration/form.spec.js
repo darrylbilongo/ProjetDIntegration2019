@@ -1,4 +1,4 @@
-describe('Form', () => {
+describe('Formulaire', () => {
     beforeEach(() => {
       cy.visit('/login')
     })
@@ -10,7 +10,7 @@ describe('Form', () => {
     it('Connection', () => {
       const email_input = "lea@gmail.com";
       const mdp_input = "hello";
-      
+
       cy.get('#email_input.form-control')
         .type(email_input)
         .should('have.value', email_input)
