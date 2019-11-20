@@ -59,6 +59,7 @@ class Login extends Component {
                                     placeholder="Entrez votre email"
                                     onChange={this.handleChangeEmail}
                                     autoFocus
+                                    id="email_input"
                                 />
                             </div>
                             <div className="form-group">
@@ -67,6 +68,7 @@ class Login extends Component {
                                     className="form-control"
                                     placeholder="Entrez votre mot de passe"
                                     onChange={this.handleChangeMDP}
+                                    id="mdp_input"
                                 />
                             </div>
                             <button type="submit"
