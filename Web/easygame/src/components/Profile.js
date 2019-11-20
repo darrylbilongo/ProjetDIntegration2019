@@ -9,7 +9,10 @@ class Profile extends Component {
         this.state = {
             nom: "",
             prenom: "",
-            email: ""
+            email: "",
+            dateNaissance:"",
+            totem:"",
+            fonction:""
         }
     }
 
@@ -19,8 +22,11 @@ class Profile extends Component {
 
         this.setState({
             nom: decoded.nom,
-            prenom: decode.prenom,
-            email: decoded.email
+            prenom: decoded.prenom,
+            email: decoded.email,
+            dateNaissance : decoded.dateNaissance,
+            totem : decoded.totem,
+            fonction : decoded.fonction
         })
 
     }
@@ -45,6 +51,14 @@ class Profile extends Component {
                                 <tr>
                                     <td>Email</td>
                                     <td>{this.state.email}</td>
+                                </tr>
+                                <tr>
+                                    <td>Fonction</td>
+                                    <td>{this.state.fonction}</td>
+                                </tr>
+                                <tr>
+                                    <td>Totem</td>
+                                    <td>{this.state.totem}</td>
                                 </tr>
                             </tbody>
 

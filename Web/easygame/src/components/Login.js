@@ -51,13 +51,14 @@ class Login extends Component {
                 <div className="row">
                     <div className="col-md-6 mt-5 mx-auto">
                         <form noValidate onSubmit={this.handleSubmit}>
-                            <h1 className="h3 mn-3">Connectez vous s'il vous plait!</h1>
+                            <h1 className="h3 mn-3">Connectez vous!</h1>
                             <div className="form-group">
                                 <label htmlFor="email">Email: </label>
                                 <input type="email"
                                     className="form-control"
                                     placeholder="Entrez votre email"
                                     onChange={this.handleChangeEmail}
+                                    autoFocus
                                 />
                             </div>
                             <div className="form-group">

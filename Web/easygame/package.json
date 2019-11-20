@@ -8,6 +8,7 @@
     "@fullcalendar/react": "^4.3.0",
     "axios": "^0.19.0",
     "bootstrap": "^4.3.1",
+    "cypress": "^3.6.1",
     "date-fns": "^2.5.0",
     "history": "^4.10.1",
     "jwt-decode": "^2.2.0",
@@ -33,7 +34,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "cypress": "cypress open"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -49,5 +51,10 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@babel/core": "^7.7.2",
+    "@storybook/react": "^5.2.6",
+    "babel-loader": "^8.0.6"
   }
 }

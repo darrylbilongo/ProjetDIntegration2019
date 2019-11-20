@@ -28,11 +28,17 @@ const userRouter = require('./routes/users');
 const fonctionRouter = require('./routes/fonctions');
 const totemRouter = require('./routes/totems');
 const planningRouter = require('./routes/plannings');
+const parentRouter = require('./routes/parent');
+const animateurRouter = require('./routes/animateur');
+const eventRouter = require('./routes/event');
 
 app.use('/api/users', userRouter);
+app.use('/api/event', eventRouter);
 app.use('/api/fonctions', fonctionRouter);
 app.use('/api/totems', totemRouter);
 app.use('/api/plannings', planningRouter);
+app.use('/api/parent', parentRouter);
+app.use('/api/parent', animateurRouter);
 
 
 app.listen(port,function(){

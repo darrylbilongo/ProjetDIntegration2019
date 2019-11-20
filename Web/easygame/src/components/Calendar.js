@@ -7,14 +7,30 @@ import { decode } from 'punycode';
 
 class Calendar extends Component {
 
+    constructor(){
+        super()
+        this.state = {
+            nom: "",
+            prenom: "",
+            email: "",
+            dateNaissance:"",
+            totem:"",
+            fonction:""
+        }
+    }
+
     componentDidMount(){
         const token = localStorage.usertoken;
         const decoded = jwt_decode(token);
 
         this.setState({
             nom: decoded.nom,
-            prenom: decode.prenom,
-            email: decoded.email
+            prenom: decoded.prenom,
+            email: decoded.email,
+            dateNaissance : decoded.dateNaissance,
+            totem : decoded.totem,
+            fonction : decoded.fonction,
+            events: decoded.events
         })
 
     }
@@ -28,8 +44,12 @@ class Calendar extends Component {
     render () {
             return (
                 <div>
+                    <div className="container">
+                        <h2>Hello {this.state.prenom}</h2>
+                    </div>
                     <FullCalendar 
-                        defaultView="dayGridMonth" plugins={[ dayGridPlugin ]}
+                        defaultView="dayGridMonth" 
+                        plugins={[ dayGridPlugin ]}
                         events={[
                             { title: 'Repas', date: '2019-11-01' },
                             { title: 'Activité 1', date: '2019-11-05' }
