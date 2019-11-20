@@ -14,6 +14,7 @@ import NavBar from './components/NavBar';
 import Footer from './components/Footer';
 import Calendar from './components/Calendar';
 import Administration from './components/Admin';
+import Listing from './components/Listing';
 
 class App extends React.Component {
   render(){
@@ -31,6 +32,7 @@ class App extends React.Component {
             <Route path="/register" component={Register} />
             <Route path="/calendar" component={Calendar}/>
             <Route path="/admin" component={Administration}/>
+            <Route path="/listing" component={Listing}/>
             {/*<Route component={Error}/>*/}
           </div>
           <Footer/>

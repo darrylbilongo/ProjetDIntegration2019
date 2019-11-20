@@ -1,0 +1,29 @@
+
+[{
+    "ID": "1",
+    "Name" : "Lea",
+    "Totem" : "Lion",
+    "Role": "Animateur"
+}, {
+    "ID": "2",
+    "Name" : "Pierre",
+    "Totem" : "Burunduk",
+    
+    "Role" : "Scout"
+}, {
+    "ID": "3",
+    "Name" : "Max",
+    "Totem" : "Taguan",
+    "Role" : "Scout"
+}, {
+    "ID": "4",
+    "Name" : "Yves",
+    "Totem" : "Addax",
+    "Role" : "Scout"
+} , {
+    "ID": "5",
+    "Name" : "Kevin",
+    "Totem" : "Serow",
+    "Role" : "Scout"
+}
+]

@@ -71,7 +71,14 @@ class NavBar extends React.Component {
                     </a>
             </li>
         )
-       
+
+        const listingLink = (
+            <li className="nav-item">
+                    <Link to="/listing" className="nav-link">
+                        Listing
+                    </Link>
+            </li>
+        )
         return (
 
             <nav className="navbar navbar-expand-lg navbar-light bg-light" id="navbar">
@@ -91,8 +98,10 @@ class NavBar extends React.Component {
                         {localStorage.usertoken ? homeLink : loginLink}
                         {localStorage.usertoken ?  calendarLink: regLink}
                         {localStorage.usertoken ? profileLink :null}
+                        {localStorage.usertoken ? listingLink :null}
                         {localStorage.usertoken ? logoutLink :null}
-                        {/*<li className="nav-item">
+                        {
+                            /*<li className="nav-item">
                             <a className="nav-link" href="/admin">Administration</a>
                         </li>
                         <li className="nav-item">

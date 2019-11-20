@@ -27,7 +27,7 @@ class Home extends React.Component {
           </div>
           <div class="row">
             <div class="col-md-3 menu-home">
-              <a class="btn btn-outline-secondary col-md-8" href="/Home">home</a>
+              <a class="btn btn-outline-secondary col-md-8" href="/Home">Home</a>
             </div>
             <div class="col-md-3 menu-home">
               <a class="btn btn-outline-secondary col-md-8" href="/Team">Team</a>
