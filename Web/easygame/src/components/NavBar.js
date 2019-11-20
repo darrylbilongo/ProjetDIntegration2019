@@ -1,7 +1,13 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
+import {Link, withRouter} from 'react-router-dom';
 
 class NavBar extends React.Component {
+
+    logOut(e){
+        e.preventDefault();
+        localStorage.removeItem('usertoken');
+        this.props.history.push('/');
+    }
 
     constructor(props) {
         super(props);
@@ -20,41 +26,96 @@ class NavBar extends React.Component {
     }
    
     render() { 
-        return ( 
-            <nav class="navbar navbar-expand-lg navbar-light bg-light" id="navbar">
-                <a class="navbar-brand" href="/">EasyGame</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
+
+        const loginRegLink = (
+            <div className="collapse navbar-collapse justify-content"  id="navbarNav">
+                <ul>
+                    <li className="nav-item">
+                        <Link to="/login" className="nav-link">
+                            Se connecter
+                        </Link>
+                    </li>
+                    <li className="nav-item">
+                        <Link to="/register" className="nav-link">
+                            S'enregistrer
+                        </Link>
+                    </li>
+                </ul>
+            </div>
+            
+        )
+         
+        const regLink = (
+            <li className="nav-item">
+                <Link to="/register" className="nav-link">
+                    Register
+                </Link>
+            </li>
+        )
+        
+        const userLink = (
+            <ul>
+                <li className="nav-item">
+                            <Link to="/home" className="nav-link">
+                                Home
+                            </Link>
+                </li>
+                <li className="nav-item">
+                    <Link to="/calendar" className="nav-link">
+                        Calendrier
+                    </Link>
+                </li>
+                <li className="nav-item">
+                    <Link to="/profile" className="nav-link">
+                        Profil
+                    </Link>
+                </li>
+                <li className="nav-item">
+                    <a href="" onClick={this.logOut.bind(this)} className="nav-link">
+                       Deconnexion
+                    </a>
+                </li>
+            </ul>
+        )
+        const logoutLink = (
+            <li className="nav-item">
+                <a href="" onClick={this.logOut.bind(this)} className="nav-link">
+                   Log Out
+                </a>
+            </li>
+        )
+       
+        return (
+
+            <nav className="navbar navbar-expand-lg navbar-light bg-light" id="navbar">
+                <a className="navbar-brand" href="/">EasyGame</a>
+                <button className="navbar-toggler" 
+                    type="button"  
+                    data-toggle="collapse" 
+                    data-target="#navbarNav" 
+                    aria-controls="navbarNav"
+                    aria-expanded="false" 
+                    aria-label="Toggle navigation">
+                        <span className="navbar-toggler-icon"></span>
                 </button>
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="/admin">Administration <span class="sr-only">(current)</span></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/">Tracking</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Jeux</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/login">Profil</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/about">About</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/team">Team</a>
-                    </li>
-                    {/* <Component2 /> 
-                    <li class="nav-item">
-                        <a class="nav-link disabled" href="#">Disabled</a>
-                    </li>
-                    */}
+                <div className="collapse navbar-collapse justify-content"  id="navbarNav">
+                    <ul className="navbar-nav"> 
+
+                        {localStorage.usertoken ? userLink : loginRegLink}
+                        {/*<li className="nav-item">
+                            <a className="nav-link" href="/admin">Administration</a>
+                        </li>
+                        <li className="nav-item">
+                            <a className="nav-link" href="/error">Tracking</a>
+                        </li>
+                        <li className="nav-item">
+                            <a className="nav-link" href="/calendar">Calendrier</a>
+                        </li>*/}
                     </ul>
+                    
                 </div>
             </nav>
         );
     }
 }
-export default NavBar;
+export default withRouter(NavBar);

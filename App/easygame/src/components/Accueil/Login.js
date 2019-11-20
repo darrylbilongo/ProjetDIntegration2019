@@ -1,24 +1,30 @@
 import React, {Component} from 'react';
-import { StyleSheet, Text, View, Dimensions, TextInput, Alert,} from 'react-native';
+import { ActivityIndicator, StyleSheet, Text, View, Dimensions, TextInput, Alert,} from 'react-native';
 import Welcome from '../Accueil/Welcome';
 import Animated, {Easing} from "react-native-reanimated";
 import {TapGestureHandler, State, TouchableOpacity} from 'react-native-gesture-handler';
 import Svg, {Image, Circle, ClipPath} from 'react-native-svg';
 import styles from './styles';
 import NavigationService from '../Navigation/NavigationService';
-
+import verifierDonnees from './verifierDonnees';
 
 const { width, height } = Dimensions.get('window');
 
 const {Value ,concat, event, clockRunning, timing, debug, stopClock, startClock, Clock, block, cond, eq, Extrapolate, interpolate, set} = Animated;
 
+
 export default class Login extends Component {
   constructor(){
     super();
 
+    global.utilisateur = {};
+
     this.state = {
       userEmail: "",
       userPassword: "",
+      responseAPI: "",
+      isLoading: true,
+      text: <Text></Text>
     }
 
     this.viewOpacity = new Value(1);
@@ -93,44 +99,49 @@ export default class Login extends Component {
     });
   }
 
-  myValidate = () =>{
-    const {userEmail, userPassword} = this.state;
-    /*
-    fetch('https://www.easygame.funndeh.com/nichtszusehen/login.php', {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        email: userEmail,
-        password: userPassword
-      })
-    })
-    .then((response) => response.json())
-    .then((responseJson) => {
-      alert(responseJson);
-    })
-    .catch((error) => {
-      console.error(error);
-    });*/
 
+  login = async () => {
+    try{
+      const response = await fetch('http://easygame.funndeh.com:5000/api/users/login', {
+                              method: 'POST',
+                              headers: {
+                                'Accept': 'application/json',
+                                'Content-Type': 'application/json'
+                              },
+                              body: JSON.stringify({
+                                email: this.state.userEmail,
+                                motDePasse: this.state.userPassword
+                              })
+                            });                
+      this.state.responseAPI = await response.json(); 
+      this.state.isLoading = false;
+    }
+    catch (error){
+      console.log(error);
+    }
     
-    if(userEmail == "" && userPassword == ""){
-      Alert.alert("Veuillez remplir votre mail et votre mot de passe");
+  }
+
+  myValidate = () => {
+    const {userEmail, userPassword} = this.state;
+    if(verifierDonnees(userEmail, userPassword)){
+      this.login();
+      if(this.state.responseAPI.message == 'Utilisateur existant: Connexion reussie!!!'){
+        this.state.userPassword = '';
+        this.state.userEmail = '';
+        global.utilisateur = this.state.responseAPI.utilisateur;
+        NavigationService.navigate('Profile');
+        this.state.text = <Text></Text>;
+        this._textInput1.setNativeProps({ text: '' });
+        this._textInput2.setNativeProps({ text: '' });
+      }
+      else if(this.state.responseAPI.message == undefined)
+        this.state.text = <ActivityIndicator size="small" color="#00ff00" />;
+      else
+        Alert.alert(this.state.responseAPI.message);
     }
-    else if(userEmail == "manou@gmail.com" && userPassword == "manou"){
-      NavigationService.navigate('Profile');
-    }
-    else if(userEmail != "" && userPassword == ""){
-      Alert.alert("Pas de mot de passe!")
-    }
-    else if(userEmail == "" && userPassword != ""){
-      Alert.alert("Pas d'email!")
-    }
-    else{
-      Alert.alert("Email ou mot de passe érroné!")
-    }
+    else
+      Alert.alert("Veuillez remplir votre mail et votre mot de passe"); 
   }
 
   stopAction = (e) =>{
@@ -149,7 +160,6 @@ export default class Login extends Component {
   }
 
   render() {
-    
     return (
     <View style={myContainer.container}>
         <Animated.View style={{...myContainer.container,
@@ -223,6 +233,7 @@ export default class Login extends Component {
                   onChangeText={userEmail => this.setState({userEmail})}
                   autoCapitalize='none'
                   returnKeyType='next'
+                  ref={component => this._textInput1 = component}
                 />
                 <TextInput 
                   placeholder="mot de passe"
@@ -232,6 +243,7 @@ export default class Login extends Component {
                   autoCapitalize='none'
                   onChangeText={userPassword => this.setState({userPassword})}
                   keyboardType={'default'}
+                  ref={component => this._textInput2 = component}
                 />
                 <TouchableOpacity style={{...styles.button, backgroundColor: '#003d00'}}
                   onPress={this.myValidate}
@@ -240,6 +252,9 @@ export default class Login extends Component {
                     Connexion
                   </Text>
                 </TouchableOpacity>
+                <View>
+                  {this.state.text}
+                </View>
             </Animated.View>
           </View>
         </Animated.View>
