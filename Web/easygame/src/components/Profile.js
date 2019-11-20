@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import jwt_decode from 'jwt-decode';
 import { decode } from 'punycode';
-
+import avatar from '../Logo/avatar-1577909_960_720.webp'
+import { AUTH_LOGOUT } from 'ra-core';
 class Profile extends Component {
 
     constructor(){
@@ -33,12 +34,17 @@ class Profile extends Component {
 
     render () {
             return (
+                 
                 <div className="container">
-                    <div className="jumbotron mt-5">
-                        <div className="col-sm-8">
+                    <div class="row">
+                        <div className="jumbotron col-md-6">
+                            <img src={avatar} alt="" height="40%"></img>
+                        </div>
+                    <div className="jumbotron">
+                        <div className="col-md">
                             <h1>Profile</h1>
                         </div>
-                        <table className="table col-md-6 mx-auto">
+                        <table className="table col-sm-2 mx-auto">
                             <tbody>
                                 <tr>
                                     <td>Nom</td>
@@ -61,9 +67,12 @@ class Profile extends Component {
                                     <td>{this.state.totem}</td>
                                 </tr>
                             </tbody>
-
+                            
                         </table>
                     </div>
+                </div>
+                    
+                   
                 </div>
             );
     }
