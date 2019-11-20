@@ -44,7 +44,7 @@ class Profile extends Component {
                         <div className="col-md">
                             <h1>Profile</h1>
                         </div>
-                        <table className="table col-sm-2 mx-auto">
+                        <table className="table col-md-8 mx-auto">
                             <tbody>
                                 <tr>
                                     <td>Nom</td>
