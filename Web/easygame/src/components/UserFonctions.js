@@ -18,7 +18,7 @@ export const register = newUser => {
             fonction : newUser.fonction
         })
         .then(res => {
-            console.log(res.message);
+            console.log(res.data.message);
         })
         .catch(err => {
             console.log(err)
@@ -35,6 +35,17 @@ export const login = user => {
             localStorage.setItem('usertoken', res.data.token);
             console.log(res.data.message);
             return res.data.token;
+        })
+        .catch(err => {
+            console.log(err)
+        })
+}
+
+export const ajoutEvent = (t, d) => {
+    return axios
+        .post('http://localhost:5000/api/users/add')
+        .then(res => {
+            console.log(res.message);
         })
         .catch(err => {
             console.log(err)

@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import FullCalendar from '@fullcalendar/react'
 import dayGridPlugin from '@fullcalendar/daygrid'
 import jwt_decode from 'jwt-decode';
+import {ajoutEvent } from './UserFonctions';
 import { decode } from 'punycode';
 
 
@@ -17,7 +18,8 @@ class Calendar extends Component {
             totem:"",
             fonction:"",
             events: [],
-            nouveau:""
+            nouveau:"",
+            newDate:""
         }
     }
 
@@ -48,22 +50,16 @@ class Calendar extends Component {
         });
     }
 
-    onTypeChange = (type) => {
-        this.setState({
-            type,
-        });
-    }
-
     onSubmit(e) {
         e.preventDefault();
 
-        let evenements = this.state.events;
+        const testEvent = {
+            event_id: '1',
+            title: this.state.nouveau,
+            date: this.state.newDate  
+        }
 
-        evenements.push(e);
-
-        this.setState({
-            events: evenements
-        })
+        ajoutEvent(this.state.nouveau, this.state.newDate)
     }
 
     render () {
@@ -78,10 +74,11 @@ class Calendar extends Component {
                         events={this.state.events}
                         onTypeChange={this.onTypeChange} 
                         />   
-                    <form noValidate onSubmit={this.onSubmit}>
+                    {/*<form noValidate onSubmit={this.onSubmit}>
                             <div className="form-group">
-                                <label htmlFor="password"> Entrez le nom: </label>
-                                <input type="password"
+                                <label htmlFor="text"> Ajoutez des nouveaux évenements: </label>
+                                <input type="text"
+                                    name="nouveau"
                                     className="form-control"
                                     placeholder=". . ."
                                     onChange={this.onChange}
@@ -100,7 +97,7 @@ class Calendar extends Component {
                             className="btn btn-block btn-lg btn-primary">
                                 Envoyer
                             </button>
-                        </form>
+            </form>*/}
                 </div>   
             );
     }
