@@ -4,40 +4,46 @@ import logo from '../Logo/output-onlinepngtools.png'
 import fond from '../Logo/backpack-climber.jpg'
 
 class Home extends React.Component {
+  logOut(e){
+    e.preventDefault();
+    localStorage.removeItem('usertoken');
+    this.props.history.push('/');
+}
     render(){
+      const logoutLink = (
+        <a class="btn btn-outline-secondary col-md-8" href="" onClick={this.logOut.bind(this)}>
+                       Deconnexion
+        </a>
+      )
+      const loginLink = (
+        <a class="btn btn-outline-secondary col-md-8" href="/Login" >Se connecter</a>
+      )
+
       return (
         <HomeComponent>
-          <div id="carrousel" class="carousel slide" data-ride="carousel">
-
-          <ul className="carousel-indicators">
-            <li data-target="#carrousel" data-slide-to="0" class="active"></li>
-            <li data-target="#carrousel" data-slide-to="1"></li>
-            <li data-target="#carrousel" data-slide-to="2"></li>
-          </ul>
-
-          <div class="carousel-inner">
-            <div class="carousel-item active">   
-              <img src={fond} id="fond" alt="fond vert"></img>
-              <img src={logo} class="centered" id="logo" alt="logo EasyGame"></img>
-              <button type="button" class="btn btn-primary dropdown-toggle btn" data-toggle="dropdown">
-                Login or Register
-              </button>
-              <div class="dropdown-menu">
-                <a class="dropdown-item" href="/Login" >Login</a>
-                <a class="dropdown-item" href="#/Register">Register</a>
-              </div>
+          <div class="row align-items-center">
+            <img src={fond} id="fond" alt="fond vert" class="col"></img>
+              <img src={logo} class="centered col-sm-4" id="logo" alt="logo EasyGame" ></img>
+          </div>
+          <div class="row">
+            <div class="col-md-3 menu-home">
+              <a class="btn btn-outline-secondary col-md-8" href="/Home">Home</a>
             </div>
-            <div class="map-responsive carousel-item ">
-              <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2528.9137252234977!2d4.6099503153492885!3d50.66586237970143!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47c17e7138d0942d%3A0x8141721ace507d70!2sEphec%20Louvain-la-Neuve!5e0!3m2!1sfr!2sbe!4v1573080241868!5m2!1sfr!2sbe" 
-              class="map" allowfullscreen></iframe>
+            <div class="col-md-3 menu-home">
+              <a class="btn btn-outline-secondary col-md-8" href="/Team">Team</a>
+            </div>
+            <div class="col-md-3 menu-home">
+              <a  class="btn btn-outline-secondary col-md-8" href="/About">About</a>
+            </div>
+            <div class="col-md-3 menu-home">
+              {localStorage.usertoken ? logoutLink : loginLink}
             </div>
           </div>
-          <a class="carousel-control-prev map" href="#carrousel" data-slide="prev">
-            <span class="carousel-control-prev-icon"></span>
-          </a>
-          <a class="carousel-control-next" href="#carrousel" data-slide="next">
-            <span class="carousel-control-next-icon"></span>
-          </a>
+          <div class="row align-items-center">
+          <div class="map-responsive col-md">
+              <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2528.9137252234977!2d4.6099503153492885!3d50.66586237970143!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47c17e7138d0942d%3A0x8141721ace507d70!2sEphec%20Louvain-la-Neuve!5e0!3m2!1sfr!2sbe!4v1573080241868!5m2!1sfr!2sbe" 
+              class="map" allowfullscreen></iframe>
+          </div>
         </div>
         </HomeComponent>
       );
@@ -45,13 +51,19 @@ class Home extends React.Component {
 }
 
 const HomeComponent = styled.div`
-      background-color:grey;
       .imgmenus{
         width:100%;
       }
       .map{
+        margin: 0px;
+        padding: 0px;
+      }
+      .menuHome{
         margin: 0;
         padding: 0;
+      }
+      .btn{
+        margin: 0.3em;
       }
       div {
         color: black;
@@ -90,8 +102,6 @@ const HomeComponent = styled.div`
         position: absolute;
         top: 30%;
         left: 50%;
-        width:40%;
-        height:50%;
         transform: translate(-50%, -50%);
       }
       .row {
@@ -124,15 +134,6 @@ const HomeComponent = styled.div`
             width: 100%;
           }
         }
-      .btn{
-        position: absolute;
-        top:70%;
-        left:80%;
-        z-index:10;
-        font-size: 80%;
-        box-sizing: content-box;
-        transform: translate(-50%, -50%);
-      }
       .map-responsive {
         overflow:hidden;
         padding-bottom:56.25%;

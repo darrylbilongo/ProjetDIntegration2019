@@ -66,7 +66,11 @@ class Calendar extends Component {
             return (
                 <div>
                     <div className="container">
+<<<<<<< HEAD
                         <h1>Hello {this.state.prenom}, {this.state.event}</h1>
+=======
+                        <h2>Bonjour {this.state.prenom}</h2>
+>>>>>>> Jean
                     </div>
                     <FullCalendar 
                         defaultView="dayGridMonth" 

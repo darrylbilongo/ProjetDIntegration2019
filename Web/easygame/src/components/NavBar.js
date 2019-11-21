@@ -27,64 +27,58 @@ class NavBar extends React.Component {
    
     render() { 
 
-        const loginRegLink = (
-            <div className="collapse navbar-collapse justify-content"  id="navbarNav">
-                <ul>
-                    <li className="nav-item">
+        const loginLink = (
+            <li className="nav-item">
                         <Link to="/login" className="nav-link">
                             Se connecter
                         </Link>
-                    </li>
-                    <li className="nav-item">
+            </li>
+        )
+
+         const regLink = (
+            <li className="nav-item">
                         <Link to="/register" className="nav-link">
                             S'enregistrer
                         </Link>
                     </li>
-                </ul>
-            </div>
-            
-        )
-         
-        const regLink = (
+        ) 
+        const homeLink = (
             <li className="nav-item">
-                <Link to="/register" className="nav-link">
-                    Register
-                </Link>
-            </li>
-        )
-        
-        const userLink = (
-            <ul>
-                <li className="nav-item">
                             <Link to="/home" className="nav-link">
                                 Home
                             </Link>
                 </li>
-                <li className="nav-item">
-                    <Link to="/calendar" className="nav-link">
-                        Calendrier
-                    </Link>
-                </li>
-                <li className="nav-item">
+        )
+        const calendarLink = (
+            <li className="nav-item">
+                <Link to="/calendar" className="nav-link">
+                    Calendrier
+                </Link>
+             </li>
+        )
+
+        const profileLink = (
+            <li className="nav-item">
                     <Link to="/profile" className="nav-link">
                         Profil
                     </Link>
-                </li>
-                <li className="nav-item">
-                    <a href="" onClick={this.logOut.bind(this)} className="nav-link">
-                       Deconnexion
-                    </a>
-                </li>
-            </ul>
+            </li>
         )
         const logoutLink = (
             <li className="nav-item">
-                <a href="" onClick={this.logOut.bind(this)} className="nav-link">
-                   Log Out
-                </a>
+                    <a href="" onClick={this.logOut.bind(this)} className="nav-link">
+                       Deconnexion
+                    </a>
             </li>
         )
-       
+
+        const listingLink = (
+            <li className="nav-item">
+                    <Link to="/listing" className="nav-link">
+                        Listing
+                    </Link>
+            </li>
+        )
         return (
 
             <nav className="navbar navbar-expand-lg navbar-light bg-light" id="navbar">
@@ -101,8 +95,13 @@ class NavBar extends React.Component {
                 <div className="collapse navbar-collapse justify-content"  id="navbarNav">
                     <ul className="navbar-nav"> 
 
-                        {localStorage.usertoken ? userLink : loginRegLink}
-                        {/*<li className="nav-item">
+                        {localStorage.usertoken ? homeLink : loginLink}
+                        {localStorage.usertoken ?  calendarLink: regLink}
+                        {localStorage.usertoken ? profileLink :null}
+                        {localStorage.usertoken ? listingLink :null}
+                        {localStorage.usertoken ? logoutLink :null}
+                        {
+                            /*<li className="nav-item">
                             <a className="nav-link" href="/admin">Administration</a>
                         </li>
                         <li className="nav-item">
