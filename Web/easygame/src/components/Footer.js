@@ -4,16 +4,14 @@ class Footer extends Component {
     render(){
         return (
             <div>
-                <footer class="app-footer">
-                    <div>
-                    <a>EasyGame</a>
-                    <span>&copy; EasyGame</span>
-                    </div>
-                    <div class="ml-auto">
-                        <span>Powered by </span>
-                        <a href="/team">Easy Game</a>
+                <footer className="main-footer">
+                    <strong>Copyright © 2019 <a href="http://adminlte.io">Easy Game - Groupe 7</a>.</strong>
+                    All rights reserved.
+                    <div className="float-right d-none d-sm-inline-block">
+                        <b>Version</b> 0.1.0
                     </div>
                 </footer>
+
             </div>
         );
     }

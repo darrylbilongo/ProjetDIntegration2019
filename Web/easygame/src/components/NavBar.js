@@ -27,28 +27,55 @@ class NavBar extends React.Component {
    
     render() { 
 
-        const loginLink = (
-                <li className="nav-item">
-                    <Link to="/login" className="nav-link">
-                        Login
-                    </Link>
-                </li>
+        const loginRegLink = (
+            <div className="collapse navbar-collapse justify-content"  id="navbarNav">
+                <ul>
+                    <li className="nav-item">
+                        <Link to="/login" className="nav-link">
+                            Se connecter
+                        </Link>
+                    </li>
+                    <li className="nav-item">
+                        <Link to="/register" className="nav-link">
+                            S'enregistrer
+                        </Link>
+                    </li>
+                </ul>
+            </div>
+            
         )
          
         const regLink = (
             <li className="nav-item">
-            <Link to="/register" className="nav-link">
-            Register
-            </Link>
+                <Link to="/register" className="nav-link">
+                    Register
+                </Link>
             </li>
-            )
+        )
         
         const userLink = (
-            <li className="nav-item">
-                    <Link to="/profile" className="nav-link">
-                        User
+            <ul>
+                <li className="nav-item">
+                            <Link to="/home" className="nav-link">
+                                Home
+                            </Link>
+                </li>
+                <li className="nav-item">
+                    <Link to="/calendar" className="nav-link">
+                        Calendrier
                     </Link>
-            </li>
+                </li>
+                <li className="nav-item">
+                    <Link to="/profile" className="nav-link">
+                        Profil
+                    </Link>
+                </li>
+                <li className="nav-item">
+                    <a href="" onClick={this.logOut.bind(this)} className="nav-link">
+                       Deconnexion
+                    </a>
+                </li>
+            </ul>
         )
         const logoutLink = (
             <li className="nav-item">
@@ -58,35 +85,34 @@ class NavBar extends React.Component {
             </li>
         )
        
-        return ( 
+        return (
 
             <nav className="navbar navbar-expand-lg navbar-light bg-light" id="navbar">
                 <a className="navbar-brand" href="/">EasyGame</a>
-                <button className="navbar-toggler" type="button"  
+                <button className="navbar-toggler" 
+                    type="button"  
                     data-toggle="collapse" 
                     data-target="#navbarNav" 
                     aria-controls="navbarNav"
                     aria-expanded="false" 
                     aria-label="Toggle navigation">
-                    <span className="navbar-toggler-icon"></span>
+                        <span className="navbar-toggler-icon"></span>
                 </button>
                 <div className="collapse navbar-collapse justify-content"  id="navbarNav">
-                    <ul className="navbar-nav">
-                    <li className="nav-item">
-                        <a className="nav-link" href="/">Tracking</a>
-                    </li>
-                    <li className="nav-item">
-                        <a className="nav-link" href="#">Jeux</a>
-                    </li>
-                    <li className="nav-item">
-                        <a className="nav-link" href="/team">Team</a>
-                    </li>
-                    {localStorage.usertoken ? userLink : loginLink}
-                    {localStorage.usertoken ? logoutLink : regLink}
-                    <li className="nav-item">
-                        <a className="nav-link" href="/about">About</a>
-                    </li>
+                    <ul className="navbar-nav"> 
+
+                        {localStorage.usertoken ? userLink : loginRegLink}
+                        {/*<li className="nav-item">
+                            <a className="nav-link" href="/admin">Administration</a>
+                        </li>
+                        <li className="nav-item">
+                            <a className="nav-link" href="/error">Tracking</a>
+                        </li>
+                        <li className="nav-item">
+                            <a className="nav-link" href="/calendar">Calendrier</a>
+                        </li>*/}
                     </ul>
+                    
                 </div>
             </nav>
         );

@@ -45,7 +45,21 @@ const userSchema = new Schema({
     fonction:{
         type: String,
         default: 'scout'
-    }
+    },
+    events:[
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'Event'
+        }
+    ],
+    scouts:[
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'Scout'
+        }
+    ]
+
+
 
 },{
     timestamps: true   
