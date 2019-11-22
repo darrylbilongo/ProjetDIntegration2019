@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const positionSchema = new Schema({
-    idAnimateur: {
+    idDevice: {
         type: String,
         required: true
     },
@@ -15,16 +15,12 @@ const positionSchema = new Schema({
     lat: {
         type: Schema.Types.Decimal128,
         trim: true,
-    },
-    alt: {
-        type: Schema.Types.Decimal128,
         required: true,
-        trim: true,
     }
 },{
     timestamps: true   
 });
 
-const positions = mongoose.model('positions', positionSchema);
+const positions = mongoose.model('position', positionSchema);
 
 module.exports = positions;
