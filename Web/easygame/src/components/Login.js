@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-
+import { decode } from 'punycode';
 import {login} from './UserFonctions';
 
 class Login extends Component {
@@ -17,7 +17,7 @@ class Login extends Component {
     }
 
     handleChangeEmail(e) {
-        this.setState({
+        this.setState({   
             email: e.target.value
         });
     }
@@ -72,7 +72,8 @@ class Login extends Component {
                                 />
                             </div>
                             <button type="submit"
-                            className="btn btn-block btn-lg btn-primary">
+                            className="btn btn-block btn-lg btn-primary"
+                            >
                                 Se connecter
                             </button>
                         </form>

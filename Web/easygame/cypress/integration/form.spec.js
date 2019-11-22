@@ -8,8 +8,8 @@ describe('Formulaire', () => {
     })
 
     it('Connection', () => {
-      const email_input = "lea@gmail.com";
-      const mdp_input = "hello";
+      const email_input = "darryl@gmail.com";
+      const mdp_input = "secrt";
 
       cy.get('#email_input.form-control')
         .type(email_input)
@@ -19,5 +19,7 @@ describe('Formulaire', () => {
         .type(mdp_input)
         .should('have.value', mdp_input)
         .type('{enter}')
+
+      cy.location('pathname').should('eq', '/profile')
     })
   })

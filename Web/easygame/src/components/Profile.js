@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import jwt_decode from 'jwt-decode';
-import { decode } from 'punycode';
 
 class Profile extends Component {
 
