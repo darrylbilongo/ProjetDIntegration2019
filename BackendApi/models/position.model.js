@@ -8,18 +8,16 @@ const positionSchema = new Schema({
         required: true
     },
     lon: {
-        type: Double,
+        type: Schema.Types.Decimal128,
         required: true,
         trim: true,
-        minlength:5
     },
     lat: {
-        type: Double,
-        required: true,
+        type: Schema.Types.Decimal128,
         trim: true,
     },
     alt: {
-        type: Double,
+        type: Schema.Types.Decimal128,
         required: true,
         trim: true,
     }

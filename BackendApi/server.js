@@ -25,15 +25,12 @@ connection.once('open', () => {
 
 
 const userRouter = require('./routes/users');
-const fonctionRouter = require('./routes/fonctions');
-const totemRouter = require('./routes/totems');
 const planningRouter = require('./routes/plannings');
+const positionsRouter = require("./routes/positions");
 
 app.use('/api/users', userRouter);
-app.use('/api/fonctions', fonctionRouter);
-app.use('/api/totems', totemRouter);
 app.use('/api/plannings', planningRouter);
-app.use('/api/positions', planningRouter);
+app.use('/api/positions', positionsRouter);
 
 
 app.listen(port,function(){
