@@ -33,6 +33,7 @@ app.use('/api/users', userRouter);
 app.use('/api/fonctions', fonctionRouter);
 app.use('/api/totems', totemRouter);
 app.use('/api/plannings', planningRouter);
+app.use('/api/positions', planningRouter);
 
 
 app.listen(port,function(){

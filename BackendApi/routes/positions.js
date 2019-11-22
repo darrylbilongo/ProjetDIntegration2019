@@ -8,12 +8,16 @@ router.route('/').get((req, res) => {
 });
 
 router.route('/add').post((req, res) => {
-    const position_id = req.body.position_id;
-    const position_nom = req.body.position_nom;
+    const idAnim = req.body.idAnim;
+    const locationLon = req.body.location.lon;
+    const locationLat = req.body.location.lat;
+    const locationAlt = req.body.location.alt;
 
     const nouveau = new position({
-        position_id,
-        position_nom
+        idAnim,
+        locationLon,
+        locationLat,
+        locationAlt
     });
 
     nouveau.save()
