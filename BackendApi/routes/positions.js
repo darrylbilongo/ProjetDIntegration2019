@@ -8,9 +8,9 @@ router.route('/').get((req, res) => {
 });
 
 router.route('/add').post((req, res) => {
-    const idDevice = req.body.idDevice;
-    const lon = req.body.location.longitude;
-    const lat = req.body.location.latitude;
+    const idDevice = req.body.payload_fields.idDevice;
+    const lon = req.body.payload_fields.location.longitude;
+    const lat = req.body.payload_fields.location.latitude;
 
     const nouveau = new Position({
         idDevice,
