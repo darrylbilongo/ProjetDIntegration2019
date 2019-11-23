@@ -23,7 +23,6 @@ connection.once('open', () => {
     console.log("MongoDB database connection established successfully");
 });
 
-
 const userRouter = require('./routes/users');
 const fonctionRouter = require('./routes/fonctions');
 const totemRouter = require('./routes/totems');

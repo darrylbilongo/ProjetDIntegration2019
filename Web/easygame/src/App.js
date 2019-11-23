@@ -1,5 +1,5 @@
 import React from 'react';
-import {BrowserRouter as Router, Route, Switch } from 'react-router-dom'; 
+import {BrowserRouter as Router, Route } from 'react-router-dom'; 
 import './App.css';
 
 // Components
@@ -15,6 +15,7 @@ import Footer from './components/Footer';
 import Calendar from './components/Calendar';
 import Administration from './components/Admin';
 import Listing from './components/Listing';
+import Tracking from './components/Tracking';
 
 class App extends React.Component {
   render(){
@@ -33,6 +34,7 @@ class App extends React.Component {
             <Route path="/calendar" component={Calendar}/>
             <Route path="/admin" component={Administration}/>
             <Route path="/listing" component={Listing}/>
+            <Route path="/tracking" component={Tracking}/>
             {/*<Route component={Error}/>*/}
           </div>
           <Footer/>
