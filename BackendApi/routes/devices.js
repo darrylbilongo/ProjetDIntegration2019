@@ -22,7 +22,7 @@ router.route('/add').post((req, res) => {
 })
 
 router.route('/getDevices').post((req, res) =>{
-    Device.findOne({
+    Device.find({
         proprietaire: req.body.proprietaire
     })
     .then((device) => res.json(device))
