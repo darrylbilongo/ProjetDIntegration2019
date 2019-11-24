@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const positionSchema = new Schema({
-    idDevice: {//nom du device
+    nomDevice: {//nom du device
         type: String,
         required: true
     },

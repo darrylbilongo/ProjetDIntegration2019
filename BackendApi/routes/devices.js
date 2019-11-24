@@ -8,11 +8,11 @@ router.route('/').get((req, res) => {
 });
 
 router.route('/add').post((req, res) => {
-    const nom = req.body.nom;
+    const nomDevice = req.body.nom;
     const proprietaire = req.body.proprietaire;
 
     const nouveau = new Device({
-        nom,
+        nomDevice,
         proprietaire
     });
 
@@ -21,7 +21,7 @@ router.route('/add').post((req, res) => {
             .catch(err => res.status(400).json({message: 'Error: ' + err}));
 })
 
-router.route('/getDevices').get((req, res) =>{
+router.route('/getDevices').post((req, res) =>{
     Device.findOne({
         proprietaire: req.body.proprietaire
     })

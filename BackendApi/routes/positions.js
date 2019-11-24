@@ -8,12 +8,12 @@ router.route('/').get((req, res) => {
 });
 
 router.route('/add').post((req, res) => {
-    const idDevice = req.body.payload_fields.idDevice;
+    const nomDevice = req.body.payload_fields.idDevice;
     const lon = req.body.payload_fields.location.longitude;
     const lat = req.body.payload_fields.location.latitude;
 
     const nouveau = new Position({
-        idDevice,
+        nomDevice,
         lon,
         lat
     });
@@ -23,9 +23,9 @@ router.route('/add').post((req, res) => {
             .catch(err => res.status(400).json({message: 'Error: ' + err}));
 })
 
-router.route('/getLastPosition').get((req, res) =>{
+router.route('/getLastPosition').post((req, res) =>{
     Position.findOne({
-        idDevice: req.body.idDevice
+        nomDevice: req.body.nom
     })
     .sort({"createdAt": -1})
     .limit(1)
