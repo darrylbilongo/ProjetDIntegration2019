@@ -31,9 +31,11 @@ const userSchema = new Schema({
         type: String,
         default: 'scout'
     },
-    idAnimateur:{
+    idAnimateur: {
         type: String,
-        required: true
+        required: true,
+        unique: true,
+        trim: true,
     }
 
 },{

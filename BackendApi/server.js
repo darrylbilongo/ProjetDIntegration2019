@@ -27,10 +27,12 @@ connection.once('open', () => {
 const userRouter = require('./routes/users');
 const planningRouter = require('./routes/plannings');
 const positionsRouter = require("./routes/positions");
+const devicesRouter = require("./routes/devices");
 
 app.use('/api/users', userRouter);
 app.use('/api/plannings', planningRouter);
 app.use('/api/positions', positionsRouter);
+app.use('/api/devices', devicesRouter);
 
 
 app.listen(port,function(){

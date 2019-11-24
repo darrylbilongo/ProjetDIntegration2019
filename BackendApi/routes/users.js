@@ -16,15 +16,13 @@ router.route('/').get((req, res) => {
 router.route('/register').post((req, res) => {
 
     const userData = {
-        nomUtilisateur : req.body.nomUtilisateur,
         nom : req.body.nom,
         prenom : req.body.prenom,
         email : req.body.email,
         motDePasse : req.body.motDePasse,
         dateNaissance : req.body.dateNaissance,
-        estSupprime : req.body.estSupprime,
-        totem : req.body.totem,
         fonction : req.body.fonction,
+        idAnimateur: req.body.idAnimateur
     }
 
     User.findOne({
@@ -68,15 +66,14 @@ router.route('/login').post((req, res) => {
                     // Mots de Passe compatibles
                     const verif = {
                         _id: user._id,
-                        nomUtilisateur : user.nomUtilisateur,
                         nom : user.nom,
                         prenom : user.prenom,
                         email : user.email,
                         motDePasse : user.motDePasse,
                         dateNaissance : user.dateNaissance,
-                        estSupprime : user.estSupprime,
-                        totem : user.totem,
                         fonction : user.fonction,
+                        idAnimateur: user.idAnimateur
+
                     };
                     let token = jwt.sign(verif, process.env.SECRET_KEY, {
                         expiresIn: 1440
@@ -123,12 +120,10 @@ router.route('/update/:id').post((req, res) =>{
                 bcrypt.hash(req.body.newMotDePasse, 10, (err, hash) =>{
                     user.motDePasse = hash;
 
-                    user.nomUtilisateur = req.body.nomUtilisateur;
                     user.nom = req.body.nom;
                     user.prenom = req.body.prenom;
                     user.email = req.body.email;
                     user.dateNaissance = req.body.dateNaissance;
-                    user.totem = req.body.totem;
 
                     user.save()
                         .then(() => res.json({message: 'Profil à jour!'}))
@@ -151,26 +146,22 @@ router.route('/update/:id').post((req, res) =>{
 });
 
 router.route('/add').post((req, res) => {
-    const nomUtilisateur = req.body.nomUtilisateur;
     const nom = req.body.nom;
     const prenom = req.body.prenom;
     const email = req.body.email;
     const motDePasse = req.body.motDePasse;
     const dateNaissance = req.body.dateNaissance;
-    const estSupprime = req.body.estSupprime;
-    const totem = req.body.totem;
     const fonction = req.body.fonction;
+    const idAnimateur = req.body.idAnimateur;
 
     const nouveau = new User({
-        nomUtilisateur,
         nom,
         prenom,
         email,
         motDePasse,
         dateNaissance,
-        estSupprime,
-        totem,
-        fonction
+        fonction,
+        idAnimateur
     });
 
     nouveau.save()
