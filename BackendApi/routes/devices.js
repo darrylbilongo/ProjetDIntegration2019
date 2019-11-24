@@ -8,7 +8,7 @@ router.route('/').get((req, res) => {
 });
 
 router.route('/add').post((req, res) => {
-    const nomDevice = req.body.nom;
+    const nomDevice = req.body.nomDevice;
     const proprietaire = req.body.proprietaire;
 
     const nouveau = new Device({
