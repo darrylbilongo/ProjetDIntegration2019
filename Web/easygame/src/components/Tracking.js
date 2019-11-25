@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import CreateDevice from './CreateDevice';
 
 const list = [
     {
@@ -16,19 +17,18 @@ class Tracking extends Component {
         return(
             <div>
                 <div>
-                    Ajouter un nouveau device :
-
-                    <ul>
-                        {list.map(item => (
-                        <li key={item.id}>
-                            <div>{item.id}</div>
-                            <div>{item.firstname}</div>
-                            <div>{item.lastname}</div>
-                            <div>{item.year}</div>
-                        </li>
-                        ))}
-                    </ul>
+                    <h3>Ajouter un nouveau device</h3>
+                    <CreateDevice/>
                 </div>
+                
+                    {/*<ul>
+                        {list.map(item => (
+                            <li key={item.id}>
+                                <div>{item.id}</div>
+                                <div>{item.key}</div>
+                            </li>
+                        ))}
+                        </ul>*/}
             </div>
         );
     }

@@ -79,6 +79,15 @@ class NavBar extends React.Component {
                     </Link>
             </li>
         )
+
+        const trackingLink = (
+            <li className="nav-item">
+                    <Link to="/tracking" className="nav-link">
+                        Tracking
+                    </Link>
+            </li>
+        )
+
         return (
 
             <nav className="navbar navbar-expand-lg navbar-light bg-light" id="navbar">
@@ -96,10 +105,11 @@ class NavBar extends React.Component {
                     <ul className="navbar-nav"> 
 
                         {localStorage.usertoken ? homeLink : loginLink}
-                        {localStorage.usertoken ?  calendarLink: regLink}
+                        {localStorage.usertoken ? calendarLink: regLink}
+                        {localStorage.usertoken ? trackingLink :null}
                         {localStorage.usertoken ? profileLink :null}
-                        {localStorage.usertoken ? listingLink :null}
                         {localStorage.usertoken ? logoutLink :null}
+                        
                         {
                             /*<li className="nav-item">
                             <a className="nav-link" href="/admin">Administration</a>
