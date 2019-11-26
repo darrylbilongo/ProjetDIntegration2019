@@ -6,8 +6,7 @@ const deviceSchema = new Schema({
     nomDevice: {
         type: String,
         trim: true,
-        unique: true,
-        required: true
+        unique: true
     },
     proprietaire: {
         type: String,
