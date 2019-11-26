@@ -1,28 +1,50 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import axios from 'axios';
+import jwt_decode from 'jwt-decode';
 
 export default class CreateDevice extends Component {
 
-    state = {
-        id : '',
-        key: ''
+    constructor(){
+        super()
+        this.state = {
+            nom: "",
+            prenom: "",
+            idAnimateur: "",
+            email: "",
+            dateNaissance:"",
+            totem:"",
+            fonction:"",
+            nomDevice : '',
+            devices: []
+        }
+
+        this.onChange = this.onChange.bind(this);
+    }
+
+    componentDidMount(){
+        const token = localStorage.usertoken;
+        const decoded = jwt_decode(token);
+
+        this.setState({
+            nom: decoded.nom,
+            idAnimateur: decoded.idAnimateur,
+            prenom: decoded.prenom,
+            email: decoded.email,
+        })
+
     }
 
     handleSubmit = (e) => {
         e.preventDefault();
 
-        const id = this.refs.id;
-        const key = this.refs.key
-
-        const task = {
-            id: id.value,
-            key: key.value
+        const device = {
+            nomDevice: this.state.nomDevice,
+            proprietaire: this.state.email
         }
-
-        this.createDevice(task);
+        this.addDevice(device);
         
         this.setState({
-            id: "",
-            key: ""
+            nom: ""
         })
     }
 
@@ -32,8 +54,19 @@ export default class CreateDevice extends Component {
         this.setState({[nam]: val});
     }
 
-    createDevice(dev) {
-        return dev;
+    addDevice = (dev) => {
+        axios.post('http://easygame.funndeh.com:5000/api/devices/add', {
+            nomDevice: dev.nomDevice,
+            proprietaire: dev.proprietaire
+        })
+        .then(
+            res => this.setState({
+            devices: [...this.state.devices, res.data]
+            })
+        )
+        .catch(err => {
+            console.log(err)
+        })
     }
 
     render() {
@@ -44,13 +77,8 @@ export default class CreateDevice extends Component {
                         <input 
                         className="form-control" 
                         type="text"
-                        name="id" 
-                        placeholder="Id du device"
-                        onChange={this.onChange} />
-                        <input 
-                        className="form-control" 
-                        type="text" 
-                        placeholder="Entrez la clé"
+                        name="nomDevice" 
+                        placeholder="nom du device"
                         onChange={this.onChange} />
                     </div>
                     <div className="col-md-2 text-right">

@@ -21,6 +21,7 @@ class Calendar extends Component {
             nouveau:"",
             newDate:""
         }
+        this.onChange = this.onChange.bind(this);
     }
 
     componentDidMount(){
@@ -31,10 +32,6 @@ class Calendar extends Component {
             nom: decoded.nom,
             prenom: decoded.prenom,
             email: decoded.email,
-            dateNaissance : decoded.dateNaissance,
-            totem : decoded.totem,
-            fonction : decoded.fonction,
-            events: [],
         })
     }
 
@@ -54,12 +51,15 @@ class Calendar extends Component {
         e.preventDefault();
 
         const testEvent = {
-            event_id: '1',
             title: this.state.nouveau,
             date: this.state.newDate  
         }
 
-        ajoutEvent(this.state.nouveau, this.state.newDate)
+        this.ajouterEvent(testEvent);
+    }
+
+    ajouterEvent() {
+        return null;
     }
 
     render () {
@@ -74,7 +74,7 @@ class Calendar extends Component {
                         events={this.state.events}
                         onTypeChange={this.onTypeChange} 
                         />   
-                    {/*<form noValidate onSubmit={this.onSubmit}>
+                    <form noValidate onSubmit={this.onSubmit}>
                             <div className="form-group">
                                 <label htmlFor="text"> Ajoutez des nouveaux évenements: </label>
                                 <input type="text"
@@ -97,7 +97,7 @@ class Calendar extends Component {
                             className="btn btn-block btn-lg btn-primary">
                                 Envoyer
                             </button>
-            </form>*/}
+            </form>
                 </div>   
             );
     }

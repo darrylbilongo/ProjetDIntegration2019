@@ -1,8 +1,6 @@
 import React, {Component} from 'react';
 import jwt_decode from 'jwt-decode';
-import { decode } from 'punycode';
 import avatar from '../Logo/avatar-1577909_960_720.webp'
-import { AUTH_LOGOUT } from 'ra-core';
 class Profile extends Component {
 
     constructor(){
@@ -13,7 +11,8 @@ class Profile extends Component {
             email: "",
             dateNaissance:"",
             totem:"",
-            fonction:""
+            fonction:"",
+            idAnimateur: ""
         }
     }
 
@@ -27,7 +26,8 @@ class Profile extends Component {
             email: decoded.email,
             dateNaissance : decoded.dateNaissance,
             totem : decoded.totem,
-            fonction : decoded.fonction
+            fonction : decoded.fonction,
+            idAnimateur : decoded.idAnimateur
         })
 
     }
@@ -46,6 +46,10 @@ class Profile extends Component {
                         </div>
                         <table className="table col-md-8 mx-auto">
                             <tbody>
+                                <tr>
+                                    <td>Id</td>
+                                    <td>{this.state.idAnimateur}</td>
+                                </tr>
                                 <tr>
                                     <td>Nom</td>
                                     <td>{this.state.nom}</td>

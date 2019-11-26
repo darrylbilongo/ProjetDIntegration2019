@@ -40,7 +40,7 @@ class Login extends Component {
 
         login(user).then(res => {
             if(res){
-                this.props.history.push('/profile')
+                this.props.history.push('/calendar')
             }
         })
     }
