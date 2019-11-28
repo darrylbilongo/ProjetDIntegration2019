@@ -27,19 +27,19 @@ static uint8_t mydata[] = "Hello, world!";      //For test using.
    This is the default Semtech key, which is used by the prototype TTN
    network initially.
    ttn*/
-static const PROGMEM u1_t NWKSKEY[16] =  { 0x96, 0x62, 0xED, 0xB4, 0x3C, 0x93, 0xB9, 0x9C, 0xF1, 0x9F, 0x29, 0x9F, 0xE7, 0x03, 0xBE, 0x16 };
+static const PROGMEM u1_t NWKSKEY[16] =  { 0x96, 0xCD, 0x3A, 0x62, 0xC1, 0x6D, 0x23, 0x62, 0xB2, 0x06, 0xBB, 0x7F, 0x7E, 0xC2, 0x17, 0x1F };
 
 /* LoRaWAN AppSKey, application session key
    This is the default Semtech key, which is used by the prototype TTN
    network initially.
    ttn*/
-static const u1_t PROGMEM APPSKEY[16] = { 0xEF, 0x95, 0xCE, 0xE8, 0x91, 0xEB, 0xEE, 0xC8, 0x1E, 0x3E, 0x41, 0x83, 0x25, 0xE6, 0x52, 0x9E };
+static const u1_t PROGMEM APPSKEY[16] = { 0xD6, 0x66, 0x35, 0xB3, 0x62, 0xFE, 0x81, 0xA5, 0x2A, 0x11, 0xDC, 0x2E, 0x97, 0x31, 0x0B, 0x23 };
 
 /*
  LoRaWAN end-device address (DevAddr)
  See http://thethingsnetwork.org/wiki/AddressSpace
  ttn*/
-static const u4_t DEVADDR = 0x260115C5;
+static const u4_t DEVADDR = 0x260116CA;
 
 
 /* These callbacks are only used in over-the-air activation, so they are
@@ -227,12 +227,9 @@ void GPSWrite()
   {  
   strcat(gps_lon,",");
   strcat(gps_lon,gps_lat); 
-  //strcat(gps_lon,","); 
-  //strcat(gps_lon,gps_alt);
     int i = 0;
   for(i = 0; i < 2; i++)
   {
-      //datasend.toFloat();
       atof(gps_lon);
      //Serial.println((char*)datasend);
     Serial.println("Testing converted data:");
@@ -251,15 +248,6 @@ void GPSWrite()
   Serial.print((char*)datasend);
   Serial.print("]");
   Serial.print("");
-  /*
-  for(int k = 0; k < 20;k++)
-  {
-  Serial.print("[");
-  Serial.print(datasend[k], HEX);
-  Serial.print("]");
-  }
-  Serial.println("");
-  Serial.println("");*/
   count++;
   }
   

@@ -17,7 +17,8 @@ import {createStackNavigator} from 'react-navigation-stack';
 
 import Profile from '../Accueil/Profile';
 import Planning from '../Admin/Agenda';
-import Geo from '../Geolocation/index';
+import Geo from '../Geolocation/Geo';
+import SelectDevices from '../Geolocation/SelectDevices';
 import Settings from '../Settings/Settings';
 
 import CustomSidebarMenu from './CustomSidebarMenu';
@@ -74,12 +75,12 @@ const Admin_fenetre = createStackNavigator({
  
 const Geo_Fenetre = createStackNavigator({
   Third: {
-    screen: Geo,
+    screen: SelectDevices,
     navigationOptions: ({ navigation }) => ({
       title: 'Geolocalisation',
       headerLeft: <NavigationDrawerStructure navigationProps={navigation} />,
       headerStyle: {
-        backgroundColor: '#62bd0d',
+        backgroundColor: '#509556',
       },
       headerTintColor: '#fff',
     }),
@@ -93,7 +94,7 @@ const Settings_Fenetre = createStackNavigator({
         title: 'Configuration',
         headerLeft: <NavigationDrawerStructure navigationProps={navigation} />,
         headerStyle: {
-          backgroundColor: '#62bd0d',
+          backgroundColor: '#728a5e',
         },
         headerTintColor: '#fff',
       }),
