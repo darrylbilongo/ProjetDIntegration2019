@@ -101,38 +101,62 @@ const Settings_Fenetre = createStackNavigator({
     },
   });
 
-const drawerNavigator = createDrawerNavigator(
-  {
-    Home: {
-        screen: Profile_Fenetre,
-        navigationOptions: {
-            drawerLabel: 'Accueil',
-        },
+if(global.utilisateur.fonction == "animateur"){
+  const drawerNavigator = createDrawerNavigator(
+    {
+      Home: {
+          screen: Profile_Fenetre,
+          navigationOptions: {
+              drawerLabel: 'Accueil',
+          },
+      },
+      Settings: {
+          screen: Settings_Fenetre,
+          navigationOptions: {
+            drawerLabel: 'Configuration',
+          },
+      },
+      Agenda: {
+          screen: Admin_fenetre,
+          navigationOptions: {
+              drawerLabel: 'Agenda',
+          },
+      },
+      Geo: {
+          screen: Geo_Fenetre,
+          navigationOptions: {
+              drawerLabel: 'Geolocation',
+          },
+      },
     },
-    Agenda: {
-        screen: Admin_fenetre,
-        navigationOptions: {
-            drawerLabel: 'Agenda',
-        },
-    },
-    Geo: {
-        screen: Geo_Fenetre,
-        navigationOptions: {
-            drawerLabel: 'Geolocation',
-        },
-    },
-    Settings: {
-        screen: Settings_Fenetre,
-        navigationOptions: {
-          drawerLabel: 'Configuration',
-        },
+    {
+          contentComponent: CustomSidebarMenu,
+          drawerWidth: Dimensions.get('window').width - 130,
     }
-  },
-  {
-        contentComponent: CustomSidebarMenu,
-        drawerWidth: Dimensions.get('window').width - 130,
-  }
-);
+  );
+}
+else{
+  const drawerNavigator = createDrawerNavigator(
+    {
+      Home: {
+          screen: Profile_Fenetre,
+          navigationOptions: {
+              drawerLabel: 'Accueil',
+          },
+      },
+      Settings: {
+          screen: Settings_Fenetre,
+          navigationOptions: {
+            drawerLabel: 'Configuration',
+          },
+      }
+    },
+    {
+          contentComponent: CustomSidebarMenu,
+          drawerWidth: Dimensions.get('window').width - 130,
+    }
+  );
+}
 
 const container = createAppContainer(drawerNavigator);
 

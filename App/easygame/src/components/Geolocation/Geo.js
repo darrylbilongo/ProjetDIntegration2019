@@ -24,9 +24,19 @@ class Geo extends Component {
       location: null,
     };
 
+
+    global.position = {
+      cordLatitude:50.866606,
+      cordLongitude:4.2994484,
+    }
+
     this.mergeLot = this.mergeLot.bind(this);
 
     this.componentDidMount();
+  }
+
+  getCurrentPositionTracked = () => {
+
   }
 
   componentDidMount() {
@@ -80,7 +90,7 @@ class Geo extends Component {
      }
 
   afficherPosition = (x) => {
-    console.log(x);
+    //console.log(x);
     this.setState({location:x});
   }
      
@@ -109,8 +119,8 @@ class Geo extends Component {
          title={"Votre Location"}
        />}
 
-       {!!this.state.cordLatitude && !!this.state.cordLongitude && <MapView.Marker
-          coordinate={{"latitude":this.state.cordLatitude,"longitude":this.state.cordLongitude}}
+       {!!global.position.cordLatitude && !!global.position.cordLongitude && <MapView.Marker
+          coordinate={{"latitude":global.position.cordLatitude,"longitude":global.position.cordLongitude}}
           title={"Votre Cible"}
         />}
 
@@ -123,7 +133,7 @@ class Geo extends Component {
         {!!this.state.latitude && !!this.state.longitude && this.state.x == 'error' && <MapView.Polyline
           coordinates={[
               {latitude: this.state.latitude, longitude: this.state.longitude},
-              {latitude: this.state.cordLatitude, longitude: this.state.cordLongitude},
+              {latitude: global.position.cordLatitude, longitude: global.position.cordLongitude},
           ]}
           strokeWidth={2}
           strokeColor="red"/>

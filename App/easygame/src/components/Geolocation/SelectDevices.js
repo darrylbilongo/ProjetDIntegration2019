@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
-import {Text,Alert, View, Dimensions, Image, ScrollView, TextInput, Platform, KeyboardAvoidingView, SafeAreaView,} from 'react-native';
+import {Text,Alert, View, Dimensions, Image, ScrollView, Picker, Platform, KeyboardAvoidingView, SafeAreaView,} from 'react-native';
 import styles from './styles';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import NavigationService from '../Navigation/NavigationService';
 import Animated from "react-native-reanimated";
-import RNPickerSelect from 'react-native-picker-select';
+
 
 const { width, height } = Dimensions.get('window');
 
@@ -12,22 +12,12 @@ export default class SelectDevices extends Component {
 
     constructor(){
         super();
-        global.position = '';
-        this.labelToSend = {};
-        this.responseApi = [];
-        this.labels = [];
-        this.getDevices(global.utilisateur.email);
-
-
-                                console.log(this.responseApi);
-                                
-                                this.labels = [];
-
-                                if(this.responseApi){
-                                    for(let i = 0; i< this.responseApi.length; i++){
-                                        this.labels.push({label: this.responseApi[i].nomDevice, value: this.responseApi[i].nomDevice})
-                                    }
-                                }
+        this.state = {
+            device : null,
+            responseApi : null,
+            pickersItem : null
+        };
+        
     }
 
     getStars = () => new Promise((resolve) => {
@@ -45,27 +35,23 @@ export default class SelectDevices extends Component {
                                     proprietaire: email
                                 })
                             });
-        this.responseApi = await response.json();    
+        this.state.position = await response.json();    
         this.getStars();                
                                         
     }
 
     getDataGeo = async () => {
-        global.position = await fetch('http://easygame.funndeh.com:5000/api/position/getLastPosition', {
+        const response = await fetch('http://easygame.funndeh.com:5000/api/position/getLastPosition', {
                                 method: 'POST',
                                 headers: {
                                     'Accept': 'application/json',
                                     'Content-Type': 'application/json'
                                 },
                                 body: JSON.stringify({
-                                    nom: this.labelToSend
+                                    nom: this.state.device
                                 })
-                            })
-                            .then(response => {
-                                return response.json()
-                            })
-                            .catch(error => Alert.alert(error.message));
-        console.log(global.position);
+                            });
+        console.log(response);
         NavigationService.navigate("Geolocation");
 
     }
@@ -87,30 +73,20 @@ export default class SelectDevices extends Component {
                     }} source={require("../../images/Logo/logo_transparent.png")}/>
                     <Animated.View >
 
-                    <RNPickerSelect
-                        onValueChange={(value) => this.labelToSend = value}
-                        placeholder={{
-                            label : "Selectionner votre device.",
-                            value : null
-                        }}
-                        items={this.labels}
-                    />
+                    <Picker
+                        selectedValue={this.state.device}
+                        onValueChange={(itemValue, itemIndex) =>
+                            this.setState({device: itemValue})
+                        }
+                    >
+                        <Picker.Item label="Seletionnez le device" value=""/>
+                        <Picker.Item label="MANOU1" value="MANOU1"/>
+                    </Picker>
+                    
                                     
                         <TouchableOpacity style={{...styles.deconnexion, backgroundColor: '#003d00', color:'white'}}
                             onPress={() => {
-                                this.getDevices(global.utilisateur.email);
-
-                                console.log(this.responseApi);
-                                
-                                this.labels = [];
-
-                                if(this.responseApi){
-                                    for(let i = 0; i< this.responseApi.length; i++){
-                                        this.labels.push({label: this.responseApi[i].nomDevice, value: this.responseApi[i].nomDevice})
-                                    }
-                                }
-
-                                console.log(this.labels);
+                                this.getDataGeo()
 
                             }}
                         >

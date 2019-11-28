@@ -28,65 +28,90 @@ class NavBar extends React.Component {
     render() { 
 
         const loginLink = (
-                <li className="nav-item">
-                    <Link to="/login" className="nav-link">
-                        Login
-                    </Link>
+            <li className="nav-item">
+                        <Link to="/login" className="nav-link">
+                            Se connecter
+                        </Link>
+            </li>
+        )
+
+         const regLink = (
+            <li className="nav-item">
+                        <Link to="/register" className="nav-link">
+                            S'enregistrer
+                        </Link>
+                    </li>
+        ) 
+        const homeLink = (
+            <li className="nav-item">
+                            <Link to="/home" className="nav-link">
+                                Home
+                            </Link>
                 </li>
         )
-         
-        const regLink = (
+        const calendarLink = (
             <li className="nav-item">
-            <Link to="/register" className="nav-link">
-            Register
-            </Link>
-            </li>
-            )
-        
-        const userLink = (
+                <Link to="/calendar" className="nav-link">
+                    Calendrier
+                </Link>
+             </li>
+        )
+
+        const profileLink = (
             <li className="nav-item">
                     <Link to="/profile" className="nav-link">
-                        User
+                        Profil
                     </Link>
             </li>
         )
         const logoutLink = (
             <li className="nav-item">
-                <a href="" onClick={this.logOut.bind(this)} className="nav-link">
-                   Log Out
-                </a>
+                    <a href="" onClick={this.logOut.bind(this)} className="nav-link">
+                       Deconnexion
+                    </a>
             </li>
         )
-       
-        return ( 
+
+        const listingLink = (
+            <li className="nav-item">
+                    <Link to="/listing" className="nav-link">
+                        Listing
+                    </Link>
+            </li>
+        )
+        return (
 
             <nav className="navbar navbar-expand-lg navbar-light bg-light" id="navbar">
                 <a className="navbar-brand" href="/">EasyGame</a>
-                <button className="navbar-toggler" type="button"  
+                <button className="navbar-toggler" 
+                    type="button"  
                     data-toggle="collapse" 
                     data-target="#navbarNav" 
                     aria-controls="navbarNav"
                     aria-expanded="false" 
                     aria-label="Toggle navigation">
-                    <span className="navbar-toggler-icon"></span>
+                        <span className="navbar-toggler-icon"></span>
                 </button>
                 <div className="collapse navbar-collapse justify-content"  id="navbarNav">
-                    <ul className="navbar-nav">
-                    <li className="nav-item">
-                        <a className="nav-link" href="/">Tracking</a>
-                    </li>
-                    <li className="nav-item">
-                        <a className="nav-link" href="#">Jeux</a>
-                    </li>
-                    <li className="nav-item">
-                        <a className="nav-link" href="/team">Team</a>
-                    </li>
-                    {localStorage.usertoken ? userLink : loginLink}
-                    {localStorage.usertoken ? logoutLink : regLink}
-                    <li className="nav-item">
-                        <a className="nav-link" href="/about">About</a>
-                    </li>
+                    <ul className="navbar-nav"> 
+
+                        {localStorage.usertoken ? homeLink : loginLink}
+                        {localStorage.usertoken ?  calendarLink: regLink}
+                        {localStorage.usertoken ? profileLink :null}
+                        {localStorage.usertoken ? listingLink :null}
+                        {localStorage.usertoken ? logoutLink :null}
+                        {
+                            /*<li className="nav-item">
+                            <a className="nav-link" href="/admin">Administration</a>
+                        </li>
+                        <li className="nav-item">
+                            <a className="nav-link" href="/error">Tracking</a>
+                        </li>
+                        <li className="nav-item">
+                            <a className="nav-link" href="/calendar">Calendrier</a>
+                        </li>*/}
                     </ul>
+                    
                 </div>
             </nav>
         );
