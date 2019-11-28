@@ -3,26 +3,24 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const positionSchema = new Schema({
+    nomDevice: {//nom du device
+        type: String,
+        required: true
+    },
     lon: {
-        type: Double,
-        required: true,
-        trim: true,
-        minlength:5
-    },
-    alt: {
-        type: Double,
+        type: Schema.Types.Decimal128,
         required: true,
         trim: true,
     },
-    altitude: {
-        type: Double,
-        required: true,
+    lat: {
+        type: Schema.Types.Decimal128,
         trim: true,
+        required: true,
     }
 },{
     timestamps: true   
 });
 
-const positions = mongoose.model('users', positionSchema);
+const positions = mongoose.model('position', positionSchema);
 
 module.exports = positions;

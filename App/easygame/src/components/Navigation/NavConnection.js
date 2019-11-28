@@ -17,7 +17,8 @@ import {createStackNavigator} from 'react-navigation-stack';
 
 import Profile from '../Accueil/Profile';
 import Planning from '../Admin/Agenda';
-import Geo from '../Geolocation/index';
+import Geo from '../Geolocation/Geo';
+import SelectDevices from '../Geolocation/SelectDevices';
 import Settings from '../Settings/Settings';
 
 import CustomSidebarMenu from './CustomSidebarMenu';
@@ -74,12 +75,12 @@ const Admin_fenetre = createStackNavigator({
  
 const Geo_Fenetre = createStackNavigator({
   Third: {
-    screen: Geo,
+    screen: SelectDevices,
     navigationOptions: ({ navigation }) => ({
       title: 'Geolocalisation',
       headerLeft: <NavigationDrawerStructure navigationProps={navigation} />,
       headerStyle: {
-        backgroundColor: '#62bd0d',
+        backgroundColor: '#509556',
       },
       headerTintColor: '#fff',
     }),
@@ -93,45 +94,69 @@ const Settings_Fenetre = createStackNavigator({
         title: 'Configuration',
         headerLeft: <NavigationDrawerStructure navigationProps={navigation} />,
         headerStyle: {
-          backgroundColor: '#62bd0d',
+          backgroundColor: '#728a5e',
         },
         headerTintColor: '#fff',
       }),
     },
   });
 
-const drawerNavigator = createDrawerNavigator(
-  {
-    Home: {
-        screen: Profile_Fenetre,
-        navigationOptions: {
-            drawerLabel: 'Accueil',
-        },
+if(global.utilisateur.fonction == "animateur"){
+  const drawerNavigator = createDrawerNavigator(
+    {
+      Home: {
+          screen: Profile_Fenetre,
+          navigationOptions: {
+              drawerLabel: 'Accueil',
+          },
+      },
+      Settings: {
+          screen: Settings_Fenetre,
+          navigationOptions: {
+            drawerLabel: 'Configuration',
+          },
+      },
+      Agenda: {
+          screen: Admin_fenetre,
+          navigationOptions: {
+              drawerLabel: 'Agenda',
+          },
+      },
+      Geo: {
+          screen: Geo_Fenetre,
+          navigationOptions: {
+              drawerLabel: 'Geolocation',
+          },
+      },
     },
-    Agenda: {
-        screen: Admin_fenetre,
-        navigationOptions: {
-            drawerLabel: 'Agenda',
-        },
-    },
-    Geo: {
-        screen: Geo_Fenetre,
-        navigationOptions: {
-            drawerLabel: 'Geolocation',
-        },
-    },
-    Settings: {
-        screen: Settings_Fenetre,
-        navigationOptions: {
-          drawerLabel: 'Configuration',
-        },
+    {
+          contentComponent: CustomSidebarMenu,
+          drawerWidth: Dimensions.get('window').width - 130,
     }
-  },
-  {
-        contentComponent: CustomSidebarMenu,
-        drawerWidth: Dimensions.get('window').width - 130,
-  }
-);
+  );
+}
+else{
+  const drawerNavigator = createDrawerNavigator(
+    {
+      Home: {
+          screen: Profile_Fenetre,
+          navigationOptions: {
+              drawerLabel: 'Accueil',
+          },
+      },
+      Settings: {
+          screen: Settings_Fenetre,
+          navigationOptions: {
+            drawerLabel: 'Configuration',
+          },
+      }
+    },
+    {
+          contentComponent: CustomSidebarMenu,
+          drawerWidth: Dimensions.get('window').width - 130,
+    }
+  );
+}
 
 const container = createAppContainer(drawerNavigator);
 

@@ -16,14 +16,12 @@ export default class Config extends Component {
 
     this.state = {
         isLoading: false,
-        nomUtilisateur : '',
         nom : '',
         prenom : '',
         email : '',
         oldMotDePasse : '',
         newMotDePasse : '',
         dateNaissance : '',
-        totem : '',
     };
 
     this.motDePasse='';
@@ -36,8 +34,18 @@ verifMotDePasse = () => {
         return false    
 }
 
-deleteCompte = () => {
-
+deleteCompte = async () => {
+    const response = await fetch('http://easygame.funndeh.com:5000/api/users/' + global.utilisateur._id, {
+                                    method: 'DELETE',
+                                    headers: {
+                                    'Accept': 'application/json',
+                                    'Content-Type': 'application/json'
+                                    }
+                                });
+    this.responseAPI = await response.json()
+    NavigationService.navigate('HomePage');
+    Alert.alert(this.responseAPI.message);
+    global.utilisateur = {};                  
 }
 
 sendUpdate = async () => {
@@ -49,14 +57,11 @@ sendUpdate = async () => {
                                 'Content-Type': 'application/json'
                               },
                               body: JSON.stringify({
-                                nomUtilisateur : this.state.nomUtilisateur,
                                 nom : this.state.nom,
                                 prenom : this.state.prenom,
                                 email : this.state.email,
                                 motDePasse : this.state.motDePasse,
                                 dateNaissance : this.state.dateNaissance,
-                                estSupprime : false,
-                                totem : this.state.totem,
                                 fonction : 'animateur',
                               })
                             });                             
@@ -76,27 +81,17 @@ updateCompte = () => {
 
   render() {
     return (
-        <SafeAreaView style={{flex: 1,}}>
+        <SafeAreaView style={{flex: 1, backgroundColor: '#728a5e'}}>
           <KeyboardAvoidingView style={{flex: 1}} behavior={Platform.Os == "ios" ? "padding" : "height" } enabled>
             
-            <ScrollView  style={{flex:1, backgroundColor: '#509556'}}>
+            <ScrollView  style={{flex:1, backgroundColor: '#728a5e'}}>
                 <Image style={{...styles.imgprofile, marginTop: height/10,
                     marginBottom: height/20,
                     marginLeft: width/3,
                     borderColor: '#003d00', borderRadius:50, borderWidth:1
                 }} source={require("../../images/Logo/logo_transparent.png")}/>
                 <Animated.View >
-
-                    <Text style={{...styles.mytext}}>Votre nom d'utilisateur</Text>
-                    <TextInput
-                        placeholder={global.utilisateur.nomUtilisateur}
-                        style={{...styles.textInput}}
-                        onChangeText={nomUtilisateur=> this.setState({nomUtilisateur})}
-                        autoCapitalize='none'
-                        returnKeyType='next'
-                        keyboardType={'default'}
-                    />
-
+                    
                     <Text style={{...styles.mytext}}>Votre nom</Text>
                     <TextInput
                         placeholder={global.utilisateur.nom}
@@ -204,13 +199,13 @@ updateCompte = () => {
                         secureTextEntry={true}
                     />
 
-                    <TouchableOpacity style={{...styles.deconnexion, backgroundColor: '#003d00', color:'white'}}
+                    {/*<TouchableOpacity style={{...styles.deconnexion, backgroundColor: '#003d00', color:'white'}}
                         onPress={this.updateCompte}
                     >
                         <Text style={{fontSize:20, fontWeight:'bold', color: 'white'}}>
                             Mise à jour
                         </Text>
-                    </TouchableOpacity>
+                    </TouchableOpacity>*/}
 
 
                     <TouchableOpacity style={{...styles.deconnexion, backgroundColor: '#003d00', color:'white'}}

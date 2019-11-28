@@ -5,7 +5,8 @@ import HomeScreen from '../Accueil/Homescreen';
 import Project from '../Admin/Project';
 import Planning from '../Admin/Agenda';
 import Enregistrer from '../Accueil/Enregistrer';
-import Geo from '../Geolocation/index';
+import Geo from '../Geolocation/Geo';
+import SelectDevices from '../Geolocation/SelectDevices';
 import container from '../Navigation/NavConnection';
 
 const AppNavigator = createStackNavigator(
@@ -42,6 +43,12 @@ const AppNavigator = createStackNavigator(
     },
     Geolocation: {
       screen: Geo,
+      navigationOptions: {
+        header: null,
+      }
+    },   
+    SelectDevices: {
+      screen: SelectDevices,
       navigationOptions: {
         header: null,
       }
