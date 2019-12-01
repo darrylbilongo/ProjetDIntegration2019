@@ -3,7 +3,6 @@ import FullCalendar from '@fullcalendar/react'
 import dayGridPlugin from '@fullcalendar/daygrid'
 import jwt_decode from 'jwt-decode';
 import {ajoutEvent } from './UserFonctions';
-import { decode } from 'punycode';
 
 
 class Calendar extends Component {
@@ -50,16 +49,13 @@ class Calendar extends Component {
     onSubmit(e) {
         e.preventDefault();
 
-        const testEvent = {
+        const newEvent = {
             title: this.state.nouveau,
-            date: this.state.newDate  
+            date: this.state.newDate ,
+            userEmail: this.state.email
         }
 
-        this.ajouterEvent(testEvent);
-    }
-
-    ajouterEvent() {
-        return null;
+        ajoutEvent(newEvent);
     }
 
     render () {
@@ -85,7 +81,7 @@ class Calendar extends Component {
                                 />
                             </div>
                             <div className="form-group">
-                                <input type="date" name="bday" min="1000-01-01"
+                                <input type="date" min="1000-01-01"
                                     max="3000-12-31" 
                                     name="newDate"
                                     className="form-control"

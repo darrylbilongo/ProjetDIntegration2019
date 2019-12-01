@@ -41,9 +41,13 @@ export const login = user => {
         })
 }
 
-export const ajoutEvent = (t, d) => {
+export const ajoutEvent = (event) => {
     return axios
-        .post('http://easygame.funndeh.com:5000/api/users/add')
+        .post('http://easygame.funndeh.com:5000/api/event/add', {
+            title : event.title,
+            date : event.date,
+            userEmail : event.userEmail
+        })
         .then(res => {
             console.log(res.message);
         })

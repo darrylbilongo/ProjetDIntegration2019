@@ -16,6 +16,7 @@
     "jquery": "^3.4.1",
     "jwt-decode": "^2.2.0",
     "material-ui": "^0.20.2",
+    "prop-types": "^15.7.2",
     "ra-data-json-server": "^2.9.8",
     "ra-data-simple-rest": "^2.9.8",
     "react": "^16.10.2",
