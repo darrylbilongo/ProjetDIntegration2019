@@ -10,10 +10,12 @@ router.route('/').get((req, res) => {
 router.route('/add').post((req, res) => {
     const title = req.body.title;
     const date = req.body.date;
+    const userEmail = req.body.userEmail;
 
     const nouveau = new Event({
         title,
         date,
+        userEmail
     });
 
     nouveau.save()
@@ -29,7 +31,7 @@ router.route('/:id').get((req, res) =>{
 
 router.route('/:id').delete((req, res) =>{
     Event.findByIdAndDelete(req.params.id)
-        .then(planning => res.json("Evenenemet supprimé"))
+        .then(event => res.json("Evenenemet supprimé"))
         .catch(err => res.status(400).json('Error: ' + err));
 });
 

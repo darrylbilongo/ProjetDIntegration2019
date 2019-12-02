@@ -3,11 +3,6 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const eventSchema = new Schema({
-    event_id: {
-        type: String,
-        required: true,
-        trim: true
-    },
     title: {
         type: String,
         required: true,
@@ -19,11 +14,11 @@ const eventSchema = new Schema({
         required: true,
         trim: true,
     },
-    user: { 
-        type: Schema.Types.ObjectId, 
-        ref: 'User' 
+    userEmail: { 
+        type: String,
+        required: true,
+        trim: true,
     }
-
 },{
     timestamps: true   
 });
