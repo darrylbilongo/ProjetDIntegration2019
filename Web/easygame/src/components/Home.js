@@ -11,7 +11,7 @@ class Home extends React.Component {
 }
     render(){
       const logoutLink = (
-        <a class="btn btn-outline-secondary col-md-8" href="" onClick={this.logOut.bind(this)}>
+        <a class="btn btn-outline-secondary col-md-8" onClick={this.logOut.bind(this)}>
                        Deconnexion
         </a>
       )
@@ -21,28 +21,28 @@ class Home extends React.Component {
 
       return (
         <HomeComponent>
-          <div class="row align-items-center">
+          <div className="row align-items-center">
             <img src={fond} id="fond" alt="fond vert" class="col"></img>
               <img src={logo} class="centered col-sm-4" id="logo" alt="logo EasyGame" ></img>
           </div>
-          <div class="row">
-            <div class="col-md-3 menu-home">
-              <a class="btn btn-outline-secondary col-md-8" href="/Home">Home</a>
+          <div className="row">
+            <div className="col-md-3 menu-home">
+              <a className="btn btn-outline-secondary col-md-8" href="/Home">Home</a>
             </div>
-            <div class="col-md-3 menu-home">
-              <a class="btn btn-outline-secondary col-md-8" href="/Team">Team</a>
+            <div className="col-md-3 menu-home">
+              <a className="btn btn-outline-secondary col-md-8" href="/Team">Team</a>
             </div>
-            <div class="col-md-3 menu-home">
-              <a  class="btn btn-outline-secondary col-md-8" href="/About">About</a>
+            <div className="col-md-3 menu-home">
+              <a  className="btn btn-outline-secondary col-md-8" href="/About">About</a>
             </div>
-            <div class="col-md-3 menu-home">
+            <div className="col-md-3 menu-home">
               {localStorage.usertoken ? logoutLink : loginLink}
             </div>
           </div>
-          <div class="row align-items-center">
-          <div class="map-responsive col-md">
+          <div className="row align-items-center">
+          <div className="map-responsive col-md">
               <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2528.9137252234977!2d4.6099503153492885!3d50.66586237970143!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47c17e7138d0942d%3A0x8141721ace507d70!2sEphec%20Louvain-la-Neuve!5e0!3m2!1sfr!2sbe!4v1573080241868!5m2!1sfr!2sbe" 
-              class="map" allowfullscreen></iframe>
+              className="map" allowfullscreen></iframe>
           </div>
         </div>
         </HomeComponent>

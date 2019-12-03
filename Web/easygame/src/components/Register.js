@@ -1,16 +1,11 @@
 import React, { Component } from "react";
 import { register } from './UserFonctions';
 
-
-
 class Register extends Component {
     constructor(props) {
         super(props);
 
         this.onChange = this.onChange.bind(this);
-        this.onChangeMail = this.onChangeMail.bind(this);
-        this.onChangeMdp = this.onChangeMdp.bind(this);
-        this.onChangeDate = this.onChangeDate.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
 
         this.state = {
@@ -29,25 +24,6 @@ class Register extends Component {
         let nam = e.target.name;
         let val = e.target.value;
         this.setState({[nam]: val});
-    }
-
-    onChangeMail(e) {
-        this.setState({
-            email: e.target.value
-        });
-    }
-
-    onChangeDate(e) {
-        this.setState({
-            dateNaissance: e.target.value
-        });
-    }
-
-
-    onChangeMdp(e) {
-        this.setState({
-            motDePasse: e.target.value
-        });
     }
 
     onSubmit(e) {
