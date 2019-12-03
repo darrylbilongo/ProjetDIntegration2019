@@ -15,17 +15,13 @@ export default class SelectDevices extends Component {
         this.state = {
             device : null,
             responseApi : null,
-            pickersItem : null
+            pickersItem : [],
+            devices: null
         };
-        
     }
 
-    getStars = () => new Promise((resolve) => {
-        setTimeout(() => resolve, 2000)
-    })
-
     getDevices =  async(email) => {
-        const response = await fetch('http://easygame.funndeh.com:5000/api/Devices/getDevices', {
+        let response = await fetch('http://easygame.funndeh.com:5000/api/devices/getDevices', {
                                 method: 'POST',
                                 headers: {
                                     'Accept': 'application/json',
@@ -35,29 +31,10 @@ export default class SelectDevices extends Component {
                                     proprietaire: email
                                 })
                             });
-        this.state.position = await response.json();    
-        this.getStars();                
+        let devices = await response.json();                
+        return devices; 
                                         
     }
-
-    getDataGeo = async () => {
-        const response = await fetch('http://easygame.funndeh.com:5000/api/position/getLastPosition', {
-                                method: 'POST',
-                                headers: {
-                                    'Accept': 'application/json',
-                                    'Content-Type': 'application/json'
-                                },
-                                body: JSON.stringify({
-                                    nom: this.state.device
-                                })
-                            });
-        console.log(response);
-        NavigationService.navigate("Geolocation");
-
-    }
-
-
-    
 
     render() {
         
@@ -73,21 +50,38 @@ export default class SelectDevices extends Component {
                     }} source={require("../../images/Logo/logo_transparent.png")}/>
                     <Animated.View >
 
-                    <Picker
-                        selectedValue={this.state.device}
-                        onValueChange={(itemValue, itemIndex) =>
-                            this.setState({device: itemValue})
-                        }
-                    >
-                        <Picker.Item label="Seletionnez le device" value=""/>
-                        <Picker.Item label="MANOU1" value="MANOU1"/>
-                    </Picker>
-                    
+                        <Picker
+                            selectedValue={this.state.device}
+                            onValueChange={(itemValue, itemIndex) =>{
+                                this.setState({device: itemValue})
+                                global.utilisateur.device = itemValue
+                            }}
+                        >
+                            <Picker.Item label="Seletionnez le device" value=""/>
+
+                            {
+                                this.state.pickersItem
+                            }
+
+                        </Picker>
+                            
                                     
                         <TouchableOpacity style={{...styles.deconnexion, backgroundColor: '#003d00', color:'white'}}
                             onPress={() => {
-                                this.getDataGeo()
-
+                                this.getDevices(global.utilisateur.email)
+                                    .then((data) => {
+                                        this.setState({
+                                            devices: data
+                                        })
+                                    })
+                                    .catch(err => {
+                                        console.log(err)
+                                    });
+                                    
+                                this.setState({
+                                    pickersItem: this.state.devices.map((x, index) => <Picker.Item key={index} label={x.nomDevice} value={x.nomDevice} />)
+                                })    
+                                //console.log(this.state.pickersItem)    
                             }}
                         >
                             <Text style={{fontSize:20, fontWeight:'bold', color: 'white'}}>
@@ -96,7 +90,9 @@ export default class SelectDevices extends Component {
                         </TouchableOpacity>
 
                         <TouchableOpacity style={{...styles.deconnexion, backgroundColor: '#003d00', color:'white'}}
-                            onPress={this.getDataGeo}
+                            onPress={() => {                                
+                                NavigationService.navigate("Geolocation");
+                            }}
                         >
                             <Text style={{fontSize:20, fontWeight:'bold', color: 'white'}}>
                                 Donner la position

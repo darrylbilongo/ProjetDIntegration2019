@@ -7,6 +7,7 @@ import Svg, {Image, Circle, ClipPath} from 'react-native-svg';
 import styles from './styles';
 import NavigationService from '../Navigation/NavigationService';
 import verifierDonnees from './verifierDonnees';
+import Loader from '../Loader';
 
 const { width, height } = Dimensions.get('window');
 
@@ -23,8 +24,7 @@ export default class Login extends Component {
       userEmail: "",
       userPassword: "",
       responseAPI: "",
-      isLoading: true,
-      text: <Text></Text>
+      loading: false,
     }
 
     this.viewOpacity = new Value(1);
@@ -102,6 +102,10 @@ export default class Login extends Component {
 
   login = async () => {
     try{
+      this.setState({
+        loading: true
+      });
+
       const response = await fetch('http://easygame.funndeh.com:5000/api/users/login', {
                               method: 'POST',
                               headers: {
@@ -113,8 +117,14 @@ export default class Login extends Component {
                                 motDePasse: this.state.userPassword
                               })
                             });                
-      this.state.responseAPI = await response.json(); 
-      this.state.isLoading = false;
+      let responseJson = await response.json(); 
+
+      setTimeout(() => {
+        this.setState({
+          loading: false,
+          responseAPI: responseJson
+        });
+      }, 1000);
     }
     catch (error){
       console.log(error);
@@ -126,19 +136,19 @@ export default class Login extends Component {
     const {userEmail, userPassword} = this.state;
     if(verifierDonnees(userEmail, userPassword)){
       this.login();
-      if(this.state.responseAPI.message == 'Utilisateur existant: Connexion reussie!!!'){
+      if(!this.state.responseAPI.message)
+        return;
+      if(this.state.responseAPI.message.indexOf('reussie!!!') > -1 ){
         this.state.userPassword = '';
         this.state.userEmail = '';
         global.utilisateur = this.state.responseAPI.utilisateur;
         NavigationService.navigate('Profile');
-        this.state.text = <Text></Text>;
         this._textInput1.setNativeProps({ text: '' });
         this._textInput2.setNativeProps({ text: '' });
       }
-      else if(this.state.responseAPI.message == undefined)
-        this.state.text = <ActivityIndicator size="small" color="#00ff00" />;
-      else
+      else if (this.state.responseAPI.message.indexOf('erroné') > -1){
         Alert.alert(this.state.responseAPI.message);
+      }  
     }
     else
       Alert.alert("Veuillez remplir votre mail et votre mot de passe"); 
@@ -252,9 +262,9 @@ export default class Login extends Component {
                     Connexion
                   </Text>
                 </TouchableOpacity>
-                <View>
-                  {this.state.text}
-                </View>
+
+                <Loader loading={this.state.loading} />
+          
             </Animated.View>
           </View>
         </Animated.View>
