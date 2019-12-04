@@ -77,7 +77,6 @@ export default class SelectDevices extends Component {
                                     .catch(err => {
                                         console.log(err)
                                     });
-                                    
                                 if(this.state.devices){
                                     this.setState({
                                         pickersItem: this.state.devices.map((x, index) => <Picker.Item key={index} label={x.nomDevice} value={x.nomDevice} />)

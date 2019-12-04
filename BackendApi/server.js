@@ -29,7 +29,7 @@ const devicesRouter = require("./routes/devices");
 const parentRouter = require('./routes/parent');
 const animateurRouter = require('./routes/animateur');
 const eventRouter = require('./routes/event');
-const fonctionRouter = require('./routes/fonctions');
+const fonctionRouter = require('./routes/fonction');
 
 
 app.use('/api/users', userRouter);
@@ -39,6 +39,7 @@ app.use('/api/users', userRouter);
 app.use('/api/event', eventRouter);
 app.use('/api/parent', parentRouter);
 app.use('/api/parent', animateurRouter);
+
 app.use('/api/fonctions', fonctionRouter);
 
 app.listen(port,function(){
