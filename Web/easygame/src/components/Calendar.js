@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import FullCalendar from '@fullcalendar/react'
 import dayGridPlugin from '@fullcalendar/daygrid'
 import jwt_decode from 'jwt-decode';
-import {ajoutEvent } from './UserFonctions';
+import {ajoutEvent, getEvents } from './UserFonctions';
 
 
 class Calendar extends Component {
@@ -21,6 +21,7 @@ class Calendar extends Component {
             newDate:""
         }
         this.onChange = this.onChange.bind(this);
+        this.onSubmit = this.onSubmit.bind(this);
     }
 
     componentDidMount(){
@@ -32,6 +33,13 @@ class Calendar extends Component {
             prenom: decoded.prenom,
             email: decoded.email,
         })
+
+        const e = getEvents(this.state.email);
+        
+        this.setState({
+            events: []
+        })
+        
     }
 
     onChange(e) {
@@ -40,11 +48,6 @@ class Calendar extends Component {
         this.setState({[nam]: val});
     }
 
-    onChangeDate(e) {
-        this.setState({
-            dateNaissance: e.target.value
-        });
-    }
 
     onSubmit(e) {
         e.preventDefault();
@@ -56,6 +59,9 @@ class Calendar extends Component {
         }
 
         ajoutEvent(newEvent);
+
+        
+
     }
 
     render () {
@@ -85,7 +91,7 @@ class Calendar extends Component {
                                     max="3000-12-31" 
                                     name="newDate"
                                     className="form-control"
-                                    onChange={this.onChangeDate}
+                                    onChange={this.onChange}
                                 >
                                 </input>
                             </div>

@@ -35,4 +35,13 @@ router.route('/:id').delete((req, res) =>{
         .catch(err => res.status(400).json('Error: ' + err));
 });
 
+router.route('/getEvents').post((req, res) =>{
+    Event.find({
+        proprietaire: req.body.proprietaire
+    })
+    .then((event) => res.json(event))
+    .catch(err => res.status(400).json({message: 'Error: ' + err}));
+});
+
+
 module.exports = router;

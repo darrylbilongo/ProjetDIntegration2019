@@ -55,3 +55,18 @@ export const ajoutEvent = (event) => {
             console.log(err)
         })
 }
+
+export const getEvents = (userEmail) => {
+    return axios
+        .get('http://easygame.funndeh.com:5000/api/event/', {
+            proprietaire : userEmail
+        })
+        .then(
+            res => {
+              console.log(res.message);
+            }
+        )
+        .catch(err => {
+              console.log(err)
+        })
+}
