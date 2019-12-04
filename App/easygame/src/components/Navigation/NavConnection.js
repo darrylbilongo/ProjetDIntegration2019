@@ -49,7 +49,7 @@ const Profile_Fenetre = createStackNavigator({
     screen: Profile,
     navigationOptions: ({ navigation }) => ({
       title: 'Accueil',
-      headerLeft: <NavigationDrawerStructure navigationProps={navigation} />,
+      //headerLeft: <NavigationDrawerStructure navigationProps={navigation} />,
       headerStyle: {
         backgroundColor: '#003d00',
       },
@@ -101,62 +101,38 @@ const Settings_Fenetre = createStackNavigator({
     },
   });
 
-if(global.utilisateur.fonction == "animateur"){
-  const drawerNavigator = createDrawerNavigator(
-    {
-      Home: {
-          screen: Profile_Fenetre,
-          navigationOptions: {
-              drawerLabel: 'Accueil',
-          },
-      },
-      Settings: {
-          screen: Settings_Fenetre,
-          navigationOptions: {
-            drawerLabel: 'Configuration',
-          },
-      },
-      Agenda: {
-          screen: Admin_fenetre,
-          navigationOptions: {
-              drawerLabel: 'Agenda',
-          },
-      },
-      Geo: {
-          screen: Geo_Fenetre,
-          navigationOptions: {
-              drawerLabel: 'Geolocation',
-          },
-      },
+const drawerNavigator = createDrawerNavigator(
+  {
+    Home: {
+        screen: Profile_Fenetre,
+        navigationOptions: {
+            drawerLabel: 'Accueil',
+        },
     },
-    {
-          contentComponent: CustomSidebarMenu,
-          drawerWidth: Dimensions.get('window').width - 130,
-    }
-  );
-}
-else{
-  const drawerNavigator = createDrawerNavigator(
-    {
-      Home: {
-          screen: Profile_Fenetre,
-          navigationOptions: {
-              drawerLabel: 'Accueil',
-          },
-      },
-      Settings: {
-          screen: Settings_Fenetre,
-          navigationOptions: {
-            drawerLabel: 'Configuration',
-          },
-      }
+    Settings: {
+        screen: Settings_Fenetre,
+        navigationOptions: {
+          drawerLabel: 'Configuration',
+        },
     },
-    {
-          contentComponent: CustomSidebarMenu,
-          drawerWidth: Dimensions.get('window').width - 130,
-    }
-  );
-}
+    Agenda: {
+        screen: Admin_fenetre,
+        navigationOptions: {
+            drawerLabel: 'Agenda',
+        },
+    },
+    Geo: {
+        screen: Geo_Fenetre,
+        navigationOptions: {
+            drawerLabel: 'Geolocation',
+        },
+    },
+  },
+  {
+        contentComponent: CustomSidebarMenu,
+        drawerWidth: Dimensions.get('window').width - 130,
+  }
+);
 
 const container = createAppContainer(drawerNavigator);
 

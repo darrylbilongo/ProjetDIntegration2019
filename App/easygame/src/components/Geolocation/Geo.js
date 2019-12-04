@@ -7,6 +7,8 @@ import Polyline from '@mapbox/polyline';
 
 
 class Geo extends Component {
+  _isMounted = false;
+
   constructor(props) {
     super(props);
 
@@ -17,17 +19,17 @@ class Geo extends Component {
       concat: null,
       coords:[],
       x: 'false',
-      cordLatitude:50.866606,
-      cordLongitude:4.2994484,
+      cordLatitude:0, //50.866606,
+      cordLongitude: 0,//4.2994484,
       latitudeDelta: 0.045,
       longitudeDelta: 0.045,
       location: null,
     };
 
-
-    global.position = {
-      cordLatitude:50.866606,
-      cordLongitude:4.2994484,
+    if(global.utilisateur.position){
+      this.state.cordLatitude = global.utilisateur.position.latitude;
+      this.state.cordLongitude = global.utilisateur.position.longitude;
+      console.log(this.state.cordLongitude)
     }
 
     this.mergeLot = this.mergeLot.bind(this);
@@ -35,11 +37,9 @@ class Geo extends Component {
     this.componentDidMount();
   }
 
-  getCurrentPositionTracked = () => {
-
-  }
-
   componentDidMount() {
+    this._isMounted = true;
+
     navigator.geolocation.getCurrentPosition(
        (position) => {
          this.setState({
@@ -53,7 +53,53 @@ class Geo extends Component {
        { enableHighAccuracy: false, timeout: 200000, maximumAge: 1000 },
      );
 
+     this.timer = setInterval(()=> this.miseAjourPosition(), 1000)
    }
+
+   getGeo = async () => {
+    let response = await fetch('http://easygame.funndeh.com:5000/api/positions/getLastPosition', {
+                        method: 'POST',
+                        headers: {
+                            'Accept': 'application/json',
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            nom: global.utilisateur.device
+                        })
+                    });
+    let responseJson = await response.json() ;
+    return responseJson;
+  }
+
+  componentWillUnmount(){
+    this._isMounted = false;
+  }
+
+   miseAjourPosition = () => {
+      this.getGeo()
+        .then((data) => {
+            if(data && this._isMounted){
+              this.setState({
+                cordLongitude: parseFloat(data.lat.$numberDecimal),
+                cordLatitude: parseFloat(data.lon.$numberDecimal)
+              })
+            }
+        })
+        .catch(err => {
+            console.log(err)
+        });
+    
+      //let position =  this.state.position;
+      //console.log(position);
+      
+      /*
+      if(position.lon){
+
+        this.state.cordLongitude = parseFloat(position.lon.$numberDecimal);
+        this.state.cordLatitude = parseFloat(position.lat.$numberDecimal);
+      }
+      */
+    }
 
   mergeLot(){
     if (this.state.latitude != null && this.state.longitude!=null)
@@ -90,7 +136,7 @@ class Geo extends Component {
      }
 
   afficherPosition = (x) => {
-    //console.log(x);
+    console.log(x);
     this.setState({location:x});
   }
      
@@ -119,8 +165,8 @@ class Geo extends Component {
          title={"Votre Location"}
        />}
 
-       {!!global.position.cordLatitude && !!global.position.cordLongitude && <MapView.Marker
-          coordinate={{"latitude":global.position.cordLatitude,"longitude":global.position.cordLongitude}}
+       {!!this.state.cordLatitude && !!this.state.cordLongitude && <MapView.Marker
+          coordinate={{"latitude":this.state.cordLatitude,"longitude":this.state.cordLongitude}}
           title={"Votre Cible"}
         />}
 
@@ -133,7 +179,7 @@ class Geo extends Component {
         {!!this.state.latitude && !!this.state.longitude && this.state.x == 'error' && <MapView.Polyline
           coordinates={[
               {latitude: this.state.latitude, longitude: this.state.longitude},
-              {latitude: global.position.cordLatitude, longitude: global.position.cordLongitude},
+              {latitude: this.state.cordLatitude, longitude: this.state.cordLongitude},
           ]}
           strokeWidth={2}
           strokeColor="red"/>
