@@ -21,13 +21,16 @@ char gps_lat[20]={"\0"};
 char gps_alt[20]={"\0"}; 
 float flat, flon,falt;
 
+
+boolean test = false;
+
 static uint8_t mydata[] = "Hello, world!"; 
 
-static const PROGMEM u1_t NWKSKEY[16] =  { 0x96, 0xCD, 0x3A, 0x62, 0xC1, 0x6D, 0x23, 0x62, 0xB2, 0x06, 0xBB, 0x7F, 0x7E, 0xC2, 0x17, 0x1F };
+static const PROGMEM u1_t NWKSKEY[16] =  { 0x22, 0xDF, 0x0E, 0xD5, 0x7A, 0xCD, 0xD6, 0x0F, 0x2E, 0x12, 0x2D, 0xAE, 0xB0, 0x81, 0xEE, 0xA7 };
 
-static const u1_t PROGMEM APPSKEY[16] = { 0xD6, 0x66, 0x35, 0xB3, 0x62, 0xFE, 0x81, 0xA5, 0x2A, 0x11, 0xDC, 0x2E, 0x97, 0x31, 0x0B, 0x23 };
+static const u1_t PROGMEM APPSKEY[16] = { 0xA9, 0x44, 0x51, 0x78, 0x33, 0x9F, 0x8C, 0xA5, 0xAC, 0x97, 0xA9, 0xBD, 0x9A, 0xBD, 0x32, 0xEF };
 
-static const u4_t DEVADDR = 0x260116CA;
+static const u4_t DEVADDR = 0x26011C29;
 
 void os_getArtEui (u1_t* buf) { }
 void os_getDevEui (u1_t* buf) { }
@@ -132,7 +135,7 @@ void onEvent (ev_t ev) {
 
 void setup() {
     Serial.begin(9600);
-     ss.begin(9600);  
+    ss.begin(9600);  
     while(!Serial);
     Serial.println("LoRa GPS Example---- ");
     Serial.println("Connect to TTN");
@@ -141,6 +144,13 @@ void setup() {
     digitalWrite(VCC_ENABLE, HIGH);
     delay(1000);
     #endif
+
+    //********************************************************** Code de test ******************************************************************
+    if(test){
+      flat = 50.866606;
+      flon = 4.2994484;
+    }
+
 
     os_init();
     LMIC_reset();
@@ -165,14 +175,21 @@ void setup() {
 
 void GPSRead()
 {
-  unsigned long age;
-  gps.f_get_position(&flat, &flon, &age);
-  falt=gps.f_altitude();  //get altitude    
-  flat == TinyGPS::GPS_INVALID_F_ANGLE ? 0.0 : flat, 6;   
-  flon == TinyGPS::GPS_INVALID_F_ANGLE ? 0.0 : flon, 6;
-  falt == TinyGPS::GPS_INVALID_F_ANGLE ? 0.0 : falt, 2;
  
-  
+  //*************************************** Code pour le test **************************************************
+  if(test){
+    Serial.print("******************************Valeurs du test: elles ne sont pas réelles**************************************\n");
+    flat += 0.000001;
+    flon += 0.0000005;
+  }
+  else{
+    unsigned long age;
+    gps.f_get_position(&flat, &flon, &age);
+    falt=gps.f_altitude();  //get altitude    
+    flat == TinyGPS::GPS_INVALID_F_ANGLE ? 0.0 : flat, 6;   
+    flon == TinyGPS::GPS_INVALID_F_ANGLE ? 0.0 : flon, 6;
+    falt == TinyGPS::GPS_INVALID_F_ANGLE ? 0.0 : falt, 2;    
+  }
 }
 
 void GPSWrite()
@@ -188,7 +205,7 @@ void GPSWrite()
       int i = 0;
     for(i = 0; i < 2; i++)
     {
-        atof(gps_lon);
+      atof(gps_lon);
       Serial.println("Testing converted data:");
       Serial.println(gps_lon);
     }
@@ -217,7 +234,7 @@ void GPSWrite()
   datasend[4] = lng >> 8;
   datasend[5] = lng >> 16;
   smartdelay(1000);
-  delay(5000);
+  //delay(5000);
 }
 
 static void smartdelay(unsigned long ms)

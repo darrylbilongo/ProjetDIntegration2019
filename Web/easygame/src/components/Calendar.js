@@ -3,7 +3,6 @@ import FullCalendar from '@fullcalendar/react'
 import dayGridPlugin from '@fullcalendar/daygrid'
 import jwt_decode from 'jwt-decode';
 import {ajoutEvent } from './UserFonctions';
-import { decode } from 'punycode';
 
 
 class Calendar extends Component {
@@ -21,6 +20,7 @@ class Calendar extends Component {
             nouveau:"",
             newDate:""
         }
+        this.onChange = this.onChange.bind(this);
     }
 
     componentDidMount(){
@@ -31,10 +31,6 @@ class Calendar extends Component {
             nom: decoded.nom,
             prenom: decoded.prenom,
             email: decoded.email,
-            dateNaissance : decoded.dateNaissance,
-            totem : decoded.totem,
-            fonction : decoded.fonction,
-            events: [],
         })
     }
 
@@ -53,24 +49,20 @@ class Calendar extends Component {
     onSubmit(e) {
         e.preventDefault();
 
-        const testEvent = {
-            event_id: '1',
+        const newEvent = {
             title: this.state.nouveau,
-            date: this.state.newDate  
+            date: this.state.newDate ,
+            userEmail: this.state.email
         }
 
-        ajoutEvent(this.state.nouveau, this.state.newDate)
+        ajoutEvent(newEvent);
     }
 
     render () {
             return (
                 <div>
                     <div className="container">
-<<<<<<< HEAD
-                        <h1>Hello {this.state.prenom}, {this.state.event}</h1>
-=======
                         <h2>Bonjour {this.state.prenom}</h2>
->>>>>>> Jean
                     </div>
                     <FullCalendar 
                         defaultView="dayGridMonth" 
@@ -78,7 +70,7 @@ class Calendar extends Component {
                         events={this.state.events}
                         onTypeChange={this.onTypeChange} 
                         />   
-                    {/*<form noValidate onSubmit={this.onSubmit}>
+                    <form noValidate onSubmit={this.onSubmit}>
                             <div className="form-group">
                                 <label htmlFor="text"> Ajoutez des nouveaux évenements: </label>
                                 <input type="text"
@@ -89,7 +81,7 @@ class Calendar extends Component {
                                 />
                             </div>
                             <div className="form-group">
-                                <input type="date" name="bday" min="1000-01-01"
+                                <input type="date" min="1000-01-01"
                                     max="3000-12-31" 
                                     name="newDate"
                                     className="form-control"
@@ -101,7 +93,7 @@ class Calendar extends Component {
                             className="btn btn-block btn-lg btn-primary">
                                 Envoyer
                             </button>
-            </form>*/}
+            </form>
                 </div>   
             );
     }

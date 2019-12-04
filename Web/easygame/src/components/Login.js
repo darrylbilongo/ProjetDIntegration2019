@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { decode } from 'punycode';
 import {login} from './UserFonctions';
 
 class Login extends Component {
@@ -40,7 +39,7 @@ class Login extends Component {
 
         login(user).then(res => {
             if(res){
-                this.props.history.push('/profile')
+                this.props.history.push('/calendar')
             }
         })
     }
