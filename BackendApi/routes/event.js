@@ -3,7 +3,7 @@ let Event = require('../models/event.model');
 
 router.route('/').get((req, res) => {
     Event.find()
-        .then(fonctions => res.json(fonctions))
+        .then(event => res.json(event))
         .catch(err => res.status(400).json('Error: ' + err));
 });
 
@@ -29,7 +29,7 @@ router.route('/:id').get((req, res) =>{
 
 router.route('/:id').delete((req, res) =>{
     Event.findByIdAndDelete(req.params.id)
-        .then(planning => res.json("Evenenemet supprimé"))
+        .then(event => res.json("Evenenemet supprimé"))
         .catch(err => res.status(400).json('Error: ' + err));
 });
 

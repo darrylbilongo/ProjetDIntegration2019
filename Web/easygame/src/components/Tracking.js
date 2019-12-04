@@ -6,8 +6,9 @@ import DeviceList from './DeviceList';
 class Tracking extends Component {
     render(){
         return(
-            <div>
-                <h3>Ajouter un nouveau device</h3>
+            <div className="container-fluid">
+                <h1> Tracking </h1>
+                <span>Ajouter un nouveau device</span>
                 <CreateDevice/>
                 <DeviceList/>
             </div>

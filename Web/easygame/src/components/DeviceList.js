@@ -44,8 +44,19 @@ class DeviceList extends Component {
     render() { 
         return ( 
           this.state.devices.map((device => (
-            <div>
-              <p>{device.nomDevice} + {device.proprietaire}</p>
+            <div className="container">
+              <p>
+                {device.nomDevice}
+                <select>
+                  <option selected value="groupe1">Groupe 1</option>
+                  <option value="groupe2">Groupe 2</option>
+                  <option value="groupe3">Groupe 3</option>
+                  <option value="groupe4">Groupe 4</option>
+                </select>
+                <button className="btn btn-danger" style={{ float: 'right' }}>
+                  Supprimer
+                </button>
+              </p>
             </div>
           )))
         );

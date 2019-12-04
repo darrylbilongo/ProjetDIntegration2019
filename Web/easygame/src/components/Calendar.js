@@ -62,11 +62,15 @@ class Calendar extends Component {
             return (
                 <div>
                     <div className="container">
-                        <h2>Bonjour {this.state.prenom}</h2>
+                        <h1>Bonjour {this.state.prenom}</h1>
                     </div>
                     <FullCalendar 
                         defaultView="dayGridMonth" 
                         plugins={[ dayGridPlugin ]}
+                        dateClick={(info) => {
+                            alert('Clicked on: ' + info.dateStr);
+                        }}
+                        height="parent"
                         events={this.state.events}
                         onTypeChange={this.onTypeChange} 
                         />   
