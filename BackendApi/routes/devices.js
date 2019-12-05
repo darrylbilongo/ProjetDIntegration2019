@@ -30,8 +30,8 @@ router.route('/getDevices').post((req, res) =>{
 });
 
 router.route('/:id').delete((req, res) =>{
-    User.findByIdAndDelete(req.params.id)
-        .then(device => res.json("Utilisateur supprimé!"))
+    Device.findByIdAndDelete(req.params.id)
+        .then(device => res.json("Device supprimé!"))
         .catch(err => res.status(400).json({message: 'Error: ' + err}));
 });
 
