@@ -7,14 +7,12 @@ export const register = newUser => {
 
     return axios   
         .post('http://easygame.funndeh.com:5000/api/users/register', {
-            nomUtilisateur : "test123",
             nom : newUser.nom,
             prenom : newUser.prenom,
             email : newUser.email,
             motDePasse : newUser.motDePasse,
             dateNaissance : newUser.dateNaissance,
             estSupprime : false,
-            totem : newUser.totem,
             fonction : newUser.fonction
         })
         .then(res => {
@@ -49,7 +47,7 @@ export const ajoutEvent = (event) => {
             userEmail : event.userEmail
         })
         .then(res => {
-            console.log(res.message);
+            console.log(res);
         })
         .catch(err => {
             console.log(err)
@@ -58,12 +56,13 @@ export const ajoutEvent = (event) => {
 
 export const getEvents = (userEmail) => {
     return axios
-        .get('http://easygame.funndeh.com:5000/api/event/', {
-            proprietaire : userEmail
+        .post('http://easygame.funndeh.com:5000/api/event/getEvents', {
+            userEmail : userEmail
         })
         .then(
             res => {
-              console.log(res.message);
+              console.log(res);
+              return res;
             }
         )
         .catch(err => {

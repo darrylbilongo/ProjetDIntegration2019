@@ -81,8 +81,8 @@ export default class CreateDevice extends Component {
                         placeholder="nom du device"
                         onChange={this.onChange} />
                     </div>
-                    <div className="col-md-2 text-right">
-                        <button type="submit" className="btn btn-default">Ajouter</button>
+                    <div className="col-md-10 text-right">
+                        <button type="submit" className="btn btn-info">Ajouter</button>
                     </div>
                 </div>
             </form>

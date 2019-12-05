@@ -60,7 +60,7 @@ class Calendar extends Component {
 
         ajoutEvent(newEvent);
 
-        
+
 
     }
 
@@ -68,9 +68,10 @@ class Calendar extends Component {
             return (
                 <div>
                     <div className="container">
-                        <h2>Bonjour {this.state.prenom}</h2>
+                        <h1>Bonjour {this.state.prenom}</h1>
                     </div>
                     <FullCalendar 
+                        timeZone= 'UTC'
                         defaultView="dayGridMonth" 
                         plugins={[ dayGridPlugin ]}
                         events={this.state.events}

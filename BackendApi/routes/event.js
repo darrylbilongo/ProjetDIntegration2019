@@ -3,7 +3,7 @@ let Event = require('../models/event.model');
 
 router.route('/').get((req, res) => {
     Event.find()
-        .then(fonctions => res.json(fonctions))
+        .then(event => res.json(event))
         .catch(err => res.status(400).json('Error: ' + err));
 });
 
