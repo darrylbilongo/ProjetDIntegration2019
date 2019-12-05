@@ -65,6 +65,7 @@ class Calendar extends Component {
                         <h1>Bonjour {this.state.prenom}</h1>
                     </div>
                     <FullCalendar 
+                        timeZone= 'UTC'
                         defaultView="dayGridMonth" 
                         plugins={[ dayGridPlugin ]}
                         dateClick={(info) => {

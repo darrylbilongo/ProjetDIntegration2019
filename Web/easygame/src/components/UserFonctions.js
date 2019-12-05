@@ -7,14 +7,12 @@ export const register = newUser => {
 
     return axios   
         .post('http://easygame.funndeh.com:5000/api/users/register', {
-            nomUtilisateur : "test123",
             nom : newUser.nom,
             prenom : newUser.prenom,
             email : newUser.email,
             motDePasse : newUser.motDePasse,
             dateNaissance : newUser.dateNaissance,
             estSupprime : false,
-            totem : newUser.totem,
             fonction : newUser.fonction
         })
         .then(res => {
