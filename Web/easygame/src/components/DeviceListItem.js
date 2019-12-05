@@ -15,12 +15,6 @@ class DeviceListItem extends Component {
         return ( 
             <div>
               <p>
-                <select>
-                  <option selected value="groupe1">Groupe 1</option>
-                  <option value="groupe2">Groupe 2</option>
-                  <option value="groupe3">Groupe 3</option>
-                  <option value="groupe4">Groupe 4</option>
-                </select>
                 <button style={{ float: 'right' }}>
                   Supprimer
                 </button>

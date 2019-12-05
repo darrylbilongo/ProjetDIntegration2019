@@ -34,12 +34,8 @@ class Calendar extends Component {
             email: decoded.email,
         })
 
-        const e = getEvents(this.state.email);
-        
-        this.setState({
-            events: []
-        })
-        
+        this.refresh();
+
     }
 
     onChange(e) {
@@ -58,10 +54,31 @@ class Calendar extends Component {
             userEmail: this.state.email
         }
 
-        ajoutEvent(newEvent);
+        ajoutEvent(newEvent);  
+        
+        this.refresh();
 
+    }
 
+    refresh = async () => {
+        let newEvents = await getEvents(this.state.email).then(res => {
+            return res;
+        });
 
+        console.log(newEvents);
+
+        if(newEvents){
+            this.setState({
+                events: newEvents.map(event => {
+                    return {
+                        title: event.title,
+                        date: event.date
+                    }
+                })
+            })
+
+            console.log(this.state.events)
+        }
     }
 
     render () {
@@ -100,7 +117,12 @@ class Calendar extends Component {
                             className="btn btn-block btn-lg btn-primary">
                                 Envoyer
                             </button>
+                            
             </form>
+            <button 
+                className="btn btn-block btn-lg btn-primary" onClick={this.refresh}>
+                    Rafraichir
+                </button>
                 </div>   
             );
     }
