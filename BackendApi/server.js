@@ -28,7 +28,6 @@ const positionsRouter = require("./routes/positions");
 const devicesRouter = require("./routes/devices");
 const eventRouter = require('./routes/event');
 
-app.use('/api/users', userRouter);
 app.use('/api/positions', positionsRouter);
 app.use('/api/devices', devicesRouter);
 app.use('/api/users', userRouter);
