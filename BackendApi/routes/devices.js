@@ -29,4 +29,10 @@ router.route('/getDevices').post((req, res) =>{
     .catch(err => res.status(400).json({message: 'Error: ' + err}));
 });
 
+router.route('/:id').delete((req, res) =>{
+    User.findByIdAndDelete(req.params.id)
+        .then(device => res.json("Utilisateur supprimé!"))
+        .catch(err => res.status(400).json({message: 'Error: ' + err}));
+});
+
 module.exports = router;
