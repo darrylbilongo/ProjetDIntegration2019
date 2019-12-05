@@ -14,11 +14,11 @@ const eventSchema = new Schema({
         required: true,
         trim: true,
     },
-    user: { 
-        type: Schema.Types.ObjectId, 
-        ref: 'User' 
+    userEmail: { 
+        type: String,
+        required: true,
+        trim: true,
     }
-
 },{
     timestamps: true   
 });

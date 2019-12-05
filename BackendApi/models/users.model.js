@@ -3,12 +3,6 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
-    nomUtilisateur: {
-        type: String,
-        required: true,
-        trim: true,
-        minlength:5
-    },
     nom: {
         type: String,
         required: true,
@@ -33,19 +27,18 @@ const userSchema = new Schema({
         type: Date,
         required: true,
     },
-    estSupprime: {
-        type: Boolean,
-        required: true,
-        default: false
-    },
-    totem:{
-        type: String,
-        required: true,
-    },
     fonction:{
         type: String,
         default: 'scout'
     },
+<<<<<<< HEAD
+    idAnimateur: {
+        type: String,
+        required: true,
+        unique: true,
+        trim: true,
+    }
+=======
     events:[
         {
             type: Schema.Types.ObjectId,
@@ -60,6 +53,7 @@ const userSchema = new Schema({
     ]
 
 
+>>>>>>> 130cd48d4aa3835970d6810300594e8af34a751a
 
 },{
     timestamps: true   

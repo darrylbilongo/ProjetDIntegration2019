@@ -20,7 +20,6 @@ export default class Enregistrer extends Component {
 
         this.state = {
             isLoading: false,
-            nomUtilisateur : '',
             nom : '',
             prenom : '',
             email : '',
@@ -88,15 +87,13 @@ export default class Enregistrer extends Component {
                                     'Content-Type': 'application/json'
                                   },
                                   body: JSON.stringify({
-                                    nomUtilisateur : this.state.nomUtilisateur,
                                     nom : this.state.nom,
                                     prenom : this.state.prenom,
                                     email : this.state.email,
                                     motDePasse : this.state.motDePasse,
                                     dateNaissance : this.state.dateNaissance,
-                                    estSupprime : false,
-                                    totem : this.state.totem,
                                     fonction : 'animateur',
+                                    idAnimateur: this.state.email
                                   })
                                 });                             
         this.getStars();
@@ -107,8 +104,6 @@ export default class Enregistrer extends Component {
         if(!Object.keys(this.state).filter(x => this.state[x] != '')){
             this.responseAPI.message = 'Vous avez oublié de completer une donnée!';
         }
-        else if(this.state.nomUtilisateur.length < 5)
-            this.responseAPI.message = "Le nombre de lettre attendu pour le nom d'utlisateur est 5.";
         else if(this.state.motDePasse !== this.motDePasse){
             this.responseAPI.message =  "Mots de passe incohérents!!!";
         }
@@ -119,8 +114,8 @@ export default class Enregistrer extends Component {
             if(this.verifierAge(this.state.dateNaissance)){
                 this.register();
                 if(this.responseAPI.message && this.responseAPI.message.includes(' est enregistré')){
+                    console.log(this.responseAPI);
                     global.utilisateur =this.responseAPI.utilisateur;
-                    console.log(global.utilisateur);
                     NavigationService.navigate('Profile');
                 }
             }
@@ -144,15 +139,6 @@ export default class Enregistrer extends Component {
                     borderColor: '#003d00', borderRadius:50, borderWidth:1
                 }} source={require("../../images/Logo/logo_transparent.png")}/>
                 <Animated.View >
-
-                    <TextInput
-                        placeholder="Entrez notre nom d'utilisateur"
-                        style={{...styles.textInput}}
-                        onChangeText={nomUtilisateur=> this.setState({nomUtilisateur})}
-                        autoCapitalize='none'
-                        returnKeyType='next'
-                        keyboardType={'default'}
-                    />
 
                     <TextInput
                         placeholder="Entrez votre Nom"
@@ -207,15 +193,6 @@ export default class Enregistrer extends Component {
                         }}
                         onDateChange={(date) => {this.setState({dateNaissance: date})}}
                     />              
-
-                    <TextInput
-                        placeholder="Entrez votre Totem"
-                        style={{...styles.textInput, marginTop: 15}}
-                        onChangeText={totem=> this.setState({totem})}
-                        autoCapitalize='words'
-                        returnKeyType='next'
-                        keyboardType={'default'}
-                    />
 
                     <TextInput
                         placeholder="Entrez votre mot de passe"

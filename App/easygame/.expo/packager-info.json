@@ -1,9 +1,9 @@
 {
-  "devToolsPort": 19003,
+  "devToolsPort": 19002,
   "expoServerPort": 19000,
   "packagerPort": 19001,
-  "packagerPid": 30424,
+  "packagerPid": 6236,
   "expoServerNgrokUrl": "https://bk-7ik.anonymous.easygame.exp.direct",
   "packagerNgrokUrl": "https://packager.bk-7ik.anonymous.easygame.exp.direct",
-  "ngrokPid": 30470
+  "ngrokPid": 6322
 }

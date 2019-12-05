@@ -47,9 +47,25 @@ export const ajoutEvent = (event) => {
             userEmail : event.userEmail
         })
         .then(res => {
-            console.log(res.message);
+            console.log(res);
         })
         .catch(err => {
             console.log(err)
+        })
+}
+
+export const getEvents = (userEmail) => {
+    return axios
+        .post('http://easygame.funndeh.com:5000/api/event/getEvents', {
+            userEmail : userEmail
+        })
+        .then(
+            res => {
+              console.log(res);
+              return res;
+            }
+        )
+        .catch(err => {
+              console.log(err)
         })
 }

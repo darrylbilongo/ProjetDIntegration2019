@@ -10,10 +10,12 @@ router.route('/').get((req, res) => {
 router.route('/add').post((req, res) => {
     const title = req.body.title;
     const date = req.body.date;
+    const userEmail = req.body.userEmail;
 
     const nouveau = new Event({
         title,
         date,
+        userEmail
     });
 
     nouveau.save()
@@ -32,5 +34,14 @@ router.route('/:id').delete((req, res) =>{
         .then(event => res.json("Evenenemet supprimé"))
         .catch(err => res.status(400).json('Error: ' + err));
 });
+
+router.route('/getEvents').post((req, res) =>{
+    Event.find({
+        proprietaire: req.body.proprietaire
+    })
+    .then((event) => res.json(event))
+    .catch(err => res.status(400).json({message: 'Error: ' + err}));
+});
+
 
 module.exports = router;

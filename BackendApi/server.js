@@ -24,20 +24,16 @@ connection.once('open', () => {
 });
 
 const userRouter = require('./routes/users');
-const fonctionRouter = require('./routes/fonctions');
-const totemRouter = require('./routes/totems');
-const planningRouter = require('./routes/plannings');
-const parentRouter = require('./routes/parent');
-const animateurRouter = require('./routes/animateur');
+const positionsRouter = require("./routes/positions");
+const devicesRouter = require("./routes/devices");
 const eventRouter = require('./routes/event');
 
 app.use('/api/users', userRouter);
+app.use('/api/positions', positionsRouter);
+app.use('/api/devices', devicesRouter);
+app.use('/api/users', userRouter);
 app.use('/api/event', eventRouter);
-app.use('/api/fonctions', fonctionRouter);
-app.use('/api/totems', totemRouter);
-app.use('/api/plannings', planningRouter);
-app.use('/api/parent', parentRouter);
-app.use('/api/parent', animateurRouter);
+
 
 app.listen(port,function(){
     console.log('Server is running on port: ' + port)
