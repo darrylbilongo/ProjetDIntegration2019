@@ -26,8 +26,6 @@ connection.once('open', () => {
 const userRouter = require('./routes/users');
 const positionsRouter = require("./routes/positions");
 const devicesRouter = require("./routes/devices");
-const parentRouter = require('./routes/parent');
-const animateurRouter = require('./routes/animateur');
 const eventRouter = require('./routes/event');
 const fonctionRouter = require('./routes/fonction');
 
@@ -37,8 +35,7 @@ app.use('/api/positions', positionsRouter);
 app.use('/api/devices', devicesRouter);
 app.use('/api/users', userRouter);
 app.use('/api/event', eventRouter);
-app.use('/api/parent', parentRouter);
-app.use('/api/parent', animateurRouter);
+
 
 app.use('/api/fonctions', fonctionRouter);
 
