@@ -27,17 +27,12 @@ const userRouter = require('./routes/users');
 const positionsRouter = require("./routes/positions");
 const devicesRouter = require("./routes/devices");
 const eventRouter = require('./routes/event');
-const fonctionRouter = require('./routes/fonction');
 
-
-app.use('/api/users', userRouter);
 app.use('/api/positions', positionsRouter);
 app.use('/api/devices', devicesRouter);
 app.use('/api/users', userRouter);
 app.use('/api/event', eventRouter);
 
-
-app.use('/api/fonctions', fonctionRouter);
 
 app.listen(port,function(){
     console.log('Server is running on port: ' + port)
