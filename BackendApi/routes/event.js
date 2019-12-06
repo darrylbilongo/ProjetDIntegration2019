@@ -43,5 +43,15 @@ router.route('/getEvents').post((req, res) =>{
     .catch(err => res.status(400).json({message: 'Error: ' + err}));
 });
 
+router.route('/getSpecialDate').post((req, res) => {
+
+    Event.find({
+        userEmail: req.body.userEmail,
+        date: req.body.date
+    })
+    .then((event) => res.json(event))
+    .catch(err => res.status(400).json({message: 'Error: ' + err}));
+})
+
 
 module.exports = router;
