@@ -28,10 +28,10 @@ const positionsRouter = require("./routes/positions");
 const devicesRouter = require("./routes/devices");
 const eventRouter = require('./routes/event');
 
-app.use('/api/positions', positionsRouter);
-app.use('/api/devices', devicesRouter);
-app.use('/api/users', userRouter);
-app.use('/api/event', eventRouter);
+app.use('/positions', positionsRouter);
+app.use('/devices', devicesRouter);
+app.use('/users', userRouter);
+app.use('/event', eventRouter);
 
 
 app.listen(port,function(){
