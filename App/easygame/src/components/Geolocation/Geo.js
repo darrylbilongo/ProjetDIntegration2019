@@ -57,7 +57,7 @@ class Geo extends Component {
    }
 
    getGeo = async () => {
-    let response = await fetch('http://easygame.funndeh.com:5000/api/positions/getLastPosition', {
+    let response = await fetch('https://easygame.funndeh.com/api/positions/getLastPosition', {
                         method: 'POST',
                         headers: {
                             'Accept': 'application/json',

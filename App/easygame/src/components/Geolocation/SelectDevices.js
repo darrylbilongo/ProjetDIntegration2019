@@ -21,7 +21,7 @@ export default class SelectDevices extends Component {
     }
 
     getDevices =  async(email) => {
-        let response = await fetch('http://easygame.funndeh.com:5000/api/devices/getDevices', {
+        let response = await fetch('https://easygame.funndeh.com/api/devices/getDevices', {
                                 method: 'POST',
                                 headers: {
                                     'Accept': 'application/json',

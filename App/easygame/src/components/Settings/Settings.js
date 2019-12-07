@@ -35,7 +35,7 @@ verifMotDePasse = () => {
 }
 
 deleteCompte = async () => {
-    const response = await fetch('http://easygame.funndeh.com:5000/api/users/' + global.utilisateur._id, {
+    const response = await fetch('https://easygame.funndeh.com/api/users/' + global.utilisateur._id, {
                                     method: 'DELETE',
                                     headers: {
                                     'Accept': 'application/json',
@@ -50,7 +50,7 @@ deleteCompte = async () => {
 
 sendUpdate = async () => {
     this.state.isLoading = true;
-    const response = await fetch('http://easygame.funndeh.com:5000/api/users/update/' + global.utilisateur._id, {
+    const response = await fetch('https://easygame.funndeh.com/api/users/update/' + global.utilisateur._id, {
                               method: 'POST',
                               headers: {
                                 'Accept': 'application/json',

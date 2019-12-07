@@ -4,11 +4,50 @@ import styles from './styles';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import NavigationService from '../Navigation/NavigationService';
 
-export default class Profile extends Component {
+
+
+export default class Accueil extends Component {
+
+  constructor(){
+    super();
+
+    global.utilisateur.agenda = [];
+    this.state = {
+      responseApi: ''
+    };
+  }
 
   deconnexion = () => {
     global.utilisateur = {};
     NavigationService.navigate('HomePage');
+  }
+
+  donnerAgenda = async () => {
+    try{
+      const response = await fetch('https://easygame.funndeh.com/api/event/getEvents', {
+                              method: 'POST',
+                              headers: {
+                                'Accept': 'application/json',
+                                'Content-Type': 'application/json'
+                              },
+                              body: JSON.stringify({
+                                userEmail: global.utilisateur.email
+                              })
+                            });                
+      this.state.responseApi = await response.json();
+    }
+    catch (error){
+      console.log(error);
+    }
+  }
+
+  TraiterAgenda = () => {
+    this.donnerAgenda();
+    if(this.state.responseApi && this.state.responseApi != []){
+      console.log(this.state.responseApi);
+      global.utilisateur.agenda = this.state.responseApi;
+      NavigationService.navigate("Agenda")
+    }
   }
 
   render() {
@@ -23,7 +62,7 @@ export default class Profile extends Component {
           </View>
 
           <TouchableOpacity style={{...styles.deconnexion, backgroundColor: '#003d00', color:'white'}}
-                onPress={() => NavigationService.navigate("Agenda")}
+                onPress={() => this.TraiterAgenda()}
               >
                 <Text style={{fontSize:20, fontWeight:'bold', color: 'white'}} >
                   Agenda

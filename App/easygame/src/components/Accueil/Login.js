@@ -106,7 +106,7 @@ export default class Login extends Component {
         loading: true
       });
 
-      const response = await fetch('http://easygame.funndeh.com:5000/api/users/login', {
+      const response = await fetch('https://easygame.funndeh.com/api/users/login', {
                               method: 'POST',
                               headers: {
                                 'Accept': 'application/json',

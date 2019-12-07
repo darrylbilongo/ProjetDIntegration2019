@@ -7,7 +7,7 @@ import Planning from '../Admin/Agenda';
 import Enregistrer from '../Accueil/Enregistrer';
 import Geo from '../Geolocation/Geo';
 import SelectDevices from '../Geolocation/SelectDevices';
-import Profile from '../Accueil/Profile';
+import Accueil from '../Accueil/HomeMenu';
 import container from '../Navigation/NavConnection';
 import Settings from '../Settings/Settings';
 
