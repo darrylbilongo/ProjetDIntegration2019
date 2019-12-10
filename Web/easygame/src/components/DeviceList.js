@@ -13,7 +13,8 @@ class DeviceList extends Component {
       
         this.state = {
           devices : [],
-          email : ""
+          email : "",
+          fonction: ""
         }
 
         this.onDelete = this.onDelete.bind(this);
@@ -27,6 +28,7 @@ class DeviceList extends Component {
       
       this.setState({
           email: decoded.email,
+          fonction: decoded.fonction
       })
 
       this.getDevices();
@@ -73,6 +75,14 @@ class DeviceList extends Component {
       
     }
 
+    checkAdmin = (device) => {
+      if(this.state.fonction == 'admin'){
+          return (<button name={device.nomDevice} className="btn btn-danger" style={{ float: 'right' }} onClick={this.onDelete}>
+                    Supprimer
+                  </button>)
+      } 
+    }
+
 
     render() { 
         return ( 
@@ -91,9 +101,7 @@ class DeviceList extends Component {
                     <option value="groupe4">Groupe 4</option>
                   </select>  
                 </p>
-                <button name={device.nomDevice} className="btn btn-danger" style={{ float: 'right' }} onClick={this.onDelete}>
-                    Supprimer
-                  </button>
+                {this.checkAdmin(device)}
               </div>
             )))}
           </div>
