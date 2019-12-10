@@ -47,10 +47,6 @@ class Profile extends Component {
                         <table className="table col-md-8 mx-auto">
                             <tbody>
                                 <tr>
-                                    <td>Id</td>
-                                    <td>{this.state.idAnimateur}</td>
-                                </tr>
-                                <tr>
                                     <td>Nom</td>
                                     <td>{this.state.nom}</td>
                                 </tr>

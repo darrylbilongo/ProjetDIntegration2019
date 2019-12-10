@@ -33,7 +33,7 @@ class DeviceList extends Component {
     }
 
     getDevices = () => {
-        axios.post('http://easygame.funndeh.com:5000/api/devices/getDevices', {
+        axios.post('https://easygame.funndeh.com:5000/api/devices/getDevices', {
           proprietaire : this.state.email
         })
         .then(
@@ -62,7 +62,7 @@ class DeviceList extends Component {
         }
       }) 
 
-      axios.delete('http://easygame.funndeh.com:5000/api/devices/' + id[0]._id)
+      axios.delete('https://easygame.funndeh.com:5000/api/devices/' + id[0]._id)
       .then(res => {
         console.log(res.data.message);
       })

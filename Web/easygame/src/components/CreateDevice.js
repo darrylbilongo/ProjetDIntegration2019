@@ -55,7 +55,7 @@ export default class CreateDevice extends Component {
     }
 
     addDevice = (dev) => {
-        axios.post('http://easygame.funndeh.com:5000/api/devices/add', {
+        axios.post('https://easygame.funndeh.com:5000/api/devices/add', {
             nomDevice: dev.nomDevice,
             proprietaire: dev.proprietaire
         })
