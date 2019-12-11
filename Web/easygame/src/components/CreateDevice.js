@@ -32,7 +32,10 @@ export default class CreateDevice extends Component {
             email: decoded.email,
         })
 
+        this.getDevices();
+
     }
+
 
     handleSubmit = (e) => {
         e.preventDefault();
@@ -44,7 +47,8 @@ export default class CreateDevice extends Component {
         this.addDevice(device);
         
         this.setState({
-            nom: ""
+            devices: [ device, ...this.state.devices ],
+            nom: ''
         })
     }
 
@@ -55,8 +59,8 @@ export default class CreateDevice extends Component {
     }
 
     addDevice = (dev) => {
-        axios.post('https://easygame.funndeh.com:5000/api/devices/add', {
-            nomDevice: dev.nomDevice,
+        axios.post('http://localhost:5000/api/devices/add', {
+            nom: dev.nomDevice,
             proprietaire: dev.proprietaire
         })
         .then(
@@ -72,8 +76,8 @@ export default class CreateDevice extends Component {
     render() {
         return (
             <form className="form-horizontal" onSubmit={this.handleSubmit.bind(this) }>
-                <div className="form-group">
-                    <div className="col-md-10">
+                <div className="form-row align-items-center">
+                    <div className="col-auto">
                         <input 
                         className="form-control" 
                         type="text"
@@ -81,7 +85,7 @@ export default class CreateDevice extends Component {
                         placeholder="nom du device"
                         onChange={this.onChange} />
                     </div>
-                    <div className="col-md-10 text-right">
+                    <div className="col-auto">
                         <button type="submit" className="btn btn-info">Ajouter</button>
                     </div>
                 </div>
