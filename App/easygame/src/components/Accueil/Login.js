@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
-import { ActivityIndicator, StyleSheet, Text, View, Dimensions, TextInput, Alert,} from 'react-native';
+import { ActivityIndicator, StyleSheet, Text, View, Dimensions, TextInput, Alert} from 'react-native';
+import * as SecureStore from 'expo-secure-store';
 import Welcome from '../Accueil/Welcome';
 import Animated, {Easing} from "react-native-reanimated";
 import {TapGestureHandler, State, TouchableOpacity} from 'react-native-gesture-handler';
@@ -7,7 +8,6 @@ import Svg, {Image, Circle, ClipPath} from 'react-native-svg';
 import styles from './styles';
 import NavigationService from '../Navigation/NavigationService';
 import verifierDonnees from './verifierDonnees';
-import Loader from '../Loader';
 
 const { width, height } = Dimensions.get('window');
 
@@ -125,12 +125,17 @@ export default class Login extends Component {
           responseAPI: responseJson
         });
       }, 1000);
+
     }
     catch (error){
       console.log(error);
-    }
-    
+    } 
   }
+
+  storeToken = async() => {
+    await SecureStore.setItemAsync('secure_token',this.state.responseAPI.token);
+  }
+
 
   myValidate = () => {
     const {userEmail, userPassword} = this.state;
@@ -138,20 +143,18 @@ export default class Login extends Component {
       this.login();
       if(!this.state.responseAPI.message)
         return;
-      if(this.state.responseAPI.message.indexOf('reussie!!!') > -1 ){
+      if(this.state.responseAPI.utilisateur){
         this.state.userPassword = '';
         this.state.userEmail = '';
         global.utilisateur = this.state.responseAPI.utilisateur;
-        NavigationService.navigate('Profile');
+        NavigationService.navigate('Accueil');
         this._textInput1.setNativeProps({ text: '' });
         this._textInput2.setNativeProps({ text: '' });
-      }
-      else if (this.state.responseAPI.message.indexOf('erroné') > -1){
-        Alert.alert(this.state.responseAPI.message);
-      }  
+      } 
     }
     else
-      Alert.alert("Veuillez remplir votre mail et votre mot de passe"); 
+      this.state.responseAPI.message = "Veuillez remplir votre mail et votre mot de passe"; 
+    Alert.alert(this.state.responseAPI.message);
   }
 
   stopAction = (e) =>{
@@ -262,8 +265,6 @@ export default class Login extends Component {
                     Connexion
                   </Text>
                 </TouchableOpacity>
-
-                <Loader loading={this.state.loading} />
           
             </Animated.View>
           </View>

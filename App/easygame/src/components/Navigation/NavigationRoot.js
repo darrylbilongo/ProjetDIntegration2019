@@ -19,7 +19,7 @@ const AppNavigator = createStackNavigator(
         header: null
       }
     },
-    Profile: {
+    Accueil: {
       screen: container,
       navigationOptions:{
         header: null

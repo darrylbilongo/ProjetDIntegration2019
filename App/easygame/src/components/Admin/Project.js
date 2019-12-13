@@ -1,11 +1,6 @@
 import React, {Component} from 'react';
-import {Text,Alert, View, Dimensions, Image, ScrollView, TextInput, Platform, KeyboardAvoidingView, SafeAreaView,} from 'react-native';
+import {Dimensions, Image, ScrollView, Platform, KeyboardAvoidingView, SafeAreaView,} from 'react-native';
 import styles from './styles';
-import {TouchableOpacity} from 'react-native-gesture-handler';
-import NavigationService from '../Navigation/NavigationService';
-import Animated from "react-native-reanimated";
-import DateTimePicker from 'react-native-modal-datetime-picker';
-import Planning from './Agenda';
 
 const { width, height } = Dimensions.get('window');
 

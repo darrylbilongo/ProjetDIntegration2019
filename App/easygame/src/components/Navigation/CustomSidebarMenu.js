@@ -10,7 +10,7 @@ export default class CustomSidebarMenu extends Component {
     this.items = [
       {
         navOptionThumb: 'home',
-        navOptionName: 'Profile',
+        navOptionName: 'Accueil',
         screenToNavigate: 'Home',
       },
       {

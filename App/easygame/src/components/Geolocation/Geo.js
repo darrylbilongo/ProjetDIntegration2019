@@ -39,6 +39,7 @@ class Geo extends Component {
 
   componentDidMount() {
     this._isMounted = true;
+    this.miseAjourPosition();
 
     navigator.geolocation.getCurrentPosition(
        (position) => {
@@ -53,7 +54,7 @@ class Geo extends Component {
        { enableHighAccuracy: false, timeout: 200000, maximumAge: 1000 },
      );
 
-     this.timer = setInterval(()=> this.miseAjourPosition(), 1000)
+    setInterval(()=> this.miseAjourPosition(), 30000)
    }
 
    getGeo = async () => {
@@ -81,9 +82,10 @@ class Geo extends Component {
         .then((data) => {
             if(data && this._isMounted){
               this.setState({
-                cordLongitude: parseFloat(data.lat.$numberDecimal),
-                cordLatitude: parseFloat(data.lon.$numberDecimal)
+                cordLongitude: parseFloat(data.lon.$numberDecimal),
+                cordLatitude: parseFloat(data.lat.$numberDecimal)
               })
+              console.log(data)
             }
         })
         .catch(err => {

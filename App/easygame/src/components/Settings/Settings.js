@@ -5,7 +5,8 @@ import {TouchableOpacity} from 'react-native-gesture-handler';
 import NavigationService from '../Navigation/NavigationService';
 import Animated from "react-native-reanimated";
 import DatePicker from 'react-native-datepicker';
-import { Global } from '@jest/types';
+import * as SecureStore from 'expo-secure-store';
+//import { decodeToken } from 'react-native-jsontokens'
 
 const { width, height } = Dimensions.get('window');
 
@@ -14,6 +15,7 @@ export default class Config extends Component {
   constructor(){
     super();
 
+    //const tokenData = decodeToken(token)
     this.state = {
         isLoading: false,
         nom : '',
@@ -42,10 +44,7 @@ deleteCompte = async () => {
                                     'Content-Type': 'application/json'
                                     }
                                 });
-    this.responseAPI = await response.json()
-    NavigationService.navigate('HomePage');
-    Alert.alert(this.responseAPI.message);
-    global.utilisateur = {};                  
+    this.responseAPI = await response.json()        
 }
 
 sendUpdate = async () => {
@@ -76,6 +75,16 @@ updateCompte = () => {
     }
     else
         Alert("Mot de passe incorrect!!!")
+}
+
+delete = () => {
+    this.deleteCompte();
+    console.log(this.responseAPI);
+    if(this.responseAPI){
+        NavigationService.navigate('HomePage');
+        Alert.alert(this.responseAPI.message);
+        global.utilisateur = {};     
+    }     
 }
 
 
@@ -150,18 +159,9 @@ updateCompte = () => {
                             }
                         }}
                         onDateChange={(date) => {this.setState({dateNaissance: date})}}
-                    />     
+                    />    
 
-                    <Text style={{...styles.mytext}}>Votre Totem</Text>      
-                    <TextInput
-                        placeholder={global.utilisateur.totem}
-                        style={{...styles.textInput, marginTop: 15}}
-                        onChangeText={totem=> this.setState({totem})}
-                        autoCapitalize='words'
-                        returnKeyType='next'
-                        keyboardType={'default'}
-                    />
-
+                    {/*
                     <Text style={{...styles.mytext}}>Changer votre mot de passe</Text>
                     <TextInput
                         placeholder="Ancien mot de passe"
@@ -197,7 +197,7 @@ updateCompte = () => {
                         returnKeyType='next'
                         keyboardType={'default'}
                         secureTextEntry={true}
-                    />
+                    />*/}
 
                     {/*<TouchableOpacity style={{...styles.deconnexion, backgroundColor: '#003d00', color:'white'}}
                         onPress={this.updateCompte}
@@ -209,7 +209,7 @@ updateCompte = () => {
 
 
                     <TouchableOpacity style={{...styles.deconnexion, backgroundColor: '#003d00', color:'white'}}
-                        onPress={this.deleteCompte}
+                        onPress={this.delete}
                     >
                         <Text style={{fontSize:20, fontWeight:'bold', color: 'white'}}>
                             Suppression du compte

@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
-import { StyleSheet, Text, View, Dimensions} from 'react-native';
+import { StyleSheet, Text, View, Dimensions, Alert} from 'react-native';
 import {Agenda} from 'react-native-calendars';
+import NavigationService from '../Navigation/NavigationService';
 
 const { width, height } = Dimensions.get('window');
 
@@ -61,17 +62,19 @@ export default class Planning extends Component {
         if (!this.state.items[strTime]) {
           this.state.items[strTime] = [];
           let pourUnJour = [];
-          global.utilisateur.agenda.forEach(x => {
-            if(x.date.split('T')[0] == strTime){
-              pourUnJour.push(x);
-              this.dates.push(x.date.split('T')[0]);
-            }
-          });
-          for (let j = 0; j < pourUnJour.length; j++) {
-            this.state.items[strTime].push({
-              name:  pourUnJour[j].title,
-              height: Math.max(50, Math.floor(Math.random() * 150))
+          if(global.utilisateur.agenda){
+            global.utilisateur.agenda.forEach(x => {
+              if(x.date.split('T')[0] == strTime){
+                pourUnJour.push(x);
+                this.dates.push(x.date.split('T')[0]);
+              }
             });
+            for (let j = 0; j < pourUnJour.length; j++) {
+              this.state.items[strTime].push({
+                name:  pourUnJour[j].title,
+                height: Math.max(50, Math.floor(Math.random() * 150))
+              });
+            }
           }
         }
       }
@@ -79,17 +82,25 @@ export default class Planning extends Component {
         this.tmp.push( {"color" : this.colors[Math.floor(Math.random() * 5)]});
       });
 
-      this.setState({
-        color: Object.assign(...this.dates.map((k, i) => ({[k]: this.tmp[i]})))
-      })
+      console.log("this.dates ", this.dates);
 
-      console.log(this.state.color);
+      if(typeof this.dates !== 'undefined' && this.dates.length > 0){
+        this.setState({
+          color: Object.assign(...this.dates.map((k, i) => ({[k]: this.tmp[i]})))
+        })
+  
+  
+        const newItems = {};
+        Object.keys(this.state.items).forEach(key => {newItems[key] = this.state.items[key];});
+        this.setState({
+          items: newItems
+        });
+      }
+      else{
+        Alert.alert("Il n'y rien de prévus pour vous.");
+        NavigationService.navigate('Accueil');
+      }
 
-      const newItems = {};
-      Object.keys(this.state.items).forEach(key => {newItems[key] = this.state.items[key];});
-      this.setState({
-        items: newItems
-      });
     }, 1000);
   }
 

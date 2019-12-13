@@ -116,7 +116,7 @@ export default class Enregistrer extends Component {
                 if(this.responseAPI.message && this.responseAPI.message.includes(' est enregistré')){
                     console.log(this.responseAPI);
                     global.utilisateur =this.responseAPI.utilisateur;
-                    NavigationService.navigate('Profile');
+                    NavigationService.navigate('Accueil');
                 }
             }
         }
