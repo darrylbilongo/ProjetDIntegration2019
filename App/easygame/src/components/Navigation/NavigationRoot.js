@@ -7,7 +7,9 @@ import Planning from '../Admin/Agenda';
 import Enregistrer from '../Accueil/Enregistrer';
 import Geo from '../Geolocation/Geo';
 import SelectDevices from '../Geolocation/SelectDevices';
+import Accueil from '../Accueil/HomeMenu';
 import container from '../Navigation/NavConnection';
+import Settings from '../Settings/Settings';
 
 const AppNavigator = createStackNavigator(
   {
@@ -17,7 +19,7 @@ const AppNavigator = createStackNavigator(
         header: null
       }
     },
-    Profile: {
+    Accueil: {
       screen: container,
       navigationOptions:{
         header: null
@@ -52,7 +54,13 @@ const AppNavigator = createStackNavigator(
       navigationOptions: {
         header: null,
       }
-    },    
+    },      
+    Settings: {
+      screen: Settings,
+      navigationOptions: {
+        header: null,
+      }
+    },  
   },
   {
     initialRouteName: 'HomePage',

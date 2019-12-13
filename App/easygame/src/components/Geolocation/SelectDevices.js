@@ -21,7 +21,7 @@ export default class SelectDevices extends Component {
     }
 
     getDevices =  async(email) => {
-        let response = await fetch('http://easygame.funndeh.com:5000/api/devices/getDevices', {
+        let response = await fetch('https://easygame.funndeh.com/api/devices/getDevices', {
                                 method: 'POST',
                                 headers: {
                                     'Accept': 'application/json',
@@ -77,10 +77,11 @@ export default class SelectDevices extends Component {
                                     .catch(err => {
                                         console.log(err)
                                     });
-                                    
-                                this.setState({
-                                    pickersItem: this.state.devices.map((x, index) => <Picker.Item key={index} label={x.nomDevice} value={x.nomDevice} />)
-                                })    
+                                if(this.state.devices){
+                                    this.setState({
+                                        pickersItem: this.state.devices.map((x, index) => <Picker.Item key={index} label={x.nomDevice} value={x.nomDevice} />)
+                                    }) 
+                                }   
                                 //console.log(this.state.pickersItem)    
                             }}
                         >

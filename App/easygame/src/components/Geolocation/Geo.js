@@ -7,6 +7,8 @@ import Polyline from '@mapbox/polyline';
 
 
 class Geo extends Component {
+  _isMounted = false;
+
   constructor(props) {
     super(props);
 
@@ -17,8 +19,8 @@ class Geo extends Component {
       concat: null,
       coords:[],
       x: 'false',
-      cordLatitude:50.866606,
-      cordLongitude:4.2994484,
+      cordLatitude:0, //50.866606,
+      cordLongitude: 0,//4.2994484,
       latitudeDelta: 0.045,
       longitudeDelta: 0.045,
       location: null,
@@ -36,6 +38,9 @@ class Geo extends Component {
   }
 
   componentDidMount() {
+    this._isMounted = true;
+    this.miseAjourPosition();
+
     navigator.geolocation.getCurrentPosition(
        (position) => {
          this.setState({
@@ -49,11 +54,11 @@ class Geo extends Component {
        { enableHighAccuracy: false, timeout: 200000, maximumAge: 1000 },
      );
 
-     this.timer = setInterval(()=> this.miseAjourPosition(), 1000)
+    setInterval(()=> this.miseAjourPosition(), 30000)
    }
 
    getGeo = async () => {
-    let response = await fetch('http://easygame.funndeh.com:5000/api/positions/getLastPosition', {
+    let response = await fetch('https://easygame.funndeh.com/api/positions/getLastPosition', {
                         method: 'POST',
                         headers: {
                             'Accept': 'application/json',
@@ -67,14 +72,20 @@ class Geo extends Component {
     return responseJson;
   }
 
+
+  componentWillUnmount(){
+    this._isMounted = false;
+  }
+
    miseAjourPosition = () => {
       this.getGeo()
         .then((data) => {
-            if(data){
+            if(data && this._isMounted){
               this.setState({
                 cordLongitude: parseFloat(data.lon.$numberDecimal),
                 cordLatitude: parseFloat(data.lat.$numberDecimal)
               })
+              console.log(data)
             }
         })
         .catch(err => {
