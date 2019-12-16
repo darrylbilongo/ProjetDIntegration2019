@@ -82,7 +82,7 @@ delete = () => {
     console.log(this.responseAPI);
     if(this.responseAPI){
         NavigationService.navigate('HomePage');
-        Alert.alert(this.responseAPI.message);
+        Alert.alert(this.responseAPI);
         global.utilisateur = {};     
     }     
 }
