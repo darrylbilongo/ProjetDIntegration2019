@@ -1,10 +1,14 @@
 # Bienvenue sur Easygame
+**Projet d'intégration 2019/2020**
+**Groupe 7**
+Membres:
+  - [**Manuelle Ndamtang**](https://github.com/Manste): Scrum-Master
+  - [**Darryl Bilongo**](https://github.com/darrylbilongo): Product Owner
+  - [**Jean Cornil**](https://github.com/CornilJean2TL2): Développeur
 
 ![](https://github.com/darrylbilongo/ProjetDIntegration2019/blob/master/Logo/logo.png)
 
-**Groupe 7**
-
-Le projet a but da faciliter la tâche des animateurs scoots en ce qui concerne la gestion, la plannnification des activités ainsi que surveillance des membres du scouts. Ceci a été mis en place pour rassurer les parents s'exprimant sur leurs craintes pour certaines activités, qui, des fois, sont considérées comme "dangeureuses".
+Le projet a but de faciliter la tâche des animateurs scoots en ce qui concerne la gestion, la plannification des activités ainsi que surveillance des animés. Ceci a été mis en place pour rassurer les parents s'exprimant sur leurs craintes d'égarement de leur progéniture et les animateurs souvent surchargés au vue de leurs nombreuses responsabilités.
 
 Notre projet possède deux parties:
 - **application web: https://www.easygame.funndeh.com/**
