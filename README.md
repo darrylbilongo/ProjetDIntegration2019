@@ -1,6 +1,9 @@
 # Bienvenue sur Easygame
+
 **Projet d'intégration 2019/2020**
+
 **Groupe 7**
+
 Membres:
   - [**Manuelle Ndamtang**](https://github.com/Manste): Scrum-Master
   - [**Darryl Bilongo**](https://github.com/darrylbilongo): Product Owner
