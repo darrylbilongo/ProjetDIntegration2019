@@ -1,4 +1,7 @@
 # Bienvenue sur Easygame
+
+![](https://github.com/darrylbilongo/ProjetDIntegration2019/blob/master/Logo/logo.png)
+
 **Groupe 7**
 
 Le projet a but da faciliter la tâche des animateurs scoots en ce qui concerne la gestion, la plannnification des activités ainsi que surveillance des membres du scouts. Ceci a été mis en place pour rassurer les parents s'exprimant sur leurs craintes pour certaines activités, qui, des fois, sont considérées comme "dangeureuses".
