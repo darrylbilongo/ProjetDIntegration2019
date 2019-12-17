@@ -3,6 +3,7 @@ import FullCalendar from '@fullcalendar/react'
 import dayGridPlugin from '@fullcalendar/daygrid'
 import jwt_decode from 'jwt-decode';
 import {ajoutEvent, getEvents } from './UserFonctions';
+import axios from 'axios';
 
 
 class Calendar extends Component {
@@ -35,7 +36,6 @@ class Calendar extends Component {
         })
 
         this.refresh();
-
     }
 
     onChange(e) {
@@ -57,15 +57,12 @@ class Calendar extends Component {
         ajoutEvent(newEvent);  
         
         this.refresh();
-
     }
 
     refresh = async () => {
         let newEvents = await getEvents(this.state.email).then(res => {
             return res;
         });
-
-        console.log(newEvents);
 
         if(newEvents){
             this.setState({
@@ -90,9 +87,20 @@ class Calendar extends Component {
                     <FullCalendar 
                         timeZone= 'UTC'
                         defaultView="dayGridMonth" 
+                        header = {{
+                            left: 'prev,next today myCustomButton',
+                            center: 'title',
+                            right: 'month,basicWeek,basicDay'
+                        }}
                         plugins={[ dayGridPlugin ]}
                         events={this.state.events}
-                        onTypeChange={this.onTypeChange} 
+                        onTypeChange={this.onTypeChange}
+                        navLinks= {true} // can click day/week names to navigate views
+                        editable= {true}
+                        eventClick = {function(calEvent) {
+                            alert(calEvent.title);
+                            console.log(calEvent)
+                        }}
                         />   
                     <form noValidate onSubmit={this.onSubmit}>
                             <div className="form-group">
