@@ -1,6 +1,6 @@
 # Bienvenue sur Easygame
 
-![](https://github.com/darrylbilongo/ProjetDIntegration2019/blob/master/Logo/logo.png)
+![](https://github.com/darrylbilongo/ProjetDIntegration2019/blob/master/Logo/logo_transparent.png)
 
 **Groupe 7**
 
