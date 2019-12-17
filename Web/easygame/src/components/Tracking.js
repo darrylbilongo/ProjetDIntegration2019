@@ -13,7 +13,6 @@ class Tracking extends Component {
             fonction:"",
             devices: []
         }
-        this.delete = this.delete.bind(this);
         this.onChange = this.onChange.bind(this);
     }
 
@@ -31,15 +30,16 @@ class Tracking extends Component {
     }
 
     delete(id) {
-
         const reste = this.state.devices.filter((device) => {
-            if(device.id != id) return device;
+            if(device.nomDevice !== id) return device;
         });
+
+        
         /*this.setState(prevState => ({
             devices: prevState.devices.filter(el => el != id )
         }))*/
 
-        axios.delete('http://localhost:5000/api/devices/' + id)
+        axios.delete('https://easygame.funndeh.com/api/devices/' + id)
             .then(res => {
                 console.log(res.data.message);
                 this.setState({
@@ -49,10 +49,12 @@ class Tracking extends Component {
             .catch(err => {
                 console.log(err)
             })
+
+        this.getDevices();
     }
 
     addDevice = async (dev) => {
-        await axios.post('http://localhost:5000/api/devices/add', {
+        await axios.post('https://easygame.funndeh.com/api/devices/add', {
             nomDevice: dev.nomDevice,
             proprietaire: dev.proprietaire
         })
@@ -70,7 +72,7 @@ class Tracking extends Component {
     }
 
     getDevices = async () => {
-        await axios.post('http://localhost:5000/api/devices/getDevices', {
+        await axios.post('https://easygame.funndeh.com/api/devices/getDevices', {
           proprietaire : this.state.email
         })
         .then(
@@ -139,8 +141,7 @@ class Tracking extends Component {
                 <h1> Tracking </h1>
                 <span>Ajouter un nouveau device</span>
                 {this.checkAdmin()}
-                <DeviceList devices={this.state.devices} delete={this.delete}/>
-
+                <DeviceList devices={this.state.devices} delete={this.delete.bind(this)}/>
             </div>
         );
     }

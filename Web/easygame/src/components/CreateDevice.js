@@ -36,7 +36,6 @@ export default class CreateDevice extends Component {
 
     }
 
-
     handleSubmit = (e) => {
         e.preventDefault();
 

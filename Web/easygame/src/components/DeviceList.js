@@ -9,6 +9,9 @@ const DeviceItem = ({device, remove}) => {
                   <div className="col-sm">
                     <h4>{device.nomDevice}</h4>
                   </div>
+                  <button name={device.nomDevice} className="btn btn-danger" style={{ float: 'right' }} onClick={remove(device.nomDevice)}>
+                    Supprimer
+                  </button>
                 </div>
               </div>
   );
@@ -34,29 +37,6 @@ class DeviceList extends Component {
       })
     }
 
-    /*onDelete = (e) => {
-
-      console.log(e.currentTarget.parentNode);
-
-      let a = e.currentTarget.parentNode.getAttribute("data-key");
-
-      const id = this.state.devices.filter(device => {
-        if(device.nomDevice = a){
-          return true;
-        }
-      }) 
-
-      console.log(id);
-
-      axios.delete('http://localhost:5000/api/devices/')
-      .then(res => {
-        console.log(res.data.message);
-      })
-      .catch(err => {
-          console.log(err)
-      })
-
-    }*/
 
     checkAdmin = (device) => {
       if(this.state.fonction === 'animateur'){
@@ -71,7 +51,7 @@ class DeviceList extends Component {
         return ( 
           <div className="container">
             {this.props.devices.map((device => (
-              <DeviceItem device={device} key={device.nomDevice} remove={this.props.remove}></DeviceItem>
+              <DeviceItem device={device} key={device.nomDevice} remove={this.props.delete}></DeviceItem>
             )))}
           </div>
         );

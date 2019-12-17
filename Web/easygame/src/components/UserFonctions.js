@@ -6,14 +6,15 @@ export const register = newUser => {
     newUser.fonction =  "animateur";
 
     return axios   
-        .post('http://localhost:5000/api/users/register', {
+        .post('http://easygame.funndeh.com/users/register', {
             nom : newUser.nom,
             prenom : newUser.prenom,
             email : newUser.email,
             motDePasse : newUser.motDePasse,
             dateNaissance : newUser.dateNaissance,
             estSupprime : false,
-            fonction : newUser.fonction
+            fonction : newUser.fonction,
+            idAnimateur : newUser.email
         })
         .then(res => {
             console.log(res.data.message);
@@ -41,7 +42,7 @@ export const login = user => {
 
 export const ajoutEvent = (event) => {
     return axios
-        .post('http://localhost:5000/api/event/add', {
+        .post('https://easygame.funndeh.com/api/event/add', {
             title : event.title,
             date : event.date,
             userEmail : event.userEmail
