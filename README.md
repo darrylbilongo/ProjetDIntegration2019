@@ -14,22 +14,4 @@ Notre projet possède deux parties:
 
 ### Application Mobile
 
-Une fois dans le projet, aller dans le repertoire ***App/easygame/*** et installer les modules ***nodeJs*** sur base du ***package.json***:
-```bash
-cd App/easygame
-sudo npm install
-```
-Une fois les modules installés, il faudra démarrer l'application grâce à la commande:
-```bash
-sudo expo start
-```
-ou bien 
-```bash
-sudo npm start
-```
-ou encore (pour les fans du yarn)
-```bash
-sudo yarn start
-```
-L'application va ouvrir une fenêtre depuis votre navigateur en local au port 1900. Veuillez vous assurer que votre mobile se trouve dans le même réseau que votre ordinateur. Télécharger l'application ***expo*** sur votre mobile pour un test à temps réel.
-Vous verrez un QR Code depuis votre terminal et votre nagigateur. Scannez le depuis l'application ***expo*** se trouvant sur votre mobile.
+L'application mobile est disponible sur le site du projet [easygame](https://www.easygame.funndeh.com). Vous pouvez egalement scanner le QR code de l'application déploiée sur [expo](https://expo.io/@easygame/easygame), mais cela demande que vous ayez installé au préalable l'application **expo**. Pour d'amples informations, vueillez jetter un coup sur notre [wiki](https://github.com/darrylbilongo/ProjetDIntegration2019/wiki/5.-Guide-de-l'application-mobile)
