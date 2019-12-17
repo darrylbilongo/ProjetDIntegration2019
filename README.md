@@ -21,4 +21,6 @@ Notre projet possède deux parties:
 
 ### Application Mobile
 
-L'application mobile est disponible sur le site du projet [easygame](https://www.easygame.funndeh.com). Vous pouvez egalement scanner le QR code de l'application déploiée sur [expo](https://expo.io/@easygame/easygame), mais cela demande que vous ayez installé au préalable l'application **expo**. Pour d'amples informations, vueillez jetter un coup sur notre [wiki](https://github.com/darrylbilongo/ProjetDIntegration2019/wiki/5.-Guide-de-l'application-mobile)
+L'application mobile est disponible sur le site du projet [easygame](https://www.easygame.funndeh.com). Vous pouvez egalement scanner le QR code de l'application déploiée sur [expo](https://expo.io/@easygame/easygame), mais cela demande que vous ayez installé au préalable l'application **expo**. Pour d'amples informations, vueillez jetter un coup sur notre [wiki](https://github.com/darrylbilongo/ProjetDIntegration2019/wiki/5.-Guide-de-l'application-mobile). 
+
+L'utilisation de notre application implique l'acceptation des [conditions d'utilisation](https://github.com/darrylbilongo/ProjetDIntegration2019/wiki/2.-Conditions-d'utilisation-d'EasyGame). Veuillez lire attentivement, il est bref et assez simple de compréhension.
