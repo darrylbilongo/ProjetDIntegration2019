@@ -15,7 +15,7 @@ import {createDrawerNavigator} from 'react-navigation-drawer';
 import {createStackNavigator} from 'react-navigation-stack';
  
 
-import Profile from '../Accueil/Profile';
+import Accueil from '../Accueil/HomeMenu';
 import Planning from '../Admin/Agenda';
 import Geo from '../Geolocation/Geo';
 import SelectDevices from '../Geolocation/SelectDevices';
@@ -46,10 +46,10 @@ class NavigationDrawerStructure extends Component {
  
 const Profile_Fenetre = createStackNavigator({
   First: {
-    screen: Profile,
+    screen: Accueil,
     navigationOptions: ({ navigation }) => ({
       title: 'Accueil',
-      headerLeft: <NavigationDrawerStructure navigationProps={navigation} />,
+      //headerLeft: <NavigationDrawerStructure navigationProps={navigation} />,
       headerStyle: {
         backgroundColor: '#003d00',
       },

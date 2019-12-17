@@ -80,7 +80,7 @@ export default class Enregistrer extends Component {
 
     register = async () => {
         this.state.isLoading = true;
-        const response = await fetch('http://easygame.funndeh.com:5000/api/users/register', {
+        const response = await fetch('https://easygame.funndeh.com/api/users/register', {
                                   method: 'POST',
                                   headers: {
                                     'Accept': 'application/json',
@@ -116,7 +116,7 @@ export default class Enregistrer extends Component {
                 if(this.responseAPI.message && this.responseAPI.message.includes(' est enregistré')){
                     console.log(this.responseAPI);
                     global.utilisateur =this.responseAPI.utilisateur;
-                    NavigationService.navigate('Profile');
+                    NavigationService.navigate('Accueil');
                 }
             }
         }
