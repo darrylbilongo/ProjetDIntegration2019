@@ -56,7 +56,7 @@ class Tracking extends Component {
     addDevice = async (dev) => {
         await axios.post('https://easygame.funndeh.com/api/devices/add', {
             nomDevice: dev.nomDevice,
-            proprietaire: this.state.email
+            proprietaire: dev.proprietaire
         })
         .then(
             res => {
@@ -72,19 +72,36 @@ class Tracking extends Component {
     }
 
     getDevices = async () => {
-        await axios.post('https://easygame.funndeh.com/api/devices/getDevices', {
-          proprietaire : this.state.email
-        })
-        .then(
-          res => {
-            this.setState({
-              devices : res.data
-            })
-          }
-        )
-        .catch(err => {
-            console.log(err)
-        })
+        if (this.state.fonction == "animateur") {
+            await axios.post('https://easygame.funndeh.com/api/devices/getDevices', {
+                            proprietaire : this.state.email
+                            })
+                        .then(
+                            res => {
+                                this.setState({
+                                devices : res.data
+                                })
+                            }
+                        )
+                        .catch(err => {
+                            console.log(err)
+                        })
+        }
+        else if(this.state.fonction == "admin"){
+            await axios.get('https://easygame.funndeh.com/api/devices/')
+                .then(
+                    res => {
+                        this.setState({
+                            devices : res.data
+                            })
+                        
+                    }
+                )
+                .catch(err => {
+                    console.log(err)
+                })
+        }
+        
     }
 
     onChange(e) {
@@ -101,17 +118,20 @@ class Tracking extends Component {
             proprietaire: this.state.proprietaire
         }
 
+        console.log(device);
         this.addDevice(device);
+
+        
 
         this.setState({
             devices: [ device, ...this.state.devices ],
-            nom: ''
+            nom: '',
         })
     }
 
 
     checkAdmin = () => {
-        if(this.state.fonction == 'animateur'){
+        if(this.state.fonction == 'admin'){
             return (
                 <div>
                     <span>Ajouter un nouveau device</span>
@@ -123,6 +143,14 @@ class Tracking extends Component {
                                 type="text"
                                 name="nomDevice" 
                                 placeholder="nom du device"
+                                onChange={this.onChange} />
+                            </div>
+                            <div className="col-auto">
+                                <input 
+                                className="form-control" 
+                                type="email"
+                                name="proprietaire" 
+                                placeholder= "email de l'animateur"
                                 onChange={this.onChange} />
                             </div>
                             <div className="col-auto">

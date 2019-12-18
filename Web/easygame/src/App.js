@@ -15,6 +15,7 @@ import Footer from './components/Footer';
 import Calendar from './components/Calendar';
 import Tracking from './components/Tracking';
 import Download from './components/Download';
+import About from './components/About';
 
 class App extends React.Component {
   render(){
@@ -27,6 +28,7 @@ class App extends React.Component {
           <Route exact path="/home" component={Home}/>
           <div className="container">
             <Route path="/login" component={Login} />
+            <Route path="/about" component={About} />
             <Route path="/team" component={Team} />
             <Route path="/profile" component={Profile} />
             <Route path="/register" component={Register} />

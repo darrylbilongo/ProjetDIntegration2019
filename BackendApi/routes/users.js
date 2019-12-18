@@ -81,7 +81,7 @@ router.route('/login').post((req, res) => {
                     //res.send(token)
                     res.json({
                         token: token,
-                        message: 'Utilisateur existant: Connexion reussie!!!',
+                        message: 'Bienvenue!!!',
                         utilisateur: user
                     })
                 }

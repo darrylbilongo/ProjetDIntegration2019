@@ -10,15 +10,6 @@ class Home extends React.Component {
     this.props.history.push('/');
 }
     render(){
-      const logoutLink = (
-        <a className="btn btn-outline-secondary col-md-8" onClick={this.logOut.bind(this)}>
-                       Deconnexion
-        </a>
-      )
-      const loginLink = (
-        <a className="btn btn-outline-secondary col-md-8" href="/Login" >Se connecter</a>
-      )
-
       return (
         <HomeComponent>
           <div className="row align-items-center">
