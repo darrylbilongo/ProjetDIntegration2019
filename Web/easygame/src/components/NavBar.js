@@ -112,12 +112,14 @@ class NavBar extends React.Component {
                 <div className="collapse navbar-collapse justify-content"  id="navbarNav">
                     <ul className="navbar-nav"> 
 
-                        {localStorage.usertoken ? homeLink : loginLink}
+                    <Link to="/download" className="nav-link">
+                        Télecharger l'App
+                    </Link>
+                        {localStorage.usertoken ? null : loginLink}
                         {localStorage.usertoken ? calendarLink: regLink}
-                        {localStorage.usertoken ? trackingLink :null}
-                        {localStorage.usertoken ? downloadLink :null}
-                        {localStorage.usertoken ? profileLink :null}
-                        {localStorage.usertoken ? logoutLink :null}
+                        {localStorage.usertoken ? trackingLink : null}
+                        {localStorage.usertoken ? profileLink : null}
+                        {localStorage.usertoken ? logoutLink : null}
                         
                         {
                             /*<li className="nav-item">

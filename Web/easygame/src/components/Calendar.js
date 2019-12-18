@@ -63,6 +63,7 @@ class Calendar extends Component {
             return res;
         });
 
+
         if(newEvents){
             this.setState({
                 events: newEvents.map(event => {
@@ -72,6 +73,7 @@ class Calendar extends Component {
                     }
                 })
             })
+            
         }
     }
 
@@ -82,22 +84,10 @@ class Calendar extends Component {
                         <h1>Bonjour {this.state.prenom}</h1>
                     </div>
                     <FullCalendar 
-                        timeZone= 'UTC'
                         defaultView="dayGridMonth" 
-                        header = {{
-                            left: 'prev,next today myCustomButton',
-                            center: 'title',
-                            right: 'month,basicWeek,basicDay'
-                        }}
                         plugins={[ dayGridPlugin ]}
                         events={this.state.events}
                         onTypeChange={this.onTypeChange}
-                        navLinks= {true} // can click day/week names to navigate views
-                        editable= {true}
-                        eventClick = {function(calEvent) {
-                            alert(calEvent.title);
-                            console.log(calEvent)
-                        }}
                         />   
                     <form noValidate onSubmit={this.onSubmit}>
                             <div className="form-group">

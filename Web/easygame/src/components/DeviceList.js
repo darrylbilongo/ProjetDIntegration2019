@@ -3,7 +3,7 @@ import React from 'react';
 const DeviceItem = ({device, remove, fonction}) => {
 
   let check = () => {
-    if (fonction == 'animateur') {
+    if (fonction == 'admin') {
       return <button className="btn btn-danger" style={{ float: 'right' }} onClick={() => {remove(device._id)}}>
                 Supprimer 
               </button> 
@@ -14,6 +14,9 @@ const DeviceItem = ({device, remove, fonction}) => {
       <div className="row" key={device.nomDevice}>
         <div className="col-sm">
           <h4>{device.nomDevice}</h4>
+        </div>
+        <div className="col-sm">
+          <h4>{device.proprietaire}</h4>
         </div>
         {check()}  
       </div>   

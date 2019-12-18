@@ -16,9 +16,6 @@ export const register = newUser => {
             fonction : newUser.fonction,
             idAnimateur : newUser.email
         })
-        .then(res => {
-            console.log(res.data.message);
-        })
         .catch(err => {
             console.log(err)
         })
@@ -32,7 +29,6 @@ export const login = user => {
         })
         .then(res => {
             localStorage.setItem('usertoken', res.data.token);
-            console.log(res.data.message);
             return res.data.token;
         })
         .catch(err => {
@@ -47,11 +43,8 @@ export const ajoutEvent = (event) => {
             date : event.date,
             userEmail : event.userEmail
         })
-        .then(res => {
-            console.log(res);
-        })
         .catch(err => {
-            console.log(err)
+            alert("Device peut être déja attribué...Réessayez")
         })
 }
 
@@ -62,11 +55,10 @@ export const getEvents = (userEmail) => {
         })
         .then(
             res => {
-              console.log(res.data);
               return res.data;
             }
         )
         .catch(err => {
-              console.log(err)
+              alert("Ne peut pas avoir les evenements")
         })
 }
