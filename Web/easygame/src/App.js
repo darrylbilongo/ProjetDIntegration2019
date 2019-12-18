@@ -14,6 +14,7 @@ import NavBar from './components/NavBar';
 import Footer from './components/Footer';
 import Calendar from './components/Calendar';
 import Tracking from './components/Tracking';
+import Download from './components/Download';
 
 class App extends React.Component {
   render(){
@@ -29,6 +30,7 @@ class App extends React.Component {
             <Route path="/team" component={Team} />
             <Route path="/profile" component={Profile} />
             <Route path="/register" component={Register} />
+            <Route path="/download" component={Download} />
             <Route path="/calendar" component={Calendar}/>
             <Route path="/tracking" component={Tracking}/>
             {/*<Route component={Error}/>*/}

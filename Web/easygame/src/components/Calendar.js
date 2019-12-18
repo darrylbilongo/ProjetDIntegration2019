@@ -3,7 +3,6 @@ import FullCalendar from '@fullcalendar/react'
 import dayGridPlugin from '@fullcalendar/daygrid'
 import jwt_decode from 'jwt-decode';
 import {ajoutEvent, getEvents } from './UserFonctions';
-import axios from 'axios';
 
 
 class Calendar extends Component {
@@ -73,8 +72,6 @@ class Calendar extends Component {
                     }
                 })
             })
-
-            console.log(this.state.events)
         }
     }
 

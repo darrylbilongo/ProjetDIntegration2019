@@ -49,6 +49,14 @@ class NavBar extends React.Component {
                             </Link>
                 </li>
         )
+
+        const downloadLink = (
+            <li className="nav-item">
+                <Link to="/download" className="nav-link">
+                    Télecharger l'App
+                </Link>
+            </li>
+        )
         const calendarLink = (
             <li className="nav-item">
                 <Link to="/calendar" className="nav-link">
@@ -107,6 +115,7 @@ class NavBar extends React.Component {
                         {localStorage.usertoken ? homeLink : loginLink}
                         {localStorage.usertoken ? calendarLink: regLink}
                         {localStorage.usertoken ? trackingLink :null}
+                        {localStorage.usertoken ? downloadLink :null}
                         {localStorage.usertoken ? profileLink :null}
                         {localStorage.usertoken ? logoutLink :null}
                         

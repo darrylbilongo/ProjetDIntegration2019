@@ -34,9 +34,7 @@ class Login extends Component {
             email: this.state.email,
             motDePasse: this.state.motDePasse
         }
-
-        console.log(user);
-
+        
         login(user).then(res => {
             if(res){
                 this.props.history.push('/calendar')

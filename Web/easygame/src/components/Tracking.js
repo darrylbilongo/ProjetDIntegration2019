@@ -26,10 +26,10 @@ class Tracking extends Component {
             fonction: decoded.fonction
         })
 
-        this.getDevices();
+        await this.getDevices();
     }
 
-    delete(id) {
+    remove(id) {
         const reste = this.state.devices.filter((device) => {
             if(device.nomDevice !== id) return device;
         });
@@ -49,8 +49,6 @@ class Tracking extends Component {
             .catch(err => {
                 console.log(err)
             })
-
-        this.getDevices();
     }
 
     addDevice = async (dev) => {
@@ -141,7 +139,7 @@ class Tracking extends Component {
                 <h1> Tracking </h1>
                 <span>Ajouter un nouveau device</span>
                 {this.checkAdmin()}
-                <DeviceList devices={this.state.devices} delete={this.delete.bind(this)}/>
+                <DeviceList devices={this.state.devices} remove={this.remove.bind(this)}/>
             </div>
         );
     }
