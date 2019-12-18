@@ -1,7 +1,17 @@
 # Bienvenue sur Easygame
+
+**Projet d'intégration 2019/2020**
+
 **Groupe 7**
 
-Le projet a but da faciliter la tâche des animateurs scoots en ce qui concerne la gestion, la plannnification des activités ainsi que surveillance des membres du scouts. Ceci a été mis en place pour rassurer les parents s'exprimant sur leurs craintes pour certaines activités, qui, des fois, sont considérées comme "dangeureuses".
+Membres:
+  - [**Manuelle Ndamtang**](https://github.com/Manste): Scrum-Master
+  - [**Darryl Bilongo**](https://github.com/darrylbilongo): Product Owner
+  - [**Jean Cornil**](https://github.com/CornilJean2TL2): Développeur
+
+![](https://github.com/darrylbilongo/ProjetDIntegration2019/blob/master/Logo/logo.png)
+
+Le projet a but de faciliter la tâche des animateurs scoots en ce qui concerne la gestion, la plannification des activités ainsi que surveillance des animés. Ceci a été mis en place pour rassurer les parents s'exprimant sur leurs craintes d'égarement de leur progéniture et les animateurs souvent surchargés au vue de leurs nombreuses responsabilités.
 
 Notre projet possède deux parties:
 - **application web: https://www.easygame.funndeh.com/**
@@ -11,22 +21,6 @@ Notre projet possède deux parties:
 
 ### Application Mobile
 
-Une fois dans le projet, aller dans le repertoire ***App/easygame/*** et installer les modules ***nodeJs*** sur base du ***package.json***:
-```bash
-cd App/easygame
-sudo npm install
-```
-Une fois les modules installés, il faudra démarrer l'application grâce à la commande:
-```bash
-sudo expo start
-```
-ou bien 
-```bash
-sudo npm start
-```
-ou encore (pour les fans du yarn)
-```bash
-sudo yarn start
-```
-L'application va ouvrir une fenêtre depuis votre navigateur en local au port 1900. Veuillez vous assurer que votre mobile se trouve dans le même réseau que votre ordinateur. Télécharger l'application ***expo*** sur votre mobile pour un test à temps réel.
-Vous verrez un QR Code depuis votre terminal et votre nagigateur. Scannez le depuis l'application ***expo*** se trouvant sur votre mobile.
+L'application mobile est disponible sur le site du projet [easygame](https://www.easygame.funndeh.com). Vous pouvez egalement scanner le QR code de l'application déploiée sur [expo](https://expo.io/@easygame/easygame), mais cela demande que vous ayez installé au préalable l'application **expo**. Pour d'amples informations, vueillez jetter un coup sur notre [wiki](https://github.com/darrylbilongo/ProjetDIntegration2019/wiki/5.-Guide-de-l'application-mobile). 
+
+L'utilisation de notre application implique l'acceptation des [conditions d'utilisation](https://github.com/darrylbilongo/ProjetDIntegration2019/wiki/2.-Conditions-d'utilisation-d'EasyGame). Veuillez lire attentivement, il est bref et assez simple de compréhension.
