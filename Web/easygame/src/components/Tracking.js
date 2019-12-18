@@ -56,7 +56,7 @@ class Tracking extends Component {
     addDevice = async (dev) => {
         await axios.post('https://easygame.funndeh.com/api/devices/add', {
             nomDevice: dev.nomDevice,
-            proprietaire: dev.proprietaire
+            proprietaire: this.state.email
         })
         .then(
             res => {
@@ -98,7 +98,7 @@ class Tracking extends Component {
 
         const device = {
             nomDevice: this.state.nomDevice,
-            proprietaire: this.state.email
+            proprietaire: this.state.proprietaire
         }
 
         this.addDevice(device);
@@ -114,6 +114,7 @@ class Tracking extends Component {
         if(this.state.fonction == 'animateur'){
             return (
                 <div>
+                    <span>Ajouter un nouveau device</span>
                     <form className="form-horizontal" onSubmit={this.handleSubmit.bind(this) }>
                         <div className="form-row align-items-center">
                             <div className="col-auto">
@@ -128,8 +129,7 @@ class Tracking extends Component {
                                 <button type="submit" className="btn btn-info">Ajouter</button>
                             </div>
                         </div>
-                    </form>
-                <button onClick={this.getDevices}>Charger les devices</button>    
+                    </form>    
                 </div>
             )
         } 
@@ -138,10 +138,10 @@ class Tracking extends Component {
     render(){
         return(
             <div className="container-fluid">
-                <h1> Tracking </h1>
-                <span>Ajouter un nouveau device</span>
+                <h1> Tracking </h1> 
+                <button onClick={this.getDevices}>Charger les devices</button>  
                 {this.checkAdmin()}
-                <DeviceList devices={this.state.devices} remove={this.remove.bind(this)}/>
+                <DeviceList devices={this.state.devices} remove={this.remove.bind(this)} fonction={this.state.fonction}/>
             </div>
         );
     }
