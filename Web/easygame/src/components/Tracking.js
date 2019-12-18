@@ -49,6 +49,8 @@ class Tracking extends Component {
             .catch(err => {
                 console.log(err)
             })
+
+        this.getDevices();
     }
 
     addDevice = async (dev) => {

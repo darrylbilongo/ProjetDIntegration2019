@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 const DeviceItem = ({device, remove}) => {
   return (
@@ -6,7 +6,7 @@ const DeviceItem = ({device, remove}) => {
         <div className="col-sm">
           <h4>{device.nomDevice}</h4>
         </div>
-        <button className="btn btn-danger" style={{ float: 'right' }} onClick={remove(device.nomDevice)}>
+        <button className="btn btn-danger" style={{ float: 'right' }} onClick={() => {remove(device._id)}}>
           Supprimer
         </button>
       </div>   
