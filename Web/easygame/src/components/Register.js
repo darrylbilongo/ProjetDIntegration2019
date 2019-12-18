@@ -103,7 +103,7 @@ class Register extends Component {
                                 </input>
                             </div>
                             <button type="submit"
-                            className="btn btn-block btn-lg btn-primary">
+                            className="btn btn-block btn-lg btn-success">
                                 Envoyer
                             </button>
                         </form>

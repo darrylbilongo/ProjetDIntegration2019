@@ -11,12 +11,12 @@ class Home extends React.Component {
 }
     render(){
       const logoutLink = (
-        <a class="btn btn-outline-secondary col-md-8" onClick={this.logOut.bind(this)}>
+        <a className="btn btn-outline-secondary col-md-8" onClick={this.logOut.bind(this)}>
                        Deconnexion
         </a>
       )
       const loginLink = (
-        <a class="btn btn-outline-secondary col-md-8" href="/Login" >Se connecter</a>
+        <a className="btn btn-outline-secondary col-md-8" href="/Login" >Se connecter</a>
       )
 
       return (
@@ -33,10 +33,10 @@ class Home extends React.Component {
               <a className="btn btn-outline-secondary col-md-8" href="/Team">Team</a>
             </div>
             <div className="col-md-4 menu-home">
-              <a  className="btn btn-outline-secondary col-md-8" href="/About">About</a>
+              <a  class="btn btn-outline-secondary col-md-8" href="/About">About</a>
             </div>
           </div>
-          <div className="row align-items-center">
+          <div class="row align-items-center">
         </div>
         </HomeComponent>
       );
