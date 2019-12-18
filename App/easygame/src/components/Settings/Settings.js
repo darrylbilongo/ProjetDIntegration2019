@@ -81,9 +81,9 @@ delete = () => {
     this.deleteCompte();
     console.log(this.responseAPI);
     if(this.responseAPI){
-        NavigationService.navigate('HomePage');
         Alert.alert(this.responseAPI);
-        global.utilisateur = {};     
+        global.utilisateur = {};  
+        NavigationService.navigate('HomePage');   
     }     
 }
 
