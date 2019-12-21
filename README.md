@@ -7,7 +7,6 @@
 Membres:
   - [**Manuelle Ndamtang**](https://github.com/Manste): Scrum-Master
   - [**Darryl Bilongo**](https://github.com/darrylbilongo): Product Owner
-  - [**Jean Cornil**](https://github.com/CornilJean2TL2): Développeur
 
 ![](https://github.com/darrylbilongo/ProjetDIntegration2019/blob/master/Logo/logo.png)
 
