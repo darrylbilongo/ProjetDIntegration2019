@@ -24,7 +24,7 @@
     "expo-secure-store": "^8.0.0",
     "express": "^4.17.1",
     "haversine": "^1.1.1",
-    "minimist": "^1.2.0",
+    "minimist": "^1.2.2",
     "moment": "^2.24.0",
     "mongoose": "^5.7.5",
     "morgan": "^1.9.1",
